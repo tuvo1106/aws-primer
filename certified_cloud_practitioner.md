@@ -1,0 +1,187 @@
+# AWS Certified Cloud Practitioner
+
+## Table of Contents
+
+- [FAQ](#faq)
+- [Exam Guide](#exam-guide)
+- [Cloud Concepts](#cloud-concepts)
+- [AWS Global Infrastructure](#aws-global-infrastructure)
+- [Getting Started](#getting-started)
+
+### FAQ
+
+#### Who is the CCP for?
+
+- Learning AWS foundational knowledge
+- Shows you've poked around and can use the AWS console
+- Focuses on billing and business-centric concepts
+- Commonly obtained by _sales_ and _management_ to help inform VPs or CEO reasons to utilize AWS
+
+#### What value does the CCP hold?
+
+- Not a gilded title
+- Can help superficially increase your AWS certification count
+- Not recognized as an important recertification for developers on resumes
+
+#### Thinking of skipping the CCP? Think again...
+
+- It's an easy win, and a confidence booster
+- Mitigate unknown conditions that cause stress or distraction for future exam
+- Directly prepare for the Solution Architect Associate
+
+#### How long to study to pass CCP?
+
+- If you're a developer... 8 hours
+- If you're a bootcamp grad... 15 hours
+- If you're sales or management... 20 hours
+
+#### Where to take test?
+
+- PSI
+- Pearson VUE
+
+#### Cost/Logistics
+
+- \$100
+- 90 minutes
+- 65 questions
+- 70% passing score
+- Valid for 3 years
+
+### Exam Guide
+
+#### Link
+
+https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf
+
+#### Content Outline
+
+Cloud Concepts - 28%
+Security - 24%
+Technology - 36%
+Billing and Pricing - 12%
+
+### Cloud Concepts
+
+#### What is cloud computing?
+
+cloud computing - the practice of using a network of remote servers hosted on the Internet to store, manage and process data, rather than a local server or a personal coputer
+
+**On-premise**
+
+- you own the servers
+- you hire the IT people
+- you pay or rent the real estate
+- you take all the risk
+
+**Cloud-providers**
+
+- someone else owns the servers
+- someone else hires the IT people
+- someone else pays or rents the real estate
+- you are responsible for your configuring cloud services and code, someone else takes care of the rest
+
+#### Six advantages and benefits of cloud computing
+
+**Trade capital expense for variable expense**
+
+- No upfront-cost
+- Pay on-demand
+
+**Benefit from massive economies of scale**
+
+- You are sharing the cost with other customers
+
+**Stop guessing capacity**
+
+- Instead of paying for idle or underutilized servers, you can scale up or down to meet needs
+
+**Increase speed and agility**
+**Stop spending money on running and maintaining data centers**
+
+- Focus on customers, rather than the heavy lifting of racking, stacking and powering servers
+
+**Go global in minutes**
+
+#### Types of Cloud Computing
+
+**SaaS**
+
+- for customers
+- a complete product that is run and managed by the service provider
+- Gmail, Salesforce, Office365
+
+**PaaS**
+
+- for developers
+- removes the need for your organization to manage the underlying infrastructure so you can focus on the deployment and management of your applications
+- Elastic Beanstalk, Heroku
+
+**IaaS**
+
+- for admins
+- the basic building blocks for cloud IT; provides access to networking features, computers and data storage space
+- AWS, GCP, Azure
+
+#### What is cloud computing?
+
+**Cloud**
+
+- Squarespace, Dropbox
+- Startups, new projects and companies
+
+**Hybrid**
+
+- Deloitte
+- Using cloud and on-prem
+- Banks, FinTech, Legacy on-prem
+
+**On-Premise**
+
+- "Private cloud"
+- Public sector eg. government
+- Super sensitive data eg. hospitals
+- Large enterprise with heavy regulation eg. insurance companies
+
+### AWS Global Infrastructure
+
+#### Where does all this cloud computing run?
+
+- 69 availabilty zones within 22 geographic regions
+- AWS serves over a million active customers in more than 190 countries
+- Regions: physical location in the world with multiple Availability Zones
+- Availability Zones: one or more discrete data centers
+- Edge Location: datacenter owned by a trusted partner of AWS
+
+#### Regions
+
+- A geographically _distinct_ location which has multiple datacenters (AZs).
+- Every region is physically isolated from and independent of every other region in terms of location, power, water supply.
+- Each region has at least 2 AZs.
+- AWS largest region is US-EAST.
+- New services almost always become available first in US-EAST.
+- Not all services are available in all regions.
+- US-EAST-1 is the region where you see all your billing information.
+
+#### Availabilty Zones
+
+- An AZ is a datacenter owned and operated by AWS.
+- AZs are represented by a Region Code, followed by a letter identifier eg. `us-east-1a`.
+- Distributing your instances across multiple AZs allows failover configuration for handling requests when one goes down.
+- < 10ms latency between AZs
+
+#### Edge Locations
+
+- An edge location is a datacenter owned by a trusted partner of AWS which has a direction connection to the AWS network.
+- These locations serve request sfor CloudFront and Route 53.
+
+#### GovCloud Regions
+
+- AWS GovCloud Regions allow customers to host sensitive Controlled Unclassified Information and other types of regulated workloads.
+- GovCloud Regions are only operated by employees who are US citizens.
+
+### Getting Started
+
+#### To set billing alarms
+
+- CloudWatch, Alarms

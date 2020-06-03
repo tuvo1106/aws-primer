@@ -266,6 +266,7 @@ cloud computing - the practice of using a network of remote servers hosted on th
 - reduced pricing is based on Term X Class Offering X Payment Option
 
 - **Term**
+
   - 1 Year
   - 3 Years
 
@@ -460,6 +461,8 @@ Each account has a Root Account User
 
 **Service Control Policies** give central control over the alloed permissions for all accounts in your organization, helping to ensure your accounts stay within your organization's guidelines
 
+---
+
 ### Technology Overview
 
 #### AWS Networking
@@ -513,3 +516,46 @@ All services below are running EC2s under the hood
 **Lambda** - serverless functions. Run code without provisioning or manage servers. You only pay for the compute time you consume.
 **Elastic Beanstalk** - orchestrates various AWS services, including EC2, S3, Simple Notification Service (SNS), CloudWatch, autoscaling, and ELB
 **AWS Batch** - plans, schedules, and executes your batch computing workloads across the full range of AWS compute services and features, such as EC2 and Spot instances
+
+#### Storage Services
+
+**S3** - Simple Storage Service - object storage
+**S3 Glacier** - low cost storage for archiving and long-term backup
+**Storage Gateway** - hybrid cloud storag with local caching
+
+- File Gateway, Volume Gateway, Tape Gateway
+
+**EBS** - Elastic Block Storage - hard drive in the cloud you can attach to EC2 instances
+
+- SSD, HHD
+
+**EFS** - file storage mountable to multiple EC2 instances at the same time
+
+**Snowball** - physically migrate lots of data via a computer suitcase 50-80 TB
+
+- Snowball Edge - a better version (100 TB)
+- Snowmobile - Shipping container, pulled by a semi-trailer truck (100PB)
+
+#### Business Centric Services
+
+**Amazon Connect** - Call Center. Cloud-based call center service you can setup in just a few clicks - based on the same proven system used by the Amazon customer service teams.
+**Workspaces** - Virtual Remote Desktop - Secure managed service for provisioning either Windows or Linux desktops
+**WorkDocs** - A content creation and collaboration service - easily create, edit and share content saved centrally in AWS (Sharepoint)
+**Chime** - AWS Platform for online meetings, video conferencing, and business calling
+**WorkMail** - Managed business email, contacts and calendar service
+**Pinpoint** - marketing campaign management system you can use for sending targeted email, SMS, push notif, and voice messages
+**SES** - Simple Email Service. A cloud-based email sending service designed for marketers and application developers to send marketing, emails
+**QuickSight** - a Business Intelligence (BI) service. Connect multiple datasources and quickly visualize data
+
+#### Enterprise Integration
+
+Going Hybrid!
+
+**Direct Connect** - dedicated gigabit network connection from your premises to AWS. Imagine having a direct fibre optic cable running straight to AWS
+**VPN** - establish a secure connection to your AWS network
+- Site-to-site VPN - connecting your on-premise to your AWS network
+- Client VPN - connecting a client to your AWS network
+
+**Storage Gateway** - a hybrid storage service that enables your on-premise applications to use AWS cloud storage. You can use this for backup and archiving, disaster recovery, cloud data processing, storage tiering, and migration
+**Active Directory** - enables your directory-aware workloads
+

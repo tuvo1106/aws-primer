@@ -65,16 +65,16 @@ https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-
 
 #### Content Outline
 
-Cloud Concepts - 28%
-Security - 24%
-Technology - 36%
-Billing and Pricing - 12%
+- Cloud Concepts - 28%
+- Security - 24%
+- Technology - 36%
+- Billing and Pricing - 12%
 
 ---
 
 ## Cloud Concepts
 
-#### What is Cloud Computing?
+#### _What is Cloud Computing?_
 
 The practice of using a network of remote servers hosted on the Internet to store, manage and process data, rather than a local server or a personal computer
 
@@ -94,14 +94,14 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ---
 
-#### Six advantages and benefits of cloud computing
+#### _Six advantages and benefits of cloud computing_
 
-**Trade capital expense for variable expense**
+1. Trade capital expense for variable expense
 
 - No upfront-cost
 - Pay on-demand
 
-**Benefit from massive economies of scale**
+2. Benefit from massive economies of scale
 
 - You are sharing the cost with other customers
 

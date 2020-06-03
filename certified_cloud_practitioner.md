@@ -15,8 +15,6 @@
 
 ## FAQ
 
----
-
 #### Who is the CCP for?
 
 - Learning AWS foundational knowledge
@@ -59,8 +57,6 @@
 
 ## About the Exam
 
----
-
 #### Exam Guide Link
 
 https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf
@@ -77,8 +73,6 @@ Billing and Pricing - 12%
 ---
 
 ## Cloud Concepts
-
----
 
 #### What is Cloud Computing?
 
@@ -170,8 +164,6 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ## AWS Global Infrastructure
 
----
-
 #### Where does all this cloud computing run?
 
 - 69 availabilty zones within 22 geographic regions
@@ -219,8 +211,6 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ## Hands On
 
----
-
 #### To set billing alarms
 
 - CloudWatch, Alarms
@@ -264,8 +254,6 @@ The practice of using a network of remote servers hosted on the Internet to stor
 ---
 
 ## Billing and Pricing
-
----
 
 #### Introduction to EC2 Pricing Models
 
@@ -519,8 +507,6 @@ Each account has a Root Account User
 
 ## Technology Overview
 
----
-
 #### AWS Networking
 
 **Region** - the geographical location of the network
@@ -645,5 +631,3 @@ Going Hybrid!
 ---
 
 ## Security
-
----

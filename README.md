@@ -1,4 +1,4 @@
-# # AWS Primer
+# AWS Primer
 
 This repository contains notes for AWS certifications.
 

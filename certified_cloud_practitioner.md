@@ -481,3 +481,26 @@ Each account has a Root Account User
 - 1000 TB = 1 PB
 
 **ElastiCache** - Redis or Memcached database
+
+#### Provisioning
+
+The allocation or creation of resources and services to a customer.
+
+**Elastic Beanstalk** - service for deploying and scaling web applications and services developed with Java, .NET, Python... (Heroku-like)
+**OpsWorks** - configuration management service that provides managed instances of Chef and Puppet
+**CloudFormation** - infrastructure as code, JSON or YAML
+**AWS Quickstart** - pre-made packages that can launch and configure your AWS compute, network, storage, and other services required to deploy a workload on AWS
+**AWS** - a curated digital catalogue with thousands of software listings from independen software vendors.
+
+#### Computing Services
+
+**EC2** - Elastic Compute Cloud, highly configurable server eg. CPU, Memory, Network, OS
+
+All services below are running EC2s under the hood
+
+**ECS** - Elastic Container Service, Docker as a Service. Highly scalable, high performance container orchestration service that supports Docker containers, pay for EC2 instances
+**Fargate** - Microservices where you don't think about the infrastructure. Pay per task
+**EKS** - Kubernetes as a Service. Easy to deploy, manage, and scale containerized applications using Kubernetees
+**Lambda** - serverless functions. Run code without provisioning or manage servers. You only pay for the compute time you consume.
+**Elastic Beanstalk** - orchestrates various AWS services, including EC2, S3, Simple Notification Service (SNS), CloudWatch, autoscaling, and ELB
+**AWS Batch** - plans, schedules, and executes your batch computing workloads across the full range of AWS compute services and features, such as EC2 and Spot instances

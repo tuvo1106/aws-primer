@@ -283,19 +283,19 @@ The practice of using a network of remote servers hosted on the Internet to stor
 - commit to EC2 over a 1 or 3 year term
 - can resell unused reserved instances
 - reduced pricing is based on Term X Class Offering X Payment Option
-- Term
+- **Term**
 
   - 1 Year
   - 3 Years
 
-- Class Offerings
+- **Class Offerings**
   - Standard - up to 75% savings; cannot change RI attributes
   - Convertible - up to 54% savings; allows you to change RI attributes if greater or equal in value
   - Scheduled - you reserve instances for specific time periods eg. once a week for a few hours; savings may vary
 - RIs can be shared between multiple accounts within an org
 - unused RIs can be sold in the Reserved Instance Marketplace
 
-- Payment Options
+- **Payment Options**
   - All upfront
   - Partial upfront
   - No upfront

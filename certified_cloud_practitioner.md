@@ -3,12 +3,13 @@
 ## Table of Contents
 
 - [FAQ](#faq)
-- [Exam Guide](#exam-guide)
+- [About the Exam](#about-the-exam)
 - [Cloud Concepts](#cloud-concepts)
 - [AWS Global Infrastructure](#aws-global-infrastructure)
-- [Getting Started](#getting-started)
 - [Hands On](#hands-on)
 - [Billing and Pricing](#billing-and-pricing)
+
+---
 
 ### FAQ
 
@@ -50,9 +51,11 @@
 - 70% passing score
 - Valid for 3 years
 
-### Exam Guide
+---
 
-#### Link
+### About the Exam
+
+#### Exam Guide Link
 
 https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf
 
@@ -62,6 +65,8 @@ Cloud Concepts - 28%
 Security - 24%
 Technology - 36%
 Billing and Pricing - 12%
+
+---
 
 ### Cloud Concepts
 
@@ -182,15 +187,13 @@ cloud computing - the practice of using a network of remote servers hosted on th
 - AWS GovCloud Regions allow customers to host sensitive Controlled Unclassified Information and other types of regulated workloads.
 - GovCloud Regions are only operated by employees who are US citizens.
 
+---
+
 ### Hands On
 
 #### To set billing alarms
 
 - CloudWatch, Alarms
-
-#### Change IAM Users Sign-in Link
-
-#### Activate MFA on your root account
 
 #### Create individual IAM user
 
@@ -227,6 +230,8 @@ cloud computing - the practice of using a network of remote servers hosted on th
 - Free (750 hours)
 
 #### Lambda
+
+---
 
 ### Billing and Pricing
 
@@ -337,3 +342,61 @@ Products can be offered as:
 - Web ACL
 - AWS WAF rules
 
+#### AWS Trusted Advisor
+
+Advises you on security, saving money, performance, service limits and fault tolerance
+
+5 Categories:
+
+**Cost Optimization**
+
+- Idle Load Balancers
+- Unassociated Elastic IP Addresses
+
+**Performance**
+
+- High Utilization EC2 Instances
+
+**Security**
+
+- MFA on Root Account
+- IAM Access Key Rotation
+
+**Fault Tolerance**
+
+- Amazon RDS Backups
+
+**Service Limits**
+
+- VPC
+
+#### Consolidated Billing
+
+One bill for all of your accounts.
+You can designate one master account that pays the charges of all other member accounts.
+Use Cost Explorer to visualize usage for consolidated billing.
+
+**Volume Discounts**
+
+- The more you use, the more you save
+
+**AWS Cost Explorer**
+
+AWS Cost Explorer lets you visualize, understand and manage your AWS costs and usage over time.
+
+- Use forecasting to get an idea of future costs
+- See data at monthly or daily level
+- Use filter or grouping functionalities
+
+#### AWS Budgets
+
+Plan your service usage, service costs and instance reservations
+
+- think of it like a billing alarm on steroids
+- first 2 budgets are free of charge
+- each budget is \$0.02 per day; ~0.60 / month
+- 20,000 budgets limit
+
+#### TCO Calculator
+
+The Total Cost of Ownership allows you to estimate how much you would save switching to AWS.

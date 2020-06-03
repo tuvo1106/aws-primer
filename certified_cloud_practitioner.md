@@ -79,14 +79,12 @@ https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-
 The practice of using a network of remote servers hosted on the Internet to store, manage and process data, rather than a local server or a personal computer
 
 **On-premise**
-
 - you own the servers
 - you hire the IT people
 - you pay or rent the real estate
 - you take all the risk
 
 **Cloud-providers**
-
 - someone else owns the servers
 - someone else hires the IT people
 - someone else pays or rents the real estate
@@ -97,22 +95,18 @@ The practice of using a network of remote servers hosted on the Internet to stor
 #### _Six advantages and benefits of cloud computing_
 
 **Trade capital expense for variable expense**
-
 - No upfront-cost
 - Pay on-demand
 
 **Benefit from massive economies of scale**
-
 - You are sharing the cost with other customers
 
 **Stop guessing capacity**
-
 - Instead of paying for idle or underutilized servers, you can scale up or down to meet needs
 
 **Increase speed and agility**
 
 **Stop spending money on running and maintaining data centers**
-
 - Focus on customers, rather than the heavy lifting of racking, stacking and powering servers
 
 **Go global in minutes**
@@ -122,19 +116,16 @@ The practice of using a network of remote servers hosted on the Internet to stor
 #### _Types of Cloud Computing_
 
 **SaaS**
-
 - for customers
 - a complete product that is run and managed by the service provider
 - Gmail, Salesforce, Office365
 
 **PaaS**
-
 - for developers
 - removes the need for your organization to manage the underlying infrastructure so you can focus on the deployment and management of your applications
 - Elastic Beanstalk, Heroku
 
 **IaaS**
-
 - for admins
 - the basic building blocks for cloud IT; provides access to networking features, computers and data storage space
 - AWS, GCP, Azure
@@ -144,18 +135,15 @@ The practice of using a network of remote servers hosted on the Internet to stor
 #### _Cloud Computing Models_
 
 **Cloud**
-
 - Squarespace, Dropbox
 - Startups, new projects and companies
 
 **Hybrid**
-
 - Deloitte
 - Using cloud and on-prem
 - Banks, FinTech, Legacy on-prem
 
 **On-Premise**
-
 - "Private cloud"
 - Public sector eg. government
 - Super sensitive data eg. hospitals
@@ -259,7 +247,6 @@ The practice of using a network of remote servers hosted on the Internet to stor
 #### _Introduction to EC2 Pricing Models_
 
 **On-Demand (Least Commitment)**
-
 - default
 - low cost and flexible
 - only pay her hour
@@ -268,7 +255,6 @@ The practice of using a network of remote servers hosted on the Internet to stor
 - for first time apps
 
 **Spot (up to 90% off; biggest savings)**
-
 - request spare computing capacity
 - flexible start and end times
 - can handle interruptions (server randomly stopping and starting)
@@ -279,28 +265,27 @@ The practice of using a network of remote servers hosted on the Internet to stor
 - if YOU terminate an instance, you will still be charged
 
 **Reserved Instances (up to 75% off; best long-term)**
-
 - steady state or predictable usage
-- commit to EC2 over a 1 or 3 year term
 - can resell unused reserved instances
-- reduced pricing is based on Term X Class Offering X Payment Option
-- **Term**
-  - 1 Year
-  - 3 Years
-- **Class Offerings**
-  - Standard - up to 75% savings; cannot change RI attributes
-  - Convertible - up to 54% savings; allows you to change RI attributes if greater or equal in value
-  - Scheduled - you reserve instances for specific time periods eg. once a week for a few hours; savings may vary
 - RIs can be shared between multiple accounts within an org
 - unused RIs can be sold in the Reserved Instance Marketplace
+- reduced pricing is based on Term X Class Offering X Payment Option
 
-- **Payment Options**
-  - All upfront
-  - Partial upfront
-  - No upfront
+**Term**
+- 1 Year
+- 3 Years
+
+**Class Offerings**
+- Standard - up to 75% savings; cannot change RI attributes
+- Convertible - up to 54% savings; allows you to change RI attributes if greater or equal in value
+- Scheduled - you reserve instances for specific time periods eg. once a week for a few hours; savings may vary
+
+**Payment Options**
+- All upfront
+- Partial upfront
+- No upfront
 
 **Dedicated (most expensive)**
-
 - dedicated servers
 - multi-tenant vs single tenant
 - can be on-demand or reserved (up to 70% off)
@@ -329,26 +314,22 @@ The practice of using a network of remote servers hosted on the Internet to stor
 #### _AWS Support Plans_
 
 **Basic**
-
 - \$0 / month
 - 7 Trusted Advisor Checks
 
 **Developer**
-
 - \$20 / month
 - Tech support via email ~24 hours until reply
 - No third party support
 - 7 Trusted Advisor Checks
 
 **Business**
-
 - \$100 / month
 - Tech support via email ~24 hours until reply
 - Tech support via chat/phone anytime 24/7
 - ALL Trusted Advisor Checks
 
 **Enterprise**
-
 - Tech support via email ~24 hours until reply
 - Tech support via chat/phone anytime 24/7
 - Personal Concierge
@@ -362,14 +343,11 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 AWS Marketplace is a curated digital catalogue with thousands of software listings from independen software vendors.
 
-Easily find, buy, test and deploy software that already runs on AWS.
-
-The product can be free to use or can have associated charge.
-
-The sales channel for ISVs and Consulting Partners allows you to sell your solutions to other AWS customers.
+- Easily find, buy, test and deploy software that already runs on AWS.
+- The product can be free to use or can have associated charge.
+- The sales channel for ISVs and Consulting Partners allows you to sell your solutions to other AWS customers.
 
 Products can be offered as:
-
 - Amazon Machine Images (AMIs)
 - AWS CloudFormation templates
 - SaaS offerings
@@ -413,13 +391,9 @@ You can designate one master account that pays the charges of all other member a
 Use Cost Explorer to visualize usage for consolidated billing.
 
 **Volume Discounts**
-
 - The more you use, the more you save
 
-**AWS Cost Explorer**
-
-AWS Cost Explorer lets you visualize, understand and manage your AWS costs and usage over time.
-
+**AWS Cost Explorer** lets you visualize, understand and manage your AWS costs and usage over time.
 - Use forecasting to get an idea of future costs
 - See data at monthly or daily level
 - Use filter or grouping functionalities
@@ -457,10 +431,7 @@ The Total Cost of Ownership allows you to estimate how much you would save switc
 
 **Tags** are words of phrases that act as metadata for organizing your AWS
 
-**Resource Groups** are a collection of resources that share one or more tags
-
-Resource Groups can display details about a group of resource based on
-
+**Resource Groups** are a collection of resources that share one or more tags. Resource Groups can display details about a group of resource based on:
 - metrics
 - alarms
 - configuration settings

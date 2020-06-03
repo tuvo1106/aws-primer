@@ -96,12 +96,12 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 #### _Six advantages and benefits of cloud computing_
 
-1. Trade capital expense for variable expense
+**Trade capital expense for variable expense**
 
 - No upfront-cost
 - Pay on-demand
 
-2. Benefit from massive economies of scale
+**Benefit from massive economies of scale**
 
 - You are sharing the cost with other customers
 
@@ -110,6 +110,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 - Instead of paying for idle or underutilized servers, you can scale up or down to meet needs
 
 **Increase speed and agility**
+
 **Stop spending money on running and maintaining data centers**
 
 - Focus on customers, rather than the heavy lifting of racking, stacking and powering servers
@@ -118,7 +119,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ---
 
-#### Types of Cloud Computing
+#### _Types of Cloud Computing_
 
 **SaaS**
 
@@ -140,7 +141,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ---
 
-#### Cloud Computing Models
+#### _Cloud Computing Models_
 
 **Cloud**
 
@@ -164,7 +165,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ## AWS Global Infrastructure
 
-#### Where does all this cloud computing run?
+#### _Where does all this cloud computing run?_
 
 - 69 availabilty zones within 22 geographic regions
 - AWS serves over a million active customers in more than 190 countries
@@ -174,7 +175,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ---
 
-#### Regions
+#### _Regions_
 
 - A geographically _distinct_ location which has multiple datacenters (AZs).
 - Every region is physically isolated from and independent of every other region in terms of location, power, water supply.
@@ -186,7 +187,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ---
 
-#### Availabilty Zones
+#### _Availabilty Zones_
 
 - An AZ is a datacenter owned and operated by AWS.
 - AZs are represented by a Region Code, followed by a letter identifier eg. `us-east-1a`.
@@ -195,14 +196,14 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ---
 
-#### Edge Locations
+#### _Edge Locations_
 
 - An edge location is a datacenter owned by a trusted partner of AWS which has a direction connection to the AWS network.
 - These locations serve request sfor CloudFront and Route 53.
 
 ---
 
-#### GovCloud Regions
+#### _GovCloud Regions_
 
 - AWS GovCloud Regions allow customers to host sensitive Controlled Unclassified Information and other types of regulated workloads.
 - GovCloud Regions are only operated by employees who are US citizens.
@@ -211,51 +212,51 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ## Hands On
 
-#### To set billing alarms
+#### _To set billing alarms_
 
 - CloudWatch, Alarms
 
-#### Create individual IAM user
+#### _Create individual IAM user_
 
 - Root account should not be used
 
-#### Log in with Systems Manager
+#### _Log in with Systems Manager_
 
 - Session manager
 
-#### AMI (Amazon Machine Instance)
+#### _AMI (Amazon Machine Instance)_
 
 - In instance, Actions, Image, Create image
 
-#### Auto Scaling Groups
+#### _Auto Scaling Groups_
 
 - Guarantee one server is running
 
-#### Elastic Load Balancer (ELB)
+#### _Elastic Load Balancer (ELB)_
 
 - Load Balancers, Create New Load Balancer, Application Load Balancer
 - Need to be running in at least 2 AZs
 
-#### Simple Storage Server (S3)
+#### _Simple Storage Server (S3)_
 
-#### Cloudfront
+#### _Cloudfront_
 
 - Used as a CDN
 - Serve static content as fast as possible
 
-#### Relational Database Service (RDS)
+#### _Relational Database Service (RDS)_
 
 - Production ~\$600/month
 - Dev/Test ~\$250/month
 - Free (750 hours)
 
-#### Lambda
+#### _Lambda_
 
 ---
 
 ## Billing and Pricing
 
-#### Introduction to EC2 Pricing Models
+#### _Introduction to EC2 Pricing Models_
 
 **On-Demand (Least Commitment)**
 
@@ -283,6 +284,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 - commit to EC2 over a 1 or 3 year term
 - can resell unused reserved instances
 - reduced pricing is based on Term X Class Offering X Payment Option
+
 - **Term**
 
   - 1 Year
@@ -292,6 +294,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
   - Standard - up to 75% savings; cannot change RI attributes
   - Convertible - up to 54% savings; allows you to change RI attributes if greater or equal in value
   - Scheduled - you reserve instances for specific time periods eg. once a week for a few hours; savings may vary
+  
 - RIs can be shared between multiple accounts within an org
 - unused RIs can be sold in the Reserved Instance Marketplace
 
@@ -309,7 +312,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ---
 
-#### Free Services
+#### _Free Services_
 
 - IAM
 - Amazon VPC
@@ -327,7 +330,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ---
 
-#### AWS Support Plans
+#### _AWS Support Plans_
 
 **Basic**
 
@@ -359,7 +362,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ---
 
-#### AWS Marketplace
+#### _AWS Marketplace_
 
 AWS Marketplace is a curated digital catalogue with thousands of software listings from independen software vendors.
 
@@ -379,7 +382,7 @@ Products can be offered as:
 
 ---
 
-#### AWS Trusted Advisor
+#### _AWS Trusted Advisor_
 
 Advises you on security, saving money, performance, service limits and fault tolerance
 
@@ -409,7 +412,7 @@ Advises you on security, saving money, performance, service limits and fault tol
 
 ---
 
-#### Consolidated Billing
+#### _Consolidated Billing_
 
 One bill for all of your accounts.
 You can designate one master account that pays the charges of all other member accounts.
@@ -429,7 +432,7 @@ AWS Cost Explorer lets you visualize, understand and manage your AWS costs and u
 
 ---
 
-#### AWS Budgets
+#### _AWS Budgets_
 
 Plan your service usage, service costs and instance reservations
 
@@ -440,13 +443,13 @@ Plan your service usage, service costs and instance reservations
 
 ---
 
-#### TCO Calculator
+#### _TCO Calculator_
 
 The Total Cost of Ownership allows you to estimate how much you would save switching to AWS.
 
 ---
 
-#### AWS Landing Zone
+#### _AWS Landing Zone_
 
 - Helps Enterprises quickly set-up a secure, AWS multi-account
 - Provides you with a baseline environment to get started with a multi-account achitecture
@@ -456,7 +459,7 @@ The Total Cost of Ownership allows you to estimate how much you would save switc
 
 ---
 
-#### Resource Groups and Tagging
+#### _Resource Groups and Tagging_
 
 **Tags** are words of phrases that act as metadata for organizing your AWS
 
@@ -470,7 +473,7 @@ Resource Groups can display details about a group of resource based on
 
 ---
 
-#### AWS Quickstart
+#### _AWS Quickstart_
 
 Prebuilt templates by AWS and AWS Partners to help you deploy popular stacks on AWS.
 
@@ -482,7 +485,7 @@ A Quick Start is composed of 3 parts:
 
 ---
 
-#### AWS Cost and Usage Report
+#### _AWS Cost and Usage Report_
 
 Generate a detailed spreadsheet, enabling you to better analyze and understand your AWS costs
 
@@ -492,7 +495,7 @@ Generate a detailed spreadsheet, enabling you to better analyze and understand y
 
 ---
 
-#### Organizations and Accounts
+#### _Organizations and Accounts_
 
 **Organizations** allow you to centrally manage billing, control access, compliance, security, and share resources
 
@@ -507,7 +510,7 @@ Each account has a Root Account User
 
 ## Technology Overview
 
-#### AWS Networking
+#### _AWS Networking_
 
 **Region** - the geographical location of the network
 **AZ** - the data center of your AWS resources
@@ -520,7 +523,7 @@ Each account has a Root Account User
 
 ---
 
-#### Database Services
+#### _Database Services_
 
 **DynamoDB** - NoSQL key/value database (Cassandra-like)
 **DocumentDB** - NoSQL Document database that is MongoDB compatible
@@ -540,7 +543,7 @@ Each account has a Root Account User
 
 ---
 
-#### Provisioning
+#### _Provisioning_
 
 The allocation or creation of resources and services to a customer.
 
@@ -552,7 +555,7 @@ The allocation or creation of resources and services to a customer.
 
 ---
 
-#### Computing Services
+#### _Computing Services_
 
 **EC2** - Elastic Compute Cloud, highly configurable server eg. CPU, Memory, Network, OS
 
@@ -567,7 +570,7 @@ All services below are running EC2s under the hood
 
 ---
 
-#### Storage Services
+#### _Storage Services_
 
 **S3** - Simple Storage Service - object storage
 **S3 Glacier** - low cost storage for archiving and long-term backup
@@ -588,7 +591,7 @@ All services below are running EC2s under the hood
 
 ---
 
-#### Business Centric Services
+#### _Business Centric Services_
 
 **Amazon Connect** - Call Center. Cloud-based call center service you can setup in just a few clicks - based on the same proven system used by the Amazon customer service teams.
 **Workspaces** - Virtual Remote Desktop - Secure managed service for provisioning either Windows or Linux desktops
@@ -601,7 +604,7 @@ All services below are running EC2s under the hood
 
 ---
 
-#### Enterprise Integration
+#### _Enterprise Integration_
 
 Going Hybrid!
 
@@ -616,7 +619,7 @@ Going Hybrid!
 
 ---
 
-#### Logging Services
+#### _Logging Services_
 
 **CloudTrail** - logs all API calls between AWS services
 

@@ -284,17 +284,13 @@ The practice of using a network of remote servers hosted on the Internet to stor
 - commit to EC2 over a 1 or 3 year term
 - can resell unused reserved instances
 - reduced pricing is based on Term X Class Offering X Payment Option
-
 - **Term**
-
   - 1 Year
   - 3 Years
-
 - **Class Offerings**
   - Standard - up to 75% savings; cannot change RI attributes
   - Convertible - up to 54% savings; allows you to change RI attributes if greater or equal in value
   - Scheduled - you reserve instances for specific time periods eg. once a week for a few hours; savings may vary
-  
 - RIs can be shared between multiple accounts within an org
 - unused RIs can be sold in the Reserved Instance Marketplace
 
@@ -495,14 +491,11 @@ Generate a detailed spreadsheet, enabling you to better analyze and understand y
 
 #### _Organizations and Accounts_
 
-**Organizations** allow you to centrally manage billing, control access, compliance, security, and share resources
-
-**Root Account User** is a single sign-in identity that has complete access to all AWS services and resources in an account
+- **Organizations** allow you to centrally manage billing, control access, compliance, security, and share resources
+- **Root Account User** is a single sign-in identity that has complete access to all AWS services and resources in an account
 Each account has a Root Account User
-
-**Organization Units** are a group of AWS accounts within an organization which can also contain other organizational units - creating a hierachy
-
-**Service Control Policies** give central control over the alloed permissions for all accounts in your organization, helping to ensure your accounts stay within your organization's guidelines
+- **Organization Units** are a group of AWS accounts within an organization which can also contain other organizational units - creating a hierachy
+- **Service Control Policies** give central control over the alloed permissions for all accounts in your organization, helping to ensure your accounts stay within your organization's guidelines
 
 ---
 
@@ -510,44 +503,29 @@ Each account has a Root Account User
 
 #### _AWS Networking_
 
-**Region** - the geographical location of the network
-
-**AZ** - the data center of your AWS resources
-
-**VPC** (virtual private cloud) - a logically isolated section of the AWS Cloud where you can launch AWS resources
-
-**Internet Gateway** - enable access to the internet
-
-**Route Tables** - determine where network traffic fom your subnets are directed
-
-**NACLs** - acts as a firewall at the subnet level
-
-**Security Groups** - acts as firewall at the instance level
-
-**Subnets** - a logical partition of an IP network into multiple, smaller network segments
+- **Region** - the geographical location of the network
+- **AZ** - the data center of your AWS resources
+- **VPC** (virtual private cloud) - a logically isolated section of the AWS Cloud where you can launch AWS resources
+- **Internet Gateway** - enable access to the internet
+- **Route Tables** - determine where network traffic fom your subnets are directed
+- **NACLs** - acts as a firewall at the subnet level
+- **Security Groups** - acts as firewall at the instance level
+- **Subnets** - a logical partition of an IP network into multiple, smaller network segments
 
 ---
 
 #### _Database Services_
 
-**DynamoDB** - NoSQL key/value database (Cassandra-like)
-
-**DocumentDB** - NoSQL Document database that is MongoDB compatible
-
-**RDS** - Relational Database Service that supports multiple engines
-
-- Engines: MySQL, PostGres, Maria DB, Oracle, Microsoft SQL Server, Aurora
-- Aurora - 5x faster than MySQL and 3x faster than PSQL
-- Aurora Serverless - only runs when you need it, like AWS
-  Lambda
-
-**Neptune** - Managed graph database
-
-**Redshift** - Columnar database, petabyte warehouse
-
-- 1000 TB = 1 PB
-
-**ElastiCache** - Redis or Memcached database
+- **DynamoDB** - NoSQL key/vlue database (Cassandra-like)
+- **DocumentDB** - NoSQL Document database that is MongoDB compatible
+- **RDS** - Relational Database Service that supports multiple engines
+  - Engines: MySQL, PostGres, Maria DB, Oracle, Microsoft SQL Server, Aurora
+  - Aurora - 5x faster than MySQL and 3x faster than PSQL
+  - Aurora Serverless - only runs when you need it, like AWS Lambda
+- **Neptune** - Managed graph database
+- **Redshift** - Columnar database, petabyte warehouse
+  - 1000 TB = 1 PB
+- **ElastiCache** - Redis or Memcached database
 
 ---
 
@@ -555,78 +533,54 @@ Each account has a Root Account User
 
 The allocation or creation of resources and services to a customer.
 
-**Elastic Beanstalk** - service for deploying and scaling web applications and services developed with Java, .NET, Python... (Heroku-like)
-
-**OpsWorks** - configuration management service that provides managed instances of Chef and Puppet
-
-**CloudFormation** - infrastructure as code, JSON or YAML
-
-**AWS Quickstart** - pre-made packages that can launch and configure your AWS compute, network, storage, and other services required to deploy a workload on AWS
-
-**AWS** - a curated digital catalogue with thousands of software listings from independen software vendors.
+- **Elastic Beanstalk** - service for deploying and scaling web applications and services developed with Java, .NET, Python... (Heroku-like)
+- **OpsWorks** - configuration management service that provides managed instances of Chef and Puppet
+- **CloudFormation** - infrastructure as code, JSON or YAML
+- **AWS Quickstart** - pre-made packages that can launch and configure your AWS compute, network, storage, and other services required to deploy a workload on AWS
+- **AWS** - a curated digital catalogue with thousands of software listings from independen software vendors.
 
 ---
 
 #### _Computing Services_
 
-**EC2** - Elastic Compute Cloud, highly configurable server eg. CPU, Memory, Network, OS
+- **EC2** - Elastic Compute Cloud, highly configurable server eg. CPU, Memory, Network, OS
 
 All services below are running EC2s under the hood
 
-**ECS** - Elastic Container Service, Docker as a Service. Highly scalable, high performance container orchestration service that supports Docker containers, pay for EC2 instances
-
-**Fargate** - Microservices where you don't think about the infrastructure. Pay per task
-
-**EKS** - Kubernetes as a Service. Easy to deploy, manage, and scale containerized applications using Kubernetes
-
-**Lambda** - serverless functions. Run code without provisioning or manage servers. You only pay for the compute time you consume.
-
-**Elastic Beanstalk** - orchestrates various AWS services, including EC2, S3, Simple Notification Service (SNS), CloudWatch, autoscaling, and ELB
-
-**AWS Batch** - plans, schedules, and executes your batch computing workloads across the full range of AWS compute services and features, such as EC2 and Spot instances
+- **ECS** - Elastic Container Service, Docker as a Service. Highly scalable, high performance container orchestration service that supports Docker containers, pay for EC2 instances
+- **Fargate** - Microservices where you don't think about the infrastructure. Pay per task
+- **EKS** - Kubernetes as a Service. Easy to deploy, manage, and scale containerized applications using Kubernetes
+- **Lambda** - serverless functions. Run code without provisioning or manage servers. You only pay for the compute time you consume.
+- **Elastic Beanstalk** - orchestrates various AWS services, including EC2, S3, Simple Notification Service (SNS), CloudWatch, autoscaling, and ELB
+- **AWS Batch** - plans, schedules, and executes your batch computing workloads across the full range of AWS compute services and features, such as EC2 and Spot instances
 
 ---
 
 #### _Storage Services_
 
-**S3** - Simple Storage Service - object storage
-
-**S3 Glacier** - low cost storage for archiving and long-term backup
-
-**Storage Gateway** - hybrid cloud storag with local caching
-
-- File Gateway, Volume Gateway, Tape Gateway
-
-**EBS** - Elastic Block Storage - hard drive in the cloud you can attach to EC2 instances
-
-- SSD, HHD
-
-**EFS** - file storage mountable to multiple EC2 instances at the same time
-
-**Snowball** - physically migrate lots of data via a computer suitcase 50-80 TB
-
-- Snowball Edge - a better version (100 TB)
-- Snowmobile - Shipping container, pulled by a semi-trailer truck (100PB)
+- **S3** - Simple Storage Service - object storage
+- **S3 Glacier** - low cost storage for archiving and long-term backup
+- **Storage Gateway** - hybrid cloud storag with local caching
+  - File Gateway, Volume Gateway, Tape Gateway
+- **EBS** - Elastic Block Storage - hard drive in the cloud you can attach to EC2 instances
+  - SSD, HHD
+- **EFS** - file storage mountable to multiple EC2 instances at the same time
+- **Snowball** - physically migrate lots of data via a computer suitcase 50-80 TB
+  - Snowball Edge - a better version (100 TB)
+  - Snowmobile - Shipping container, pulled by a semi-trailer truck (100PB)
 
 ---
 
 #### _Business Centric Services_
 
-**Amazon Connect** - Call Center. Cloud-based call center service you can setup in just a few clicks - based on the same proven system used by the Amazon customer service teams.
-
-**Workspaces** - Virtual Remote Desktop - Secure managed service for provisioning either Windows or Linux desktops
-
-**WorkDocs** - A content creation and collaboration service - easily create, edit and share content saved centrally in AWS (Sharepoint)
-
-**Chime** - AWS Platform for online meetings, video conferencing, and business calling
-
-**WorkMail** - Managed business email, contacts and calendar service
-
-**Pinpoint** - marketing campaign management system you can use for sending targeted email, SMS, push notif, and voice messages
-
-**SES** - Simple Email Service. A cloud-based email sending service designed for marketers and application developers to send marketing, emails
-
-**QuickSight** - a Business Intelligence (BI) service. Connect multiple datasources and quickly visualize data
+- **Amazon Connect** - Call Center. Cloud-based call center service you can setup in just a few clicks - based on the same proven system used by the Amazon customer service teams.
+- **Workspaces** - Virtual Remote Desktop - Secure managed service for provisioning either Windows or Linux desktops
+- **WorkDocs** - A content creation and collaboration service - easily create, edit and share content saved centrally in AWS (Sharepoint)
+- **Chime** - AWS Platform for online meetings, video conferencing, and business calling
+- **WorkMail** - Managed business email, contacts and calendar service
+- **Pinpoint** - marketing campaign management system you can use for sending targeted email, SMS, push notif, and voice messages
+- **SES** - Simple Email Service. A cloud-based email sending service designed for marketers and application developers to send marketing, emails
+- **QuickSight** - a Business Intelligence (BI) service. Connect multiple datasources and quickly visualize data
 
 ---
 
@@ -634,30 +588,23 @@ All services below are running EC2s under the hood
 
 Going Hybrid!
 
-**Direct Connect** - dedicated gigabit network connection from your premises to AWS. Imagine having a direct fibre optic cable running straight to AWS
-
-**VPN** - establish a secure connection to your AWS network
-
-- Site-to-site VPN - connecting your on-premise to your AWS network
-- Client VPN - connecting a client to your AWS network
-
-**Storage Gateway** - a hybrid storage service that enables your on-premise applications to use AWS cloud storage. You can use this for backup and archiving, disaster recovery, cloud data processing, storage tiering, and migration
-
-**Active Directory** - enables your directory-aware workloads
+- **Direct Connect** - dedicated gigabit network connection from your premises to AWS. Imagine having a direct fibre optic cable running straight to AWS
+- **VPN** - establish a secure connection to your AWS network
+  - Site-to-site VPN - connecting your on-premise to your AWS network
+  - Client VPN - connecting a client to your AWS network
+- **Storage Gateway** - a hybrid storage service that enables your on-premise applications to use AWS cloud storage. You can use this for backup and archiving, disaster recovery, cloud data processing, storage tiering, and migration
+- **Active Directory** - enables your directory-aware workloads
 
 ---
 
 #### _Logging Services_
 
-**CloudTrail** - logs all API calls between AWS services
-
-- detect developer misconfiguration
-- detect malicious actors
-- automate responses
-
-**CloudWatch** - a collection of multiple services
-
-- CloudWatch Logs, Metrics, Events, Alarms, Dashboard
+- **CloudTrail** - logs all API calls between AWS services
+  - detect developer misconfiguration
+  - detect malicious actors
+  - automate responses
+- **CloudWatch** - a collection of multiple services
+  - CloudWatch Logs, Metrics, Events, Alarms, Dashboard
 
 ---
 

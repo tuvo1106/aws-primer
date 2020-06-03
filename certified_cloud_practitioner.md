@@ -7,6 +7,8 @@
 - [Cloud Concepts](#cloud-concepts)
 - [AWS Global Infrastructure](#aws-global-infrastructure)
 - [Getting Started](#getting-started)
+- [Hands On](#hands-on)
+- [Billing and Pricing](#billing-and-pricing)
 
 ### FAQ
 
@@ -180,8 +182,158 @@ cloud computing - the practice of using a network of remote servers hosted on th
 - AWS GovCloud Regions allow customers to host sensitive Controlled Unclassified Information and other types of regulated workloads.
 - GovCloud Regions are only operated by employees who are US citizens.
 
-### Getting Started
+### Hands On
 
 #### To set billing alarms
 
 - CloudWatch, Alarms
+
+#### Change IAM Users Sign-in Link
+
+#### Activate MFA on your root account
+
+#### Create individual IAM user
+
+- Root account should not be used
+
+#### Log in with Systems Manager
+
+- Session manager
+
+#### AMI (Amazon Machine Instance)
+
+- In instance, Actions, Image, Create image
+
+#### Auto Scaling Groups
+
+- Guarantee one server is running
+
+#### Elastic Load Balancer (ELB)
+
+- Load Balancers, Create New Load Balancer, Application Load Balancer
+- Need to be running in at least 2 AZs
+
+#### Simple Storage Server (S3)
+
+#### Cloudfront
+
+- Used as a CDN
+- Serve static content as fast as possible
+
+#### Relational Database Service (RDS)
+
+- Production ~\$600/month
+- Dev/Test ~\$250/month
+- Free (750 hours)
+
+#### Lambda
+
+### Billing and Pricing
+
+#### Introduction to EC2 Pricing Models
+
+**On-Demand (Least Commitment)**
+
+- default
+- low cost and flexible
+- only pay her hour
+- short-term, spiky, unpredictable workloads
+- cannot be interrupted
+- for first time apps
+
+**Spot (up to 90% off; biggest savings)**
+
+- request spare computing capacity
+- flexible start and end times
+- can handle interruptions (server randomly stopping and starting)
+- for non-critical background jobs
+- AWS Batch is an easy and convenient way to use Spot Pricing
+- instances can be terminated by AWS at any time
+- if your instance is terminated, you don't get charged for a partial hour of usage
+- if YOU terminate an instance, you will still be charged
+
+**Reserved Instances (up to 75% off; best long-term)**
+
+- steady state or predictable usage
+- commit to EC2 over a 1 or 3 year term
+- can resell unused reserved instances
+- reduced pricing is based on Term X Class Offering X Payment Option
+- Payment Options: All upfront, partial upfront, no upfront
+- Class Offerings
+  - Standard - up to 75% savings; cannot change RI attributes
+  - Convertible - up to 54% savings; allows you to change RI attributes if greater or equal in value
+  - Scheduled - you reserve instances for specific time periods eg. once a week for a few hours; savings may vary
+- RIs can be shared between multiple accounts within an org
+- unused RIs can be sold in the Reserved Instance Marketplace
+
+**Dedicated (most expensive)**
+
+- dedicated servers
+- multi-tenant vs single tenant
+- can be on-demand or reserved (up to 70% off)
+- when you need a guarantee of isolate hardware (enterprise requirements)
+
+#### Free Services
+
+- IAM
+- Amazon VPC
+- Auto Scaling\*
+- CloudFormation\*
+- Elastic Beanstalk\*
+- Opsworks\*
+- Amplify\*
+- Appysync\*
+- Codestar\*
+- Organizations & COonsolidated Billing
+- AWS Cost Explorer
+
+* May provision services which cost money
+
+#### AWS Support Plans
+
+**Basic**
+
+- \$0 / month
+- 7 Trusted Advisor Checks
+
+**Developer**
+
+- \$20 / month
+- Tech support via email ~24 hours until reply
+- No third party support
+- 7 Trusted Advisor Checks
+
+**Business**
+
+- \$100 / month
+- Tech support via email ~24 hours until reply
+- Tech support via chat/phone anytime 24/7
+- ALL Trusted Advisor Checks
+
+**Enterprise**
+
+- Tech support via email ~24 hours until reply
+- Tech support via chat/phone anytime 24/7
+- Personal Concierge
+- TAM (Technical Account Manager)
+- \$15,000 / month
+- ALL Trusted Advisor Checks
+
+#### AWS Marketplace
+
+AWS Marketplace is a curated digital catalogue with thousands of software listings from independen software vendors.
+
+Easily find, buy, test and deploy software that already runs on AWS.
+
+The product can be free to use or can have associated charge.
+
+The sales channel for ISVs and Consulting Partners allows you to sell your solutions to other AWS customers.
+
+Products can be offered as:
+
+- Amazon Machine Images (AMIs)
+- AWS CloudFormation templates
+- SaaS offerings
+- Web ACL
+- AWS WAF rules
+

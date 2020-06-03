@@ -9,10 +9,13 @@
 - [Hands On](#hands-on)
 - [Billing and Pricing](#billing-and-pricing)
 - [Technology Overview](#technology-overview)
+- [Security](#security)
 
 ---
 
 ### FAQ
+
+---
 
 #### Who is the CCP for?
 
@@ -56,9 +59,13 @@
 
 ### About the Exam
 
+---
+
 #### Exam Guide Link
 
 https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf
+
+---
 
 #### Content Outline
 
@@ -71,9 +78,11 @@ Billing and Pricing - 12%
 
 ### Cloud Concepts
 
-#### What is cloud computing?
+---
 
-cloud computing - the practice of using a network of remote servers hosted on the Internet to store, manage and process data, rather than a local server or a personal coputer
+#### What is Cloud Computing?
+
+The practice of using a network of remote servers hosted on the Internet to store, manage and process data, rather than a local server or a personal computer
 
 **On-premise**
 
@@ -88,6 +97,8 @@ cloud computing - the practice of using a network of remote servers hosted on th
 - someone else hires the IT people
 - someone else pays or rents the real estate
 - you are responsible for your configuring cloud services and code, someone else takes care of the rest
+
+---
 
 #### Six advantages and benefits of cloud computing
 
@@ -111,6 +122,8 @@ cloud computing - the practice of using a network of remote servers hosted on th
 
 **Go global in minutes**
 
+---
+
 #### Types of Cloud Computing
 
 **SaaS**
@@ -131,7 +144,9 @@ cloud computing - the practice of using a network of remote servers hosted on th
 - the basic building blocks for cloud IT; provides access to networking features, computers and data storage space
 - AWS, GCP, Azure
 
-#### What is cloud computing?
+---
+
+#### Cloud Computing Models
 
 **Cloud**
 
@@ -151,7 +166,11 @@ cloud computing - the practice of using a network of remote servers hosted on th
 - Super sensitive data eg. hospitals
 - Large enterprise with heavy regulation eg. insurance companies
 
+---
+
 ### AWS Global Infrastructure
+
+---
 
 #### Where does all this cloud computing run?
 
@@ -160,6 +179,8 @@ cloud computing - the practice of using a network of remote servers hosted on th
 - Regions: physical location in the world with multiple Availability Zones
 - Availability Zones: one or more discrete data centers
 - Edge Location: datacenter owned by a trusted partner of AWS
+
+---
 
 #### Regions
 
@@ -171,6 +192,8 @@ cloud computing - the practice of using a network of remote servers hosted on th
 - Not all services are available in all regions.
 - US-EAST-1 is the region where you see all your billing information.
 
+---
+
 #### Availabilty Zones
 
 - An AZ is a datacenter owned and operated by AWS.
@@ -178,10 +201,14 @@ cloud computing - the practice of using a network of remote servers hosted on th
 - Distributing your instances across multiple AZs allows failover configuration for handling requests when one goes down.
 - < 10ms latency between AZs
 
+---
+
 #### Edge Locations
 
 - An edge location is a datacenter owned by a trusted partner of AWS which has a direction connection to the AWS network.
 - These locations serve request sfor CloudFront and Route 53.
+
+---
 
 #### GovCloud Regions
 
@@ -191,6 +218,8 @@ cloud computing - the practice of using a network of remote servers hosted on th
 ---
 
 ### Hands On
+
+---
 
 #### To set billing alarms
 
@@ -236,6 +265,8 @@ cloud computing - the practice of using a network of remote servers hosted on th
 
 ### Billing and Pricing
 
+---
+
 #### Introduction to EC2 Pricing Models
 
 **On-Demand (Least Commitment)**
@@ -264,20 +295,19 @@ cloud computing - the practice of using a network of remote servers hosted on th
 - commit to EC2 over a 1 or 3 year term
 - can resell unused reserved instances
 - reduced pricing is based on Term X Class Offering X Payment Option
-
-- **Term**
+- Term
 
   - 1 Year
   - 3 Years
 
-- **Class Offerings**
+- Class Offerings
   - Standard - up to 75% savings; cannot change RI attributes
   - Convertible - up to 54% savings; allows you to change RI attributes if greater or equal in value
   - Scheduled - you reserve instances for specific time periods eg. once a week for a few hours; savings may vary
 - RIs can be shared between multiple accounts within an org
 - unused RIs can be sold in the Reserved Instance Marketplace
 
-- **Payment Options**
+- Payment Options
   - All upfront
   - Partial upfront
   - No upfront
@@ -288,6 +318,8 @@ cloud computing - the practice of using a network of remote servers hosted on th
 - multi-tenant vs single tenant
 - can be on-demand or reserved (up to 70% off)
 - when you need a guarantee of isolate hardware (enterprise requirements)
+
+---
 
 #### Free Services
 
@@ -304,6 +336,8 @@ cloud computing - the practice of using a network of remote servers hosted on th
 - AWS Cost Explorer
 
 * May provision services which cost money
+
+---
 
 #### AWS Support Plans
 
@@ -335,6 +369,8 @@ cloud computing - the practice of using a network of remote servers hosted on th
 - \$15,000 / month
 - ALL Trusted Advisor Checks
 
+---
+
 #### AWS Marketplace
 
 AWS Marketplace is a curated digital catalogue with thousands of software listings from independen software vendors.
@@ -352,6 +388,8 @@ Products can be offered as:
 - SaaS offerings
 - Web ACL
 - AWS WAF rules
+
+---
 
 #### AWS Trusted Advisor
 
@@ -381,6 +419,8 @@ Advises you on security, saving money, performance, service limits and fault tol
 
 - VPC
 
+---
+
 #### Consolidated Billing
 
 One bill for all of your accounts.
@@ -399,6 +439,8 @@ AWS Cost Explorer lets you visualize, understand and manage your AWS costs and u
 - See data at monthly or daily level
 - Use filter or grouping functionalities
 
+---
+
 #### AWS Budgets
 
 Plan your service usage, service costs and instance reservations
@@ -408,9 +450,13 @@ Plan your service usage, service costs and instance reservations
 - each budget is \$0.02 per day; ~0.60 / month
 - 20,000 budgets limit
 
+---
+
 #### TCO Calculator
 
 The Total Cost of Ownership allows you to estimate how much you would save switching to AWS.
+
+---
 
 #### AWS Landing Zone
 
@@ -419,6 +465,8 @@ The Total Cost of Ownership allows you to estimate how much you would save switc
 - AVM (Account Vending Machine)
   - Automatically provisions and configure new accounts via Service Catalog Template
   - Uses Single Sign-on (SSO) for managing and accessing accounts
+
+---
 
 #### Resource Groups and Tagging
 
@@ -432,6 +480,8 @@ Resource Groups can display details about a group of resource based on
 - alarms
 - configuration settings
 
+---
+
 #### AWS Quickstart
 
 Prebuilt templates by AWS and AWS Partners to help you deploy popular stacks on AWS.
@@ -442,6 +492,8 @@ A Quick Start is composed of 3 parts:
 2. AWS CloudFormation templates that automate and configure the deployment
 3. A deployment guide explaining the architecture and implementation in detail
 
+---
+
 #### AWS Cost and Usage Report
 
 Generate a detailed spreadsheet, enabling you to better analyze and understand your AWS costs
@@ -449,6 +501,8 @@ Generate a detailed spreadsheet, enabling you to better analyze and understand y
 - Places the reports into S3
 - Use Athena to turn the report into a queryable database
 - Use QuickSight to visualize your billing data as graphs
+
+---
 
 #### Organizations and Accounts
 
@@ -465,6 +519,8 @@ Each account has a Root Account User
 
 ### Technology Overview
 
+---
+
 #### AWS Networking
 
 **Region** - the geographical location of the network
@@ -475,6 +531,8 @@ Each account has a Root Account User
 **NACLs** - acts as a firewall at the subnet level
 **Security Groups** - acts as firewall at the instance level
 **Subnets** - a logical partition of an IP network into multiple, smaller network segments
+
+---
 
 #### Database Services
 
@@ -494,6 +552,8 @@ Each account has a Root Account User
 
 **ElastiCache** - Redis or Memcached database
 
+---
+
 #### Provisioning
 
 The allocation or creation of resources and services to a customer.
@@ -503,6 +563,8 @@ The allocation or creation of resources and services to a customer.
 **CloudFormation** - infrastructure as code, JSON or YAML
 **AWS Quickstart** - pre-made packages that can launch and configure your AWS compute, network, storage, and other services required to deploy a workload on AWS
 **AWS** - a curated digital catalogue with thousands of software listings from independen software vendors.
+
+---
 
 #### Computing Services
 
@@ -516,6 +578,8 @@ All services below are running EC2s under the hood
 **Lambda** - serverless functions. Run code without provisioning or manage servers. You only pay for the compute time you consume.
 **Elastic Beanstalk** - orchestrates various AWS services, including EC2, S3, Simple Notification Service (SNS), CloudWatch, autoscaling, and ELB
 **AWS Batch** - plans, schedules, and executes your batch computing workloads across the full range of AWS compute services and features, such as EC2 and Spot instances
+
+---
 
 #### Storage Services
 
@@ -536,6 +600,8 @@ All services below are running EC2s under the hood
 - Snowball Edge - a better version (100 TB)
 - Snowmobile - Shipping container, pulled by a semi-trailer truck (100PB)
 
+---
+
 #### Business Centric Services
 
 **Amazon Connect** - Call Center. Cloud-based call center service you can setup in just a few clicks - based on the same proven system used by the Amazon customer service teams.
@@ -547,15 +613,37 @@ All services below are running EC2s under the hood
 **SES** - Simple Email Service. A cloud-based email sending service designed for marketers and application developers to send marketing, emails
 **QuickSight** - a Business Intelligence (BI) service. Connect multiple datasources and quickly visualize data
 
+---
+
 #### Enterprise Integration
 
 Going Hybrid!
 
 **Direct Connect** - dedicated gigabit network connection from your premises to AWS. Imagine having a direct fibre optic cable running straight to AWS
 **VPN** - establish a secure connection to your AWS network
+
 - Site-to-site VPN - connecting your on-premise to your AWS network
 - Client VPN - connecting a client to your AWS network
 
 **Storage Gateway** - a hybrid storage service that enables your on-premise applications to use AWS cloud storage. You can use this for backup and archiving, disaster recovery, cloud data processing, storage tiering, and migration
 **Active Directory** - enables your directory-aware workloads
 
+---
+
+#### Logging Services
+
+**CloudTrail** - logs all API calls between AWS services
+
+- detect developer misconfiguration
+- detect malicious actors
+- automate responses
+
+**CloudWatch** - a collection of multiple services
+
+- CloudWatch Logs, Metrics, Events, Alarms, Dashboard
+
+---
+
+### Security
+
+---

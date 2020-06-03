@@ -400,3 +400,52 @@ Plan your service usage, service costs and instance reservations
 #### TCO Calculator
 
 The Total Cost of Ownership allows you to estimate how much you would save switching to AWS.
+
+#### AWS Landing Zone
+
+- Helps Enterprises quickly set-up a secure, AWS multi-account
+- Provides you with a baseline environment to get started with a multi-account achitecture
+- AVM (Account Vending Machine)
+  - Automatically provisions and configure new accounts via Service Catalog Template
+  - Uses Single Sign-on (SSO) for managing and accessing accounts
+
+#### Resource Groups and Tagging
+
+**Tags** are words of phrases that act as metadata for organizing your AWS
+
+**Resource Groups** are a collection of resources that share one or more tags
+
+Resource Groups can display details about a group of resource based on
+
+- metrics
+- alarms
+- configuration settings
+
+#### AWS Quickstart
+
+Prebuilt templates by AWS and AWS Partners to help you deploy popular stacks on AWS.
+
+A Quick Start is composed of 3 parts:
+
+1. A reference architecture for the deployment
+2. AWS CloudFormation templates that automate and configure the deployment
+3. A deployment guide explaining the architecture and implementation in detail
+
+#### AWS Cost and Usage Report
+
+Generate a detailed spreadsheet, enabling you to better analyze and understand your AWS costs
+
+- Places the reports into S3
+- Use Athena to turn the report into a queryable database
+- Use QuickSight to visualize your billing data as graphs
+
+#### Organizations and Accounts
+
+**Organizations** allow you to centrally manage billing, control access, compliance, security, and share resources
+
+**Root Account User** is a single sign-in identity that has complete access to all AWS services and resources in an account
+Each account has a Root Account User
+
+**Organization Units** are a group of AWS accounts within an organization which can also contain other organizational units - creating a hierachy
+
+**Service Control Policies** give central control over the alloed permissions for all accounts in your organization, helping to ensure your accounts stay within your organization's guidelines

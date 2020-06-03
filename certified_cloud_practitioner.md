@@ -8,6 +8,7 @@
 - [AWS Global Infrastructure](#aws-global-infrastructure)
 - [Hands On](#hands-on)
 - [Billing and Pricing](#billing-and-pricing)
+- [Technology Overview](#technology-overview)
 
 ---
 
@@ -449,3 +450,34 @@ Each account has a Root Account User
 **Organization Units** are a group of AWS accounts within an organization which can also contain other organizational units - creating a hierachy
 
 **Service Control Policies** give central control over the alloed permissions for all accounts in your organization, helping to ensure your accounts stay within your organization's guidelines
+
+### Technology Overview
+
+#### AWS Networking
+
+**Region** - the geographical location of the network
+**AZ** - the data center of your AWS resources
+**VPC** (virtual private cloud) - a logically isolated section of the AWS Cloud where you can launch AWS resources
+**Internet Gateway** - enable access to the internet
+**Route Tables** - determine where network traffic fom your subnets are directed
+**NACLs** - acts as a firewall at the subnet level
+**Security Groups** - acts as firewall at the instance level
+**Subnets** - a logical partition of an IP network into multiple, smaller network segments
+
+#### Database Services
+
+**DynamoDB** - NoSQL key/value database (Cassandra-like)
+**DocumentDB** - NoSQL Document database that is MongoDB compatible
+**RDS** - Relational Database Service that supports multiple engines
+
+- Engines: MySQL, PostGres, Maria DB, Oracle, Microsoft SQL Server, Aurora
+- Aurora - 5x faster than MySQL and 3x faster than PSQL
+- Aurora Serverless - only runs when you need it, like AWS
+  Lambda
+
+**Neptune** - Managed graph database
+**Redshift** - Columnar database, petabyte warehouse
+
+- 1000 TB = 1 PB
+
+**ElastiCache** - Redis or Memcached database

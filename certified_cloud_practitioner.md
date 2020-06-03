@@ -13,7 +13,7 @@
 
 ---
 
-### FAQ
+## FAQ
 
 ---
 
@@ -57,7 +57,7 @@
 
 ---
 
-### About the Exam
+## About the Exam
 
 ---
 
@@ -76,7 +76,7 @@ Billing and Pricing - 12%
 
 ---
 
-### Cloud Concepts
+## Cloud Concepts
 
 ---
 
@@ -168,7 +168,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ---
 
-### AWS Global Infrastructure
+## AWS Global Infrastructure
 
 ---
 
@@ -217,7 +217,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ---
 
-### Hands On
+## Hands On
 
 ---
 
@@ -263,7 +263,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ---
 
-### Billing and Pricing
+## Billing and Pricing
 
 ---
 
@@ -517,7 +517,7 @@ Each account has a Root Account User
 
 ---
 
-### Technology Overview
+## Technology Overview
 
 ---
 
@@ -644,6 +644,6 @@ Going Hybrid!
 
 ---
 
-### Security
+## Security
 
 ---

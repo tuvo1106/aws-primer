@@ -605,7 +605,7 @@ Going Hybrid!
 
 ---
 
-### _Know your Initialisms_
+#### _Know your Initialisms_
 
 - **IAM** - Identify and Access Management
 - **S3** - Simple Storage Service
@@ -641,3 +641,227 @@ Going Hybrid!
 ---
 
 ## Security
+
+---
+
+#### _Shared Responsibility Model_
+
+- **IN** - Customers are responsible for Security **in** the Cloud
+  - Data Configuration
+- **OF** - AWS is responsible for Security **of** the Cloud
+  - Hardware
+  - Operation of Managed Services
+  - Global Infrastructure
+  
+**Detailed Breakdown**
+  
+- **Customer**
+  - Customer Data
+  - Platforms, Applications, Identity and Access Management (IAM)
+  - Operating System, Network and Firewall Configuration
+  - Client-Side Data Engcryption and Data Integrity Authentication
+  - Server-Side Encryption (File System and/or Data)
+  - Network Traffic Protection (Encryption, Integrity, Identity)
+- **AWS**
+  - Software
+  - Compute
+  - Storage
+  - Database
+  - Networking
+  - Hardware/AWS Global Infrastructure
+  - Region
+  - Availability Zones
+  - Edge Locations
+
+---
+
+#### _AWS Compliance programs_
+
+**Compliance Programs**
+Examples
+- Health Insruance Portability and Accountability Act (HIPAA)
+  - US Legislation that provides data privacy and security provisions for safeguarding medical information.
+- The Payment Card Industry Data Security Standard (PCI DSS)
+  - Standard for when you want to sell things online and you need to handle credit card information.
+
+---
+
+#### _AWS Artifact_
+
+- No cost, self-service portal forin-demand access to AWS' compliance reports
+- Checks are based on global cimpliance frameworks
+- Reports will be in Adobe Acrobat Reader (Other PDF readers are not supported)
+
+---
+
+#### _Amazon Inspector_
+
+- **Hardening** - The act of eliminating as many security risks possible
+
+- AWS Inspector runs a security benchmark again specific EC2 instances.
+- Can perform both **Network** and **Host** Assessments
+  - Install the AWS agent on your EC2 instances
+  - Run an assessment for your assessment target
+  - Review your findings and remediate security issues
+
+*CIS benchmark has 699 checks*
+
+---
+
+#### _AWS WAF_
+
+- AWS Web Application Firewall protect yuour web applications from common web exploits
+- Write your own rules to ALLOW or DENY traffic based on the contents of an HTTP requests
+- Use a ruleset from a trusted AWS Security Partner in the AWS WAF Rules Marketplace
+- WAF can be attached to either **CloudFront** or an **Application Load Balancer**
+
+Protects web applications covered in **OWASP Top 10** mostdangerous attacks
+  - Injection
+  - Broken Authentication
+  - Sensitive data exposure
+  - XML External Entities (XXE)
+  - Broken Access control
+  - SEcurity misconfigurations
+  - Cross Site Scripting (XSS)
+  - Insecure Deserialization
+  - Using Components with known vulnerabilities
+  - Insufficient logging and monitoring
+
+---
+
+#### _AWS Shield_
+
+AWS Shield is a **managed** DDoS (Distributed Denial of Service) protection service that safeguards applications running on AWS
+
+**What is DDoS**?
+- A malicious attempt to disrupt normal traffic by floodding a website with a large amount of fake traffic
+
+- All AWS customers benefit from the automatic protections of AWS Shield Standard, at no additional charge
+- AWS Shield Standard is applied to traffic through **Route53** or **CloudFront**
+- Protects from **Layer 3, 4 and 7** attacks
+  - 7 Application
+  - 4 Transport
+  - 3 Network
+
+**Shield Standard** - Free
+- For protection against most common DDoS attacks
+- Access to tools and best practices to build a DDoS resilient architecture
+- Automatically available on all AWS Services
+
+**Shield Advanced** - $3000/year
+- For additional protection against larger and more sophisticated attacks
+- visibility into attacks
+- 24/7 access to DDoS experts for complex cases
+- Available on:
+  - Amazon Route 53
+  - Amazon CloudFront
+  - Elastic Load Balancing
+  - AWS Global Accelerator
+  - Elastic IP (Amazon Elastic Compute Cloud and Network Load Balancer)
+
+---
+
+#### _Penetration Testing_
+
+- An authorized simulated cyberattack on a computer system performed to evaluate the security of the system
+- **Permitted Services**
+  - EC2 instances, NAT Gateways, and ELD
+  - RDS
+  - CloudFront
+  - Aurora
+  - API Gateways
+  - AWS Lambda and Lambda@Edge functions
+  - Lightsail resources
+  - Elastic Beanstalk environments
+- **Prohibited Activities**
+  - DNS zone walking via Amazon Route 53 Hosted Zones
+  - Denial of Service (DoS), Distributed Denial of Service (DDoS), Simluated DoS, Simulated DDoS
+  - Port flooding
+  - Protocol flodding
+  - Request flodding (login request flooding, API request flooding)
+  
+*Other Simulated Events will need an approval by AWS*
+
+---
+
+#### _Guard Duty_
+
+**IDS/IPS** - Intrusion Detection System and Intrusion Protection System
+
+**Guard Duty**
+- A threat detection service that continuously monitors for malicious, suspicious activity and unauthorized behavior. It uses Machine Learning to analyze the AWS logs:
+  - CloudTrail logs
+  - VPC Flow logs
+  - DNS logs
+  
+*It will alert you of **Findings** which you can automate an incident response via CloudWatch Events or 3rd party services*
+
+---
+
+#### _Key Management Service_
+
+A managed service that makes it easy for you to create and control the encryption keys used to encrypt your data
+- KMS is a multi-tenant HSM (hardware security module)
+- Many AWS services are integrated to use KMS to encrypt your data with a simple checkbox
+- KMS uses Envelope Encryption
+
+**Envelope Encryption**
+- When you encrypt your data key with a master key as an additional layer of security
+
+---
+
+#### _Amazon Macie_
+
+Macie is a fully managed servie athat continuously monitors **S3 data access** activity for anomolies, and generates detailed alerts when it detects risk of unauthorized access or inadvertent data leaks.
+
+*Macie works by using Maching Learning to Analyze your CloudTrail logs*
+
+- Macie Alerts
+  - Anonymized Access
+  - Config Compliance
+  - Credential Loss
+  - File Hosting
+  - Identity Enumeration
+  - Information Loss
+  - Location Anomaly
+  - Open Permissions
+  - Privilege Escalation
+  - Ransomware
+  - Service Distruption
+  - Suspicious Access
+
+---
+
+#### _Security Groups vs NACLs_
+
+**Security Groups**
+- Acts as a firewall at the **instance** level
+- Implicitly denies all traffic
+- You create Allow rules
+
+*Eg. Allow an EC2 instance to access on port 22 for SSH*
+
+**NACLs** - Network Access Control Lists
+- Acts as a firewall at the subnet level
+- You create Allow and Deny rules
+
+*Eg. Block a specific IP address known for abuse*
+
+---
+
+#### _AWS VPN_
+
+**VPN** lets you establish a secure and **private tunnel** from your network or device to the AWS global network
+
+**AWS Site-to-Site VPN**
+- Securely connecton-premise network or branch office site to VPC
+
+**AWS Client VPN**
+- Securely connect users to AWS or on-premise networks
+
+---
+
+## Variation Study
+
+---
+

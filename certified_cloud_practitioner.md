@@ -898,4 +898,113 @@ _Eg. Block a specific IP address known for abuse_
 - **CloudSearch**
   - Search engine, you have an ecommerce website and you want to add a search bar
 
+---
+
 #### _\*Connect Service_
+
+- **Direct Connect** - Dedicated Fiber Optics Connection from datacenter to AWS
+- **Amazon Connect** - Call center service
+- **Media Connect** - new version of Elastic Transcoder, converts videos to different video types
+
+---
+
+#### Elastic Transcoder vs MediaConvert
+
+Both services transcodes videos
+
+- **Elastic Transcoder** - the old way. Transcodes videos to streaming formats.
+- **AWS Elemental MediaConvert** - the new way. Transcodes videos to streaming formats. Overlays images, inserts video clips, extracts caption data, robust UI
+
+---
+
+#### SNS vs SQS
+
+They both connect apps via messages.
+
+- **Simple Notification Service** - pass alongs messages
+
+  - send notifications to subscribers of topics via multiple protocol eg. HTTP, email, SQS, SMS
+  - SNS is generally used for sending _plain text emails_ which is triggered via other AWS services. The best example of this is billing alarms.
+  - Can retry sending in case of failure for HTTPS
+  - Really good for webhooks, simple internal emails, triggering lambda functions
+
+- **Simple Queue Service** - queue up messages, guaranteed delivery eg. PubSub (publisher-subscriber model)
+  - places messages into a queue. Applications pull queue using AWS SDK
+  - Can retain message for up to 14 days.
+  - Can send them in sequential order or in parallel
+  - Can ensure only one message is sent
+  - Can ensure messages are delivered at least once
+  - Really good for delayed tasks, queueing up emails
+
+---
+
+#### Amazon Inspector vs AWS Trusted Advisor
+
+Both are security tools and they perform audits
+
+- **Amazon Inspector**
+
+  - audits a single EC2 instance that you've selected
+  - Generates a report from a long list of security checks i.e. 699 checks
+
+- **Trusted Advisor**
+  - Trusted Advisor does not generate out a PDF report
+  - Gives you a holistic view of reccomendations across multiple services and best practices
+
+---
+
+#### ALB vs NLB vs CLB
+
+All load balancers
+
+- **Application**
+  - Layer 7 requests
+  - HTTP and HTTPS traffic
+  - Routing rules, more usability from one load balancer
+  - Can attack WAF
+- **Network**
+  - Layer 4 IP protocol data
+  - TCP and TLS traffic where extreme performance is required
+  - Capable of handling millions of requests per second while maintaining ultra-low latencies
+  - Optimized for sudden and volatile traffic patterns while using a single static IP address per AZ
+- **Classic** (old)
+  - Layer 4 and Layer 7
+  - Intended for applications that were built withing the EC2-classic network
+  - Does not target groups
+
+---
+
+#### SNS vs SES
+
+- **Simple Notification Service** - practical and internal
+
+  - send notifications to subscribers of topics via multiple protocol eg. HTTP, email, SQS, SMS
+  - SNS is generally used for sending _plain text emails_ which is triggered via other AWS services. The best example of this is billing alarms.
+  - Most exam questions are going to be talking about SNS because lots of services trigger SNS for notifications
+  - You need to know what are _topics_ and _subscriptions_
+
+- **Simple Email Service** - professional, marketing, emails
+  - a cloud-based email service e.g. SendGrid
+  - SES sends html emails, SNS cannot
+  - SES recieves inbound emails
+  - SES can create Email Templates
+  - Custom domain name email
+  - Monitor your email reputation
+
+---
+
+#### AWS Artifact vs AWS Inspector
+
+Both Artifact and Inspector compile out PDFs
+
+- **AWS Artifact**
+
+  - Why should an enterprise trust AWS?
+  - Generates a security report that's based on global compliance frameworks sch as:
+    - Service Organization Control (SOC)
+    - Payment Card Industry (PCI)
+
+- **Amazon Inspector**
+  - How do we know this EC2 instance is secure? Prove it?
+  - Runs a script that analyzes your EC2 instance, then generates a PDF report telling you which security checks passed.
+  - Audit tool for security of EC2 instances

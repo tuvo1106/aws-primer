@@ -534,7 +534,7 @@ The allocation or creation of resources and services to a customer.
 - **OpsWorks** - configuration management service that provides managed instances of Chef and Puppet
 - **CloudFormation** - infrastructure as code, JSON or YAML
 - **AWS Quickstart** - pre-made packages that can launch and configure your AWS compute, network, storage, and other services required to deploy a workload on AWS
-- **AWS** - a curated digital catalogue with thousands of software listings from independen software vendors.
+- **AWS Marketplace** - a curated digital catalogue with thousands of software listings from independen software vendors.
 
 ---
 

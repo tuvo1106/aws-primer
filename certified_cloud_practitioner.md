@@ -505,7 +505,7 @@ Generate a detailed spreadsheet, enabling you to better analyze and understand y
 - **VPC** (virtual private cloud) - a logically isolated section of the AWS Cloud where you can launch AWS resources
 - **Internet Gateway** - enable access to the internet
 - **Route Tables** - determine where network traffic fom your subnets are directed
-- **NACLs** - acts as a firewall at the subnet level
+- **NACLs** (network access control list) - acts as a firewall at the subnet level
 - **Security Groups** - acts as firewall at the instance level
 - **Subnets** - a logical partition of an IP network into multiple, smaller network segments
 

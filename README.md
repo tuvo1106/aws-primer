@@ -11,3 +11,4 @@ This repository contains notes for AWS certifications.
 ## Author
 
 - **Tu Vo** - [tuvo1106](https://github.com/tuvo1106)
+- **Ryuichi Miyazaki** - [rmiyazaki6499](https://github.com/rmiyazaki6499)

@@ -642,8 +642,6 @@ Going Hybrid!
 
 ## Security
 
----
-
 #### _Shared Responsibility Model_
 
 - **IN** - Customers are responsible for Security **in** the Cloud
@@ -863,5 +861,22 @@ Macie is a fully managed servie athat continuously monitors **S3 data access** a
 
 ## Variation Study
 
----
+#### _Cloud* Services_
 
+- **CloudFormation**
+  - Infrastructure as code, set up services via templating script eg. yml, json
+- **CloudTrail** 
+  - logs all *api calls* between *aws services* (who we can blame)
+- **CloudFront**
+  - Content Distribution Network, it creates a cached copy of your website and copies to servers located near people trying to download your website
+- **CloudWatch** - a collection of multiple services
+- **CloudWatch** - a collection of multiple services
+  - CloudWatch Logs - any custom log data, Memory usage, Rails logs, NGINX logs
+  - CloudWatch Metrics - metrics that are based off of logs eg. Memory usage
+  - CloudWatch Events - triggers an event based on conditions eg. 
+  - CloudWatch Alarms - triggers notifications based on metrics
+  - CloudWatch Dashboard - create visualizations based on metrics
+- **CloudSearch**
+  - Search engine, you have an ecommerce website and you want to add a search bar
+
+#### _*Connect Service_

@@ -324,7 +324,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 - Amplify\*
 - Appysync\*
 - Codestar\*
-- Organizations & COonsolidated Billing
+- Organizations & Consolidated Billing
 - AWS Cost Explorer
 
 \* May provision services which cost money

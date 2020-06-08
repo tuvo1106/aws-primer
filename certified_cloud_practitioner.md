@@ -10,6 +10,7 @@
 - [Billing and Pricing](#billing-and-pricing)
 - [Technology Overview](#technology-overview)
 - [Security](#security)
+- [Variation](#variation-study)
 
 ---
 

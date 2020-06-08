@@ -3,11 +3,12 @@
 ---
 
 1. Which of the below are components that can be configured in the VPC section of th AWS management console? (choose 2)
-   a. EBS volumes
-   b. Endpoints
-   c. DNS records
-   d. Subnet
-   e. Elastic Load Balancer
+
+- a. EBS volumes
+- b. Endpoints
+- c. DNS records
+- d. Subnet
+- e. Elastic Load Balancer
 
 **Answer** - B, D
 
@@ -17,20 +18,20 @@ DNS must be configured in Amazon Route 53.
 ---
 
 2. What statement is true in relation to data stored within an AWS Region?
-   a. Data is always replicated to another region
-   b. Data is not replicated outside of a region unless you configure it
-   c. Data is always automatically replicated to at least one another AZ
-   d. Data is automatically archived after 90 days
+- a. Data is always replicated to another region
+- b. Data is not replicated outside of a region unless you configure it
+- c. Data is always automatically replicated to at least one another AZ
+- d. Data is automatically archived after 90 days
 
 **Answer** - B
 
 ---
 
 3. Which type of storage stores objects comprised of key, value pairs?
-   a. Amazon EFS
-   b. Amazon EBS
-   c. Amazon S3
-   d. Amazon DynamoDB
+- a. Amazon EFS
+- b. Amazon EBS
+- c. Amazon S3
+- d. Amazon DynamoDB
 
 **Answer** - C
 
@@ -42,11 +43,11 @@ Amazon EFS is a file-based storage system.
 ---
 
 4. Which of the facts below are accurate in relation to AWS Regions? (choose 2)
-   a. Each region consists of a collection of VPCs
-   b. Regions are Content Delivery Network (CDN) endpoints for CloudFront
-   c. Each region consists of 2 or more availability zones
-   d. Regions have direct, low-latency, high throughput and redudant network connections between each other
-   e. Each region is designed to be completely isolate from the other Amazon Regions
+- a. Each region consists of a collection of VPCs
+- b. Regions are Content Delivery Network (CDN) endpoints for CloudFront
+- c. Each region consists of 2 or more availability zones
+- d. Regions have direct, low-latency, high throughput and redudant network connections between each other
+- e. Each region is designed to be completely isolate from the other Amazon Regions
 
 **Answer** - C, E
 
@@ -57,11 +58,11 @@ Edge locations (not regions) are Content Delivery Network (CDN) endpoints for Cl
 ---
 
 5. Which of the following would be good reasons to move from on-premises to the AWS Cloud? (choose 2)
-   a. Outsource all security responsibility
-   b. Gain access to free technical support services
-   c. Reduce costs through easier right-sizing of workloads
-   d. Improve agility and elasticity
-   e. Gain end-to-end operational management of the entire infrastructure stack
+- a. Outsource all security responsibility
+- b. Gain access to free technical support services
+- c. Reduce costs through easier right-sizing of workloads
+- d. Improve agility and elasticity
+- e. Gain end-to-end operational management of the entire infrastructure stack
 
 **Answer** - C, D
 
@@ -72,10 +73,10 @@ You are still responsible for ensuring the security of your application, users a
 ---
 
 6. Which AWS program can help an organization to design, build, and manage their workload?
-   a. AWS Business Development Manager
-   b. APN Consulting Partners
-   c. APN Technology Consultants
-   d. AWS Technical Account Manager
+- a. AWS Business Development Manager
+- b. APN Consulting Partners
+- c. APN Technology Consultants
+- d. AWS Technical Account Manager
 
 **Answer** - B
 
@@ -84,10 +85,10 @@ APN Consulting Partners are professional services firms that help customers of a
 ---
 
 7. An Amazon EC2 instance running the Amazon Linux 2 AMI is billed in what increment?
-   a. Per hour
-   b. Per CPU
-   c. Per GB
-   d. Per second
+- a. Per hour
+- b. Per CPU
+- c. Per GB
+- d. Per second
 
 **Answer** - D
 
@@ -97,10 +98,10 @@ You do pay for _EBS_ on a per GB of provisioned storage basis.
 ---
 
 8. Which AWS service lets you add user sign up, sign-in and access control to web and mobile apps?
-   a. AWS CloudHSM
-   b. AWS Artifact
-   c. AWS Directory Service
-   d. AWS Cognito
+- a. AWS CloudHSM
+- b. AWS Artifact
+- c. AWS Directory Service
+- d. AWS Cognito
 
 **Answer** - D
 
@@ -126,10 +127,10 @@ The customer is responsible for "security in the cloud". This includes IAM (Iden
 ---
 
 10. How does AWS assist organizations' with their capacity requirements?
-    a. With AWS you don't pay for data centres
-    b. With AWS you only pay for what you use
-    c. You don't own the infrastructure
-    d. You don't need to guess your capacity needs
+- a. With AWS you don't pay for data centres
+- b. With AWS you only pay for what you use
+- c. You don't own the infrastructure
+- d. You don't need to guess your capacity needs
 
 **Answer** - D
 

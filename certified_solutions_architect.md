@@ -563,8 +563,11 @@ NAT instances (legacy) are individual EC2 instances. Community AMIs exist to lau
 
 NAT Gateways is a managed service which launches redundant instances within the selected AZ.
 
-## IAM (Identity Access Management)
+---
 
+## IAM
+
+- Identity Access Management
 - Manages access of AWS users and resources.
 - IAM is a universal system (applied to all regions at the same time). IAM is a free service.
 - A root account is the account initially created when AWS is set up.
@@ -572,6 +575,8 @@ NAT Gateways is a managed service which launches redundant instances within the 
 - New users get assigned an Access key ID and Secret when first created when you give them programattic access.
 - Access keys are only used for CLI and SDK (cannot access console).
 - Always set up MFA for Root Accounts.
+
+---
 
 #### IAM Core Components
 
@@ -625,6 +630,3 @@ You're allowed two Access keys per user.
 
 ---
 
-
-
----

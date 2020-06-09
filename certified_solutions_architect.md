@@ -7,6 +7,7 @@
 - [S3](#s3)
 - [AWS Snowball](#aws-snowball)
 - [Virtual Private Cloud](#virtual-private-cloud)
+- [Network Access Control List](#network-access-control-list)
 
 ---
 
@@ -323,3 +324,195 @@ Think of a AWS VPC as your own _personal data center_.
 Gives you complete control over your virtual networking environment.
 
 ![VPC](./images/vpc.png)
+
+Combining these components and services is what makes up your VPC:
+
+- Internet Gateway (IGW)
+- Virtual Private Gateway (VPN Gateway)
+- Routing Tables
+- Network Access Control Lists (NACLs) - Stateless
+- Security Groups (SG) - Stateful
+- Public Subnets
+- Private Subnets
+- Nat Gateway
+- Customer Gateway
+- VPC Endpoints
+- VPC Peering
+
+---
+
+#### Key Features
+
+- VPCs are _Region Specific_; they do not span regions.
+- You can create up to _5 VPC_ per region.
+- Every region comes with a default VPC.
+- You can have _200 subnets_ per VPC.
+- You can use _IPv4 CIDR Block_ and in addition to a _IPv6 CIDR Blocks_ (the address of the VPC).
+- Cost nothing: VPC's, Route Tables, NACLs, Internet Gateways, Security Groups and Subnets, VPC Peering
+- Some things cost money: NAT Gateway, VPC Endpoints, VPN Gateway, Customer Gateway
+- DNS hostnames (should our instance have domain name addresses)
+
+---
+
+#### Default VPC
+
+AWS has a default VPC in every region so you can immediately deploy instances.
+
+- Create a VPC with a size /16 IPv4 CIDR block (172.31.0.0/16)
+- Create a size /20 default subnet in each AZ.
+- Create an Internet Gateway and connect it to your default VPC.
+- Create a default network access control list (NACL) and associate it with our default VPC.
+- Associate the default DHCP options set for your AWS account with your default VPC.
+- When you create a VPC, it automatically has a main route table.
+
+---
+
+#### Default Everywhere IP
+
+- 0.0.0.0/0 is also known as default.
+- It represents all possile IP addresses.
+- When we specify 0.0.0.0/0 in our route table for IGW we are allowing internet access.
+- When we specify 0.0.0.0/0 in our security groups inbound rules we are allowing all traffic from internet access our public resources.
+- When you see 0.0.0.0/0, just think of giving access from anywhere on the internet.
+
+---
+
+#### VPC Peering
+
+VPC Peering allows you to connect one VPC to another over a direct network route using private IP addresses.
+
+- Instances on peered VPCs behave just like they are on the same network.
+- Connect VPCs across same or different AWS accounts and regions.
+- Peering uses a Star Configuration: 1 Central VPC - 4 other VPCs.
+- No Transitive Peering (peering must take place directly between VPCs)
+  - Needs a one to one connect to immediate VPC.
+- No Overlapping CIDR Blocks.
+
+---
+
+#### Route Tables
+
+- Route tables are used to determine where network traffic is directed.
+- Each subnet in your VPC _must be associated_ with a route table.
+- A subnet can only be associated with one route table at a time, but you associate multiple subnets with the same route table.
+
+---
+
+#### Internet Gateway (IGW)
+
+- The IGW allows your VPC access to the internet.
+- The IGW does 2 things:
+  - provide a target in your VPC route tables for internet-routable traffic.
+  - perform network address translation (NAT) for instances that have been assigned public IPv4 addresses.
+- To route out to the internet, you need to add in your route tables for the IGW and set the destination to 0.0.0.0/0.
+
+---
+
+#### Bastion/Jumpbox
+
+Bastions are EC2 instances which are security harden. They are designed to help you gain access to your EC2 instances via SSH or RCP that are in a _private subnet_.
+
+They are also known as Jump boxes because you are jumping from one box to access another.
+
+NAT Gateways/Instances are only intended for EC2 instances to gain outbound access to the internet for things such as security updates. NATs cannot/should not be used as Bastions.
+
+System Manager's Sessions Manager replaces the need for Bastions.
+
+---
+
+#### Direct Connect
+
+AWS Direct Connect is the AWS solution for establishing dedicated network connections from on-premises locations to AWS.
+
+- Very fast network (lower bandwidth 50M - 500M or higher bandwidth (1GB or 10GB))
+- Helps reduce network costs and increase bandwich thoughput (great for high traffic networks)
+- Provides a more consistent network experience than a typical internet-based connection (reliable and secure)
+
+---
+
+#### VPC Endpoints
+
+Think of a secret tunnel where you don't have to leave the AWS network.
+
+VPC Endpoints allow you to _privately connect your VPC to other AWS services_.
+
+- Eliminates the need for an Intnet Gateway, NAT device, VPN connection, or AWS Direct Connect connections.
+- Instances in the VPC do not require a public IP address to communicate with service resources.
+- Traffic between your VPC and other services _does not leave the AWS network_.
+- Horizontally scaled, redundant and highly available VPC component.
+- Allows secure communication between instances and services - without adding availaility risks or bandwidth constraints on your traffic.
+
+There are 2 Types of VPC Endpoints:
+
+- Interface Endpoints
+- Gateway Endpoints
+
+---
+
+#### Interface Endpoints
+
+Interface Endpoints are Elastic Network Interfaces (ENI) with a private IP address. They serve as an entry point for traffic going to a supported service.
+
+Interface Endpoints are powered by AWS PrivateLink.
+
+Pricing per VPC endpoint per AZ ($/hour) 0.01
+Pricing per GB data processed ($) 0.01
+~7.5/mo
+
+---
+
+#### Gateway Endpoints
+
+A Gateway Endpoint is a gateway that is a target for a specific route in your route table, used for traffic destined for a supported AWS service.
+
+- VPC GE's are free!
+- To create a Gateway Endpoint, you must specify the VPC in which you want to create the endpoint, and the service to which you want to establish the connection.
+- AWS Gateway Endpoint currently only supports 2 services: S3 and DynamoDB
+
+#### VPC Flow Logs Introduction
+
+VPC Flow Logs allow you to capture IP traffic information in-and-out of Network Interfaces within your VPC.
+
+Flow Logs can be created for:
+
+- VPC
+- Subnets
+- Network Interface
+
+All log data is stored and accesible using Amazon CloudWatch Logs or S3.
+
+---
+
+#### VPC Flow Logs Log Breakdown
+
+- Version
+- Account ID
+- Interface ID
+- Source IPv4 or IPv6 addresses
+- Destination IPv4 or IPv6 addresses
+- Source port
+- Destination port
+- Protocol
+- Packets
+- Bytes
+- Start - time in UNIX
+- End - time in UNIX
+- Action - ACCEPT or REJECT
+- log-status - OK, NODATA, SKIPDATA
+
+---
+
+#### VPC Flow Logs Cheatsheet
+
+- VPC Flow Logs cannot be tagged like other AWS resources.
+- You cannot change the configuration of a flow after it's created.
+- You cannot enable flow logs for VPCs which are peered with your VPC unless it is in the same account.
+- Some instance traffic is not monitored:
+  - Instance traffic generated by contacting the AWS DNS servers.
+  - Windows license activation traffic from instances.
+  - Traffic to and from the instance metadata address (169.254.169.254).
+  - DHCP Traffic.
+
+---
+
+### Network Access Control List (NACLs)

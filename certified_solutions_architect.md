@@ -5,6 +5,8 @@
 - [FAQ](#faq)
 - [Exam Guide Overview](#exam-guide-overview)
 - [S3](#s3)
+- [AWS Snowball](#aws-snowball)
+- [Virtual Private Cloud](#virtual-private-cloud)
 
 ---
 
@@ -243,3 +245,81 @@ Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
 Only the bucket owner logged in as **Root User** can DELETE objects from bucket.
 
 ---
+
+### AWS Snowball
+
+- Petabyte-scale data transfer service.
+- Move data onto AWS via physical briefcase computer.
+
+#### Snowball
+
+- Low Cost - it cost thousands of dollars to transfer 100TB over high speed internet. Snowball can reduce that costs by _1/5th_.
+- Speed - It can take 100TB over 100 days to transfer over high speed internet. Snowball can reduce that transfer time by _less than a week_.
+- Snowball features and limitations:
+  - E-Ink display (shipping info).
+  - Tamper and weather proof.
+  - Data is encrypted end-to-end (256-bit encryption).
+  - Uses Trusted Platform Module (TPM) - a specialized chip on an endpoint device that stores RSA encryption keys specific to the host system for hardware authentication.
+  - For security purposes, data transfers must be completed within _90 days_.of the Snowball being prepared.
+  - Snowball can Import and Export from S3.
+- Snowballs come in 2 sizes:
+  - 50 TB (42 TB of usable space)
+  - 80 TB (72 TB of usable space)
+
+---
+
+#### Snowball Edge
+
+- Petabyte-scale data transfer service.
+- Move data onto AWS via physical briefcase computer.
+- Move storage and on-site compute capabilities.
+
+Similar to Snowball but with _more storage_ and with _local processing_.
+
+Snowball Edge features and limitations:
+
+- LCD diplay (shipping information and other functionality).
+- Can undertake local processing and edge-computing workloads.
+- Can use in a cluster in groups of 5 to 10 devices.
+- Three options for device configurations:
+  - Storage optimized (25 vCPUs)
+  - Compute optimized (54 vCPUs)
+  - GPU optimized (25 vCPUs)
+
+Snowball Edge comes in 2 sizes:
+
+- 100 TB (83 TB of usable space)
+- 100 TB Clustered (45 TB per node)
+
+---
+
+#### Snowmobile
+
+A _45-foot long_ ruggedized _shipping container_, pulled by a _semi-trailer truck_.
+Transfer up to _100PB_ per Snowmobile, exabyte-scale migration.
+
+AWS personnel will help you connect your network to the snowmobile and when data transfer is complete, they'll drive it back to AWS to import into S3 or Glacier.
+
+Security Features
+
+- GPS Tracking
+- Alarm monitoring
+- 24/7 video surveillance
+- An escort security while in transit (optional)
+
+---
+
+#### Virtual Private Cloud
+
+#### Introduction
+
+Provision a _logically isolated section of the AWS cloud_ where you can launch AWS resources in a virtual network that you define.
+
+---
+
+#### Core Components
+
+Think of a AWS VPC as your own _personal data center_.
+Gives you complete control over your virtual networking environment.
+
+![VPC](./vpc.png)

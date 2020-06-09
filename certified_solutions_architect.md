@@ -322,4 +322,4 @@ Provision a _logically isolated section of the AWS cloud_ where you can launch A
 Think of a AWS VPC as your own _personal data center_.
 Gives you complete control over your virtual networking environment.
 
-![VPC](./vpc.png)
+![VPC](./images/vpc.png)

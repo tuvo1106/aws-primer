@@ -7,8 +7,7 @@
 - [S3](#s3)
 - [AWS Snowball](#aws-snowball)
 - [Virtual Private Cloud](#virtual-private-cloud)
-- [Network Access Control List](#network-access-control-list)
-- [Security Groups](#security-groups)
+- [IAM](#iam)
 
 ---
 
@@ -564,3 +563,68 @@ NAT instances (legacy) are individual EC2 instances. Community AMIs exist to lau
 
 NAT Gateways is a managed service which launches redundant instances within the selected AZ.
 
+## IAM (Identity Access Management)
+
+- Manages access of AWS users and resources.
+- IAM is a universal system (applied to all regions at the same time). IAM is a free service.
+- A root account is the account initially created when AWS is set up.
+- New IAM accounts have no permissions by default until granted.
+- New users get assigned an Access key ID and Secret when first created when you give them programattic access.
+- Access keys are only used for CLI and SDK (cannot access console).
+- Always set up MFA for Root Accounts.
+
+#### IAM Core Components
+
+- Users - End users who log into the console or interact with AWS resource programatically
+- Groups - Group up your Users so they share permission levels of the group eg. Administrators, Develops, Auditors
+- Roles - Associate permissions to a Role and then assign this to Users or Groups
+- Policies - JSON documents which grant permissions for a specific user, group or role to access services. Policies are attached to IAM Identities.
+
+---
+
+#### IAM - Managed vs Customer vs Inline Policy
+
+- Managed Policies - a policy which is managed by AWS, which you cannot edit. Managed policies are labeled with an orange box.
+- Customer Managed Policies - a policy created by the customer which is editable. Customer policies have no symbol beside them.
+- Inline Policies - a policy which is directly attached to the user.
+
+---
+
+#### Policy Structure
+
+- Version
+- Statement
+- SID (optional)
+- Effect
+- Principal
+- Action
+- Resource
+- Condition
+
+---
+
+#### Password Policy
+
+In IAM, you can set a Password Policy. To set the minimum requirements of a password and rotate passwords so users have to update their passwords after X days.
+
+---
+
+#### Programmatic Access Keys
+
+Access keys allow users to interact with AWS service programatically via the AWS CLI or AWS SDK.
+
+You're allowed two Access keys per user.
+
+---
+
+#### MFA
+
+- MFA can be turned on per user.
+- The user has to turn on the MFA themselves, Admin cannot directly enforce users to have MFA.
+- The Admin account could create a policy requiring MFA to access certain resources.
+
+---
+
+
+
+---

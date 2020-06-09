@@ -8,6 +8,7 @@
 - [AWS Snowball](#aws-snowball)
 - [Virtual Private Cloud](#virtual-private-cloud)
 - [Network Access Control List](#network-access-control-list)
+- [Security Groups](#security-groups)
 
 ---
 
@@ -455,9 +456,9 @@ Interface Endpoints are Elastic Network Interfaces (ENI) with a private IP addre
 
 Interface Endpoints are powered by AWS PrivateLink.
 
-Pricing per VPC endpoint per AZ ($/hour) 0.01
-Pricing per GB data processed ($) 0.01
-~7.5/mo
+- Pricing per VPC endpoint per AZ (\$/hour) 0.01.
+- Pricing per GB data processed (\$) 0.01.
+- ~7.5/mo
 
 ---
 
@@ -515,4 +516,51 @@ All log data is stored and accesible using Amazon CloudWatch Logs or S3.
 
 ---
 
-### Network Access Control List (NACLs)
+#### Network Access Control List (NACLs)
+
+An (optional) layer of security that acts as a firewall for controlling traffic in and out of subnet(s).
+
+NACLs act as a virtual firewall at the subnet level.
+
+- VPCs automatically get a default NACL.
+- Subnets are associated with NACLs. Subnets can only belong to a single NACL.
+- Rule # determines the order of evaluation(from lowest to highest).
+- You can allow or deny traffic. You could block a single IP address (you can't do this with security groups).
+
+---
+
+#### Security Groups
+
+- You can specify the source to be an IP range or a specific IP
+- You can specify the source to be another security group
+- An instance can belong to multiple security groups, and rules are permissive.
+- Security groups are _stateful_ (if traffic is allowed inbound, it is also allowed outbound)
+
+---
+
+#### Security Groups Limits
+
+- You can have up to 10,000 SGs in a Region (default is 2,500).
+- You can have 60 inbound rules and 60 outbound rules per security group.
+- 16 SGs per Elastic Network Interface (ENI)
+
+---
+
+#### Network Address Translation (NAT)
+
+NAT is the method of re-mapping one IP address space to another.
+
+If you have a private network and you need to gain outbound access to the internet, you would need to use a NAT gateway to remap the private IPs.
+
+If you have two networks which have conflicting network addresses, you can use a NAT to make the addresses more agreeable.
+
+---
+
+#### NAT instances vs NAT Gateways
+
+NATs have to run within a Public Subnet.
+
+NAT instances (legacy) are individual EC2 instances. Community AMIs exist to launch NAT instances.
+
+NAT Gateways is a managed service which launches redundant instances within the selected AZ.
+

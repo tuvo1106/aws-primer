@@ -10,6 +10,7 @@
 - [IAM](#iam)
 - [Cognito](#cognito)
 - [Command Line Interface](#command-line-interface)
+- [DNS](#dns)
 
 ---
 
@@ -637,7 +638,6 @@ You're allowed two Access keys per user.
 - Decentralized Managed Authentication.
 - Sign-up, sign-in integration for your apps.
 - Social identity provider, eg. Facebook, Google.
-
 - **Cognito User Pools** - User directory with authentication to IpD to grant access to your app.
 - **Cognito Identity Pools** - Provide temporary credentials for users to access AWS services.
 - **Cognito Sync** - Syncs user data and preferences across all devices
@@ -656,13 +656,11 @@ You're allowed two Access keys per user.
 
 #### User Pools
 
-User Pools are user directories used to manage the actions for web and mobile apps such as:
-
+- User Pools are user directories used to manage the actions for web and mobile apps such as:
 - Sign-up
 - Sign-in
 - Account recovery
 - Account confirmation
-
 - Allows users to sign-in directly to the User Pool, or using Web Identity Federation.
 - Uses AWS Cognito as the identity broker between AWS and the identity provider.
 - Sucessful user authentication generates a JWT.
@@ -713,5 +711,81 @@ SDK is a set of tools and libraries that you can use to create applications for 
 The AWS SDK is a set of API libraries that let you integrate AWS services into your applications. The SDK is available in C++, Go, Java, JS, .NET, NodeJS, PHP, Python and Ruby.
 
 You have to enable _Programmatic Access_.
+
+---
+
+### DNS
+
+- Domain Name System
+- The phonebook of the internet.
+- DNS translates domain names to IP addresses so browsers can find internet resources.
+
+#### IP (Internet Protocol)
+
+- IP Addresses are what uniquely identifies each computer on a network, and allows communication between them using the Ineternet Protocol.
+- IPv4
+  - Example: 52.216.8.4.
+  - Address space is 32 bits with up to 4,294,967,296 available addresses (we are running out).
+- IPv6
+  - Example: 2001:0db8:95a3:0000:0000:8a2e:0370:7334.
+  - Address space is 128 bits with up to 340 undeceillion potential addresses (1 + 36 zeroes).
+  - Invented to solve available addresss limitations of IPv4.
+
+---
+
+#### Domain Registrars
+
+- Domain registrars are authorities who have the ability to assign domain names under one or more top-level domains.
+- Common registrars:
+  - HostGator
+  - GoDaddy
+  - AWS
+
+---
+
+#### Top-Level Domains
+
+- The last word within a domain represents the top-level domain name: example.com.
+- The second word within a domain name is known as the second-level domain name: example.co.uk.
+- Top-level domain names are controlled by the Internet Assigned Numbers Authority (IANA).
+- AWS has their own top level domain .aws.
+
+---
+
+#### Start of Authority (SOA)
+
+- Every domain must have an SOA record. The SOA is a way for the Domain Admins to provide information about the domain:
+  - how often it is updated.
+  - what is the admin's email address.
+- A zone file can contain only one SOA record.
+
+---
+
+#### A Records
+
+- Address Records (A Records) are one of the fundamental types of DNS records.
+- An A Record allows you to convert the name of a domain directly into an IP address. They can also be used on the root (naked domain name) itself.
+
+---
+
+#### CNAME Records
+
+- Canonical Names (CNAME) are another fundamental DNS record used to resolve one domain name to another - rather than an IP address.
+- The advantage of CNAMES is they are unlikely to change where IP addresses can change over time.
+
+---
+
+#### NS Records
+
+- Name Server Records (NS) are used by top-level domain servers to direct traffic to the DNS server containing the authoritative DNS records. Typically multiple name servers are provided for redundancy.
+- If you were managing your DNS records with Route53, the NS records for your domain would be pointing at the AWS servers.
+
+---
+
+#### Time to Live (TTL)
+
+- TTL is the length of time that a DNS record gets cached on the resolving server or the users own local machine.
+- The lower the TTL - the faster the changes to DNS records will propagate across the internet.
+- TTL is always measured in seconds under IPv4.
 
 ---

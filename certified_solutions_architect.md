@@ -1022,3 +1022,71 @@ Combine metadata with userdata scripts to perform all sorts of advanced AWS stag
 - when you need a guarantee of isolate hardware (enterprise requirements)
 
 ---
+
+### Amazon Machine Image (AMI)
+
+- A template to configure new instances.
+- AMI provides the information required to launch an instance.
+- You can turn your EC2 instances into AMIs so you can create copies of your servers.
+- An AMI holds the following information:
+  - A template for the root volume (EBS Snapshot or Instance Store template) eg. an OS, an app server and applications.
+  - Launch permissions that control which AWS accounts can use the AMI to launch instances.
+  - A block device mapping that specifies the volumes to attach to the instance when it's launched.
+- AMIs are _Region Specific!_
+
+![AMI](./images/ami.png)
+
+---
+
+#### Use Case
+
+- AMIs help you keep incremental changes to your OS, application code and system packages.
+- Using **Systems Manager Automation** you can routinely patch your AMIS with security updates.
+- AMIs are used with **LaunchConfigurations**.
+
+---
+
+#### Marketplace
+
+AWS Marketplace is a curated digital catalogue with thousands of software listings from independen software vendors.
+
+- Easily find, buy, test and deploy software that already runs on AWS.
+- The product can be free to use or can have associated charge.
+- The sales channel for ISVs and Consulting Partners allows you to sell your solutions to other AWS customers.
+
+Products can be offered as:
+
+- Amazon Machine Images (AMIs)
+- AWS CloudFormation templates
+- SaaS offerings
+- Web ACL
+- AWS WAF rules
+
+---
+
+#### Creating an AMI
+
+You can create an AMI from an existing AMI that's either running or stopped.
+
+---
+
+#### Choosing an AMI
+
+- AWS has hundreds of AMIs you can search and select from.
+- Community AMIs are free and maintained by the community.
+- AWS Marketplace has free and paid AMIs maintained by vendors.
+- AMIs can be selected based on:
+  - Region
+  - OS
+  - Architecture (32bit or 64bit)
+  - Launch permissions
+  - Root Device Volume
+    - Instance store (ephemeral storage)
+    - EBS Backed Volumes
+
+#### Copying an AMI
+
+AMIs are region specific. If you want to use an AMI from another region. You need to **Copy the AMI** and then select destination region.
+
+---
+

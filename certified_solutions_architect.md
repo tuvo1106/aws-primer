@@ -11,6 +11,8 @@
 - [Cognito](#cognito)
 - [Command Line Interface](#command-line-interface)
 - [DNS](#dns)
+- [Route 53](#route-53)
+- [EC2](#ec2)
 
 ---
 
@@ -787,5 +789,236 @@ You have to enable _Programmatic Access_.
 - TTL is the length of time that a DNS record gets cached on the resolving server or the users own local machine.
 - The lower the TTL - the faster the changes to DNS records will propagate across the internet.
 - TTL is always measured in seconds under IPv4.
+
+---
+
+### Route 53
+
+- Highly available and scalable cloud Domain Name System.
+- Register domains, create DNS routing rules eg. failovers.
+- You can:
+  - register and domain domains.
+  - create various records set on a domain.
+  - Implement complex traffic flows eg. blue/green deploy, failovers.
+  - Continiously monitor record via health checks.
+  - resolve VPCs outisde of AWS.
+
+---
+
+#### Route 53 Use Case
+
+- Use Route 53 to get your custom domains to point to your AWS resource.
+  - 1. Incoming internet traffic
+  - 2. Route traffic to web-app backend by ALB
+  - 3. Route traffic to an instance to tweak AMI
+  - 4. Route traffic to API Gateway which powers API
+  - 5. Route traffic to CloudFront which serves S3 static content
+  - 6. Route traffic to Elastic IP (EIP) which is a static IP that hosts a company Minecraft server
+
+---
+
+#### Record Sets
+
+- We create record sets which allows us to point our naked domain and subdomains via Domain records.
+- AWS has their own special Alias Record which extends DNS functionality. It route traffic to specific AWS resources.
+- Alias records are smart where they can detect that change of an IP address and continuously keep that endpoint pointed to the correct resource.
+- In most cases, you ant to be using aliases when routing traffic to AWS resources.
+
+---
+
+#### Routing Policies
+
+There are _7 different types_ of Routing Policies:
+
+- **Simple** - default policy, multiple addresses result in random selection.
+  - You have 1 record and provide single or multiple IP addresses.
+- **Weighted** - route traffic based on weighted values to split traffic.
+  - This allows you to send a certain percentage of overall traffic to one server and have any other traffic from that directed to a completely different server.
+  - Good use case is to test out experimental features.
+- **Latency-Based** - route traffic to region resource with lowest latency.
+  - Based on region
+- **Failover** route traffic if primary endpoints is unhealthy to secondary endpoint.
+  - Allows you to create active/passive setups.
+  - Route 53 automatically monitors health-checks from your primary site to determine the health of end-points. If an endpoint is determined to be in a failed state, all traffic is automatically directed to the secondary location.
+- **Geolocation** - route traffic based on the location of your users.
+- **Geo-proximity** - route traffic based on the location of your resources and optionally shift traffic from resources in one location to another.
+  - You cannot use Record Sets; you have to use Traffic Flow.
+  - You can give biases for different regions.
+- **Multi-value Answer** - respond to DNS queries with up to eight healthy records selected at random.
+
+---
+
+#### Traffic Flow
+
+- Visual editor that lets you create sophisticated routing configurations for your resources using existing routing types.
+- Supports versioning so you can roll out or roll back updates.
+- \$50 per policy record / month
+
+---
+
+#### Health Check
+
+- Checks health every 30s be default. Can be reduced to every 10s.
+- A health check can initiate a failover if status is returned unhealthy.
+- A CloudWatch Alarm can be created to alert you of status unhealthy.
+- A health check can monitor other health checks to create a chain of reactions.
+- Can create up to 50 health checks for AWS endpoints that are linked to one account.
+
+---
+
+#### Resolver
+
+- Formally known as .2 resolver.
+- A regional service that lets you route DNS queries between your VPCs and your network.
+- DNS Resolution for Hybrid Environments (On-Premise and Cloud).
+
+---
+
+### EC2
+
+- Cloud computing service.
+- Choose your OS, Storage, Memory, Network Throughput.
+- Launch and SSH into your server within minutes.
+- EC2 is a highly configurable server.
+- EC2 is resizable compute capacity.
+- Anything and everything on AWS uses EC2 instances underneath.
+
+---
+
+#### Instance Types
+
+- **General Purpose**
+  - A1, T3, T3a, T2, M5, M5a, M4.
+  - Balance of compute, memory and networking resources.
+  - Use-cases: web servers and code repositories.
+- **Compute Optimized**
+  - C5, C5n, C4.
+  - Ideal for compute bound applications that benefit form high performance processor.
+  - Use-cases: scientific modeling, dedicated gaming servers and ad server engines.
+- **Memory Optimized**
+  - R5, R5a, X1e, X1, High Memory, z1d.
+  - Fast performance for workloads that process large data sets in memory.
+  - Use-cases: In-memory caches, in-memory databases, real time big data analytics.
+- **Accelerated Optimized**
+  - P3, P2, G3, F1
+  - Hardware accelerators, or co-processors
+  - Use-cases: Machine learning, computational finance, seismic analysis, speech recognition
+- **Storage Optimized**
+  - High, sequential read and write access to very large data sets on local storage.
+  - Use-cases: NoSQL, in-memory or transactional databases, data warehousing
+
+---
+
+#### Instance Sizes
+
+EC2 instances generally double in price and key attributes.
+
+![EC2](./images/ec2.png)
+
+---
+
+#### Instance Profile
+
+- You can attach a role to an instance via an instance profile.
+- You want to always avoid _embedding your AWS credentials (Access Key and Secret)_.
+- IAM Policy -> IAM Role -> Instance Profile <- EC2 Instance
+- An instance profile holds a reference to a role.
+- Instance profiles are not easily viewed via the AWS console.
+
+---
+
+#### Placement Groups
+
+- Placement Groups let you choose the logical placement of your instances to optimize for communication, performance or durability. Placement groups are free and optional.
+- Cluster
+  - Packs instances close together inside an AZ.
+  - Low-latency network performance for tightly-coupled node-to-node communication.
+  - Well-suited for High Performance Computing (HPC) applications.
+  - Clusters cannot be multi-AZ.
+- Partition
+  - Spreads instances across logical partitions.
+  - Each partition do not share the underlying hardware with each other (rack per partition).
+  - Well-suited for large, distributed and replicated workloads (Hadoop, Cassandra, Kafka).
+- Spread
+  - Each instance is placed on a different rack.
+  - When critical instances should be kept separate from each other.
+  - You can spread a max of 7 instances.
+  - Spreads can be multi-az.
+
+---
+
+#### Userdata
+
+You can provide an EC2 with Userdata which is a _script_ that will be automatically run when launching an EC2 instance. You could install packages, apply updates.
+
+---
+
+#### Metadata
+
+- From within your EC2 instance you access information about the EC2 via a special url endpoint at **169.254.169.254**.
+
+`curl http://169.254.169.254/latest/meta-data`
+
+- `/public-ipv4` - gets current public IPV4 address
+- `/ami-id` - gets the AMI ID used to launch this instance
+- `/instance-type` - gets the instance type
+
+Combine metadata with userdata scripts to perform all sorts of advanced AWS staging automation.
+
+---
+
+#### Pricing Introduction
+
+**On-Demand (Least Commitment)**
+
+- default
+- low cost and flexible
+- only pay her hour
+- short-term, spiky, unpredictable workloads
+- cannot be interrupted
+- for first time apps
+
+**Spot (up to 90% off; biggest savings)**
+
+- request spare computing capacity
+- flexible start and end times
+- can handle interruptions (server randomly stopping and starting)
+- for non-critical background jobs
+- AWS Batch is an easy and convenient way to use Spot Pricing
+- instances can be terminated by AWS at any time
+- if your instance is terminated, you don't get charged for a partial hour of usage
+- if YOU terminate an instance, you will still be charged
+
+**Reserved Instances (up to 75% off; best long-term)**
+
+- steady state or predictable usage
+- can resell unused reserved instances
+- RIs can be shared between multiple accounts within an org
+- unused RIs can be sold in the Reserved Instance Marketplace
+- reduced pricing is based on Term X Class Offering X Payment Option
+
+**Term**
+
+- 1 Year
+- 3 Years
+
+**Class Offerings**
+
+- Standard - up to 75% savings; cannot change RI attributes
+- Convertible - up to 54% savings; allows you to change RI attributes if greater or equal in value
+- Scheduled - you reserve instances for specific time periods eg. once a week for a few hours; savings may vary
+
+**Payment Options**
+
+- All upfront
+- Partial upfront
+- No upfront
+
+**Dedicated (most expensive)**
+
+- dedicated servers
+- multi-tenant vs single tenant
+- can be on-demand or reserved (up to 70% off)
+- when you need a guarantee of isolate hardware (enterprise requirements)
 
 ---

@@ -8,6 +8,8 @@
 - [AWS Snowball](#aws-snowball)
 - [Virtual Private Cloud](#virtual-private-cloud)
 - [IAM](#iam)
+- [Cognito](#cognito)
+- [Command Line Interface](#command-line-interface)
 
 ---
 
@@ -630,3 +632,86 @@ You're allowed two Access keys per user.
 
 ---
 
+### Cognito
+
+- Decentralized Managed Authentication.
+- Sign-up, sign-in integration for your apps.
+- Social identity provider, eg. Facebook, Google.
+
+- **Cognito User Pools** - User directory with authentication to IpD to grant access to your app.
+- **Cognito Identity Pools** - Provide temporary credentials for users to access AWS services.
+- **Cognito Sync** - Syncs user data and preferences across all devices
+
+![Cognito](./images/cognito.png)
+
+---
+
+#### Web Identity Federation and IpD
+
+- **Web Identity Federation** - to exchange identity and security information betwen an identity provider (IdP) and an application.
+- **Identity Provider** - a trusted provider of your user identity that lets you use authenticate to access other services. IdP could be: Facebook, Amazon, Google, Twitter, Github, LinkedIn.
+- **Types of Identity Providers** - the technology that is behind the IdP: Security Assertion Markup Language (SAML), Single Sign On (SSO), Oauth (OIDC)
+
+---
+
+#### User Pools
+
+User Pools are user directories used to manage the actions for web and mobile apps such as:
+
+- Sign-up
+- Sign-in
+- Account recovery
+- Account confirmation
+
+- Allows users to sign-in directly to the User Pool, or using Web Identity Federation.
+- Uses AWS Cognito as the identity broker between AWS and the identity provider.
+- Sucessful user authentication generates a JWT.
+- User Pools can be thought of as the account to access the system.
+
+---
+
+#### Identity Pools
+
+- Identity Pools provide temporary AWS credentials to access services eg. S3, DynamoDB.
+- Identity Pools can be thought of as the actual mechanism authorizing access to the AWS resources.
+
+![Identity Pools](./images/identity_pools.png)
+
+---
+
+#### Sync
+
+- Sync user data and preferences across devices with one line of code.
+- Cognito uses push synchronization to push updates and synchronize data.
+- Uses SNS to send notifications to all user devices when data in the cloud changes.
+
+---
+
+### Command Line Interface
+
+Control multiple AWS services from the command line and automate them through scripts.
+
+You can perform actions such as:
+
+- List buckets, upload data to S3.
+- Launch, stop, start and terminate EC2 instances.
+- Update security groups, create subnets.
+
+Important AWS CLI flags to know:
+
+- Easily switch between AWS accounts using `--profile`.
+- Change the `--output` between JSON, table and text
+
+---
+
+#### SKD (Software Development Kit)
+
+Control multiple AWS services using popular programming languages.
+
+SDK is a set of tools and libraries that you can use to create applications for a specific software package.
+
+The AWS SDK is a set of API libraries that let you integrate AWS services into your applications. The SDK is available in C++, Go, Java, JS, .NET, NodeJS, PHP, Python and Ruby.
+
+You have to enable _Programmatic Access_.
+
+---

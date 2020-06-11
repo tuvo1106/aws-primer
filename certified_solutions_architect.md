@@ -13,6 +13,8 @@
 - [DNS](#dns)
 - [Route 53](#route-53)
 - [EC2](#ec2)
+- [Auto Scaling Groups](#auto-scaling-groups)
+- [Elastic Load Balancers](#elastic-load-balancers)
 
 ---
 
@@ -1090,3 +1092,164 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 
 ---
 
+### Auto Scaling Groups
+
+- Set scaling rules which automatically launch additional EC2 instances or shut them down to meet current demand.
+- Automatic scaling can occur via:
+  - Capacity settings
+  - Health check replacements
+  - Scaling policies
+
+---
+
+#### Capacity Settings
+
+- The size of an ASG is based on:
+  - Min - number of EC2 instances that should be at least running.
+  - Max - number of EC2 instances that allowed to be running.
+  - Desired - number of EC2 instances you ideally want to run.
+  - ASG will always launch instances to meet minimum capacity.
+
+---
+
+#### Health Check Replacements
+
+- EC2 - ASG will perform a health check on EC2 instances to determine if there is a software or hardware issue. This is based on the **EC2 Status Checks**.
+- ELB - ASG will perform a health check based on the ELB health check. ELB pings an HTTP(S) endpoint with an expected response.
+- If an instance is considered unhealthy, ASG will terminate and launch a new instance.
+
+---
+
+#### Scaling Policies
+
+- **Scaling out**: adding instances; **Scaling in**: removing instances.
+- Target Tracking - maintains a specific metric at a target value.
+  - eg. If Average CPU Utilization exceeds 75%, then add another server.
+- Simple Scaling - scales when an alarm is breached (not reccomended).
+- Scaling with steps - scales when an alarm is breached, can escalate based on alarm value changing.
+
+---
+
+#### ELB Integration
+
+- ASG can be associated with ELB. When ASG is associated with ELB, richer health checks can be set.
+- Classic Load Balancers are associated **directly** to the ASG.
+- Application and Network Load Balancers are associated **indirectly** via their Target Groups.
+
+---
+
+#### ASG Use Case
+
+1. Burst of traffic from the internet hits our domain.
+2. Route 53 points that traffic to our load balancer
+3. Load Balancer passes the traffic to its target group.
+4. The target group is associated with our ASG and sends the traffic to instances registered with our ASG.
+5. The ASG Scaling Policy will check if our instances are near capacity.
+6. The Scaling Policy determines we need another instance and launches a new EC2 instance.
+
+---
+
+#### Launch Configuration
+
+- A launch configuration is an instance configuration template that an ASG uses to launch EC2s.
+- Launch configurations **cannot be edited**. When you need to update your LC, you create a new one or clone the existing one and manually associate it.
+- Launch templates are LCs with versioning.
+
+---
+
+### Elastic Load Balancers
+
+- Distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses and Lambda functions.
+- Load balancers can by physical hardware or virtual software that accepts incoming traffic and distributes traffic to multiple targets. They can balance the load via different rules.
+- ELB is the AWS solution are there are 3 types:
+  - Application Load Balancer - ALB (HTTP, HTTPS)
+  - Network Load Balancer - NLB (TCP, UDP)
+  - Classic Load Balancer - Legacy
+- ELB must have at least two AZs.
+- ELB cannot go cross-region. You must create one per region.
+- You can attach Amazon Certification Manager SSL to any ELB.
+
+---
+
+#### ELB Rules of Traffic
+
+- **Listeners** - Incoming traffic is evaluated against listeners that match traffic with the port.
+- **Rules** - Listeners wil then invoke rules to decide what to do with traffic. Generally the next step is to forward traffic to a Target Group.
+- **Target Groups** - EC2 instances are registered as targets to a Target Group.
+
+---
+
+#### Application Load Balancer (ALB)
+
+- ALB is designed to balance HTTP and HTTPS traffic.
+- They operate at Layer 7 (application) of the OSI model.
+- ALB has a feature called _Request Routing_ which allows you to add routing rules to your listeners based on the HTTP protocol.
+- Web Application Firewall (WAF) can be attached to ALB.
+- Great for web apps.
+
+---
+
+#### Network Load Balancer (NLB)
+
+- NLM is designed to balance TCP/UDP.
+- They operate at Layer 4 (transport) of the OSI model.
+- Can handle millions of requests per second while still maintaining extremely low latency.
+- Can perform Cross-Zone load balancing.
+- Great for multiplayer video games or when network performance is critical.
+
+---
+
+#### Classic Load Balancer (NLB)
+
+- Can balance HTTP, HTTPS or TCP (not at the same time).
+- It can use Layer 7-specific features such as sticky sessions.
+- It can also use strict Layer 4 balancing for purely TCP applications.
+- Can perform Cross-Zone load balancing.
+- It will respond with a 504 error (timeout) if the underlying application is not responding.
+- Not recommended for use.
+
+---
+
+#### Sticky Sessions
+
+- Sticky Sessions is an advanced load balancing method that allows you to bind a user's session to a specific EC2 isntance.
+- Ensures all requests from that session are sent to the same instance.
+- Typically utilized with CLB.
+- Can be enabled for ALB though it cna only be set on a Target Group, not EC2 instances.
+- Cookies are used to remember what EC2 instances.
+- Useful when specific information is only stored locally on a single instance.
+
+---
+
+#### X-Forward-For Header
+
+The X-Forwarded-For (XFF) header is a command method for identifying the originating IP address of a client connecting to a serb server through an HTTP proxy or a load balancer.
+
+---
+
+#### Health Checks
+
+- Instances that are monitored by the ELB report back Health Checks as **Inservice**, or **OutofService**.
+- ELB _does not terminate unhealthy instances_. It will just redirect traffic to healthy ones.
+
+---
+
+#### Cross-Zone Load Balacning
+
+- Only for CLB and NLB.
+- When enabled:
+  - requests are distributed evenly across the instances in all enabled AZs.
+- When disabled:
+  - requests are distributed evenly across the instances in only its AZ.
+
+---
+
+#### ALB - Request Routing
+
+- Apply rules to incoming request and then forward or redirect traffic.
+  - Host header
+  - HTTP header
+  - HTTP header method
+  - Source IP
+  - Path
+  - Query string

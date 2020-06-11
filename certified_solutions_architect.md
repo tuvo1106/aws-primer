@@ -7,7 +7,12 @@
 - [S3](#s3)
 - [AWS Snowball](#aws-snowball)
 - [Virtual Private Cloud](#virtual-private-cloud)
-- [Network Access Control List](#network-access-control-list)
+- [IAM](#iam)
+- [Cognito](#cognito)
+- [Command Line Interface](#command-line-interface)
+- [DNS](#dns)
+- [Route 53](#route-53)
+- [EC2](#ec2)
 
 ---
 
@@ -455,9 +460,9 @@ Interface Endpoints are Elastic Network Interfaces (ENI) with a private IP addre
 
 Interface Endpoints are powered by AWS PrivateLink.
 
-Pricing per VPC endpoint per AZ ($/hour) 0.01
-Pricing per GB data processed ($) 0.01
-~7.5/mo
+- Pricing per VPC endpoint per AZ (\$/hour) 0.01.
+- Pricing per GB data processed (\$) 0.01.
+- ~7.5/mo
 
 ---
 
@@ -515,4 +520,573 @@ All log data is stored and accesible using Amazon CloudWatch Logs or S3.
 
 ---
 
-### Network Access Control List (NACLs)
+#### Network Access Control List (NACLs)
+
+An (optional) layer of security that acts as a firewall for controlling traffic in and out of subnet(s).
+
+NACLs act as a virtual firewall at the subnet level.
+
+- VPCs automatically get a default NACL.
+- Subnets are associated with NACLs. Subnets can only belong to a single NACL.
+- Rule # determines the order of evaluation(from lowest to highest).
+- You can allow or deny traffic. You could block a single IP address (you can't do this with security groups).
+
+---
+
+#### Security Groups
+
+- You can specify the source to be an IP range or a specific IP
+- You can specify the source to be another security group
+- An instance can belong to multiple security groups, and rules are permissive.
+- Security groups are _stateful_ (if traffic is allowed inbound, it is also allowed outbound)
+
+---
+
+#### Security Groups Limits
+
+- You can have up to 10,000 SGs in a Region (default is 2,500).
+- You can have 60 inbound rules and 60 outbound rules per security group.
+- 16 SGs per Elastic Network Interface (ENI)
+
+---
+
+#### Network Address Translation (NAT)
+
+NAT is the method of re-mapping one IP address space to another.
+
+If you have a private network and you need to gain outbound access to the internet, you would need to use a NAT gateway to remap the private IPs.
+
+If you have two networks which have conflicting network addresses, you can use a NAT to make the addresses more agreeable.
+
+---
+
+#### NAT instances vs NAT Gateways
+
+NATs have to run within a Public Subnet.
+
+NAT instances (legacy) are individual EC2 instances. Community AMIs exist to launch NAT instances.
+
+NAT Gateways is a managed service which launches redundant instances within the selected AZ.
+
+---
+
+## IAM
+
+- Identity Access Management
+- Manages access of AWS users and resources.
+- IAM is a universal system (applied to all regions at the same time). IAM is a free service.
+- A root account is the account initially created when AWS is set up.
+- New IAM accounts have no permissions by default until granted.
+- New users get assigned an Access key ID and Secret when first created when you give them programattic access.
+- Access keys are only used for CLI and SDK (cannot access console).
+- Always set up MFA for Root Accounts.
+
+---
+
+#### IAM Core Components
+
+- Users - End users who log into the console or interact with AWS resource programatically
+- Groups - Group up your Users so they share permission levels of the group eg. Administrators, Develops, Auditors
+- Roles - Associate permissions to a Role and then assign this to Users or Groups
+- Policies - JSON documents which grant permissions for a specific user, group or role to access services. Policies are attached to IAM Identities.
+
+---
+
+#### IAM - Managed vs Customer vs Inline Policy
+
+- Managed Policies - a policy which is managed by AWS, which you cannot edit. Managed policies are labeled with an orange box.
+- Customer Managed Policies - a policy created by the customer which is editable. Customer policies have no symbol beside them.
+- Inline Policies - a policy which is directly attached to the user.
+
+---
+
+#### Policy Structure
+
+- Version
+- Statement
+- SID (optional)
+- Effect
+- Principal
+- Action
+- Resource
+- Condition
+
+---
+
+#### Password Policy
+
+In IAM, you can set a Password Policy. To set the minimum requirements of a password and rotate passwords so users have to update their passwords after X days.
+
+---
+
+#### Programmatic Access Keys
+
+Access keys allow users to interact with AWS service programatically via the AWS CLI or AWS SDK.
+
+You're allowed two Access keys per user.
+
+---
+
+#### MFA
+
+- MFA can be turned on per user.
+- The user has to turn on the MFA themselves, Admin cannot directly enforce users to have MFA.
+- The Admin account could create a policy requiring MFA to access certain resources.
+
+---
+
+### Cognito
+
+- Decentralized Managed Authentication.
+- Sign-up, sign-in integration for your apps.
+- Social identity provider, eg. Facebook, Google.
+- **Cognito User Pools** - User directory with authentication to IpD to grant access to your app.
+- **Cognito Identity Pools** - Provide temporary credentials for users to access AWS services.
+- **Cognito Sync** - Syncs user data and preferences across all devices
+
+![Cognito](./images/cognito.png)
+
+---
+
+#### Web Identity Federation and IpD
+
+- **Web Identity Federation** - to exchange identity and security information betwen an identity provider (IdP) and an application.
+- **Identity Provider** - a trusted provider of your user identity that lets you use authenticate to access other services. IdP could be: Facebook, Amazon, Google, Twitter, Github, LinkedIn.
+- **Types of Identity Providers** - the technology that is behind the IdP: Security Assertion Markup Language (SAML), Single Sign On (SSO), Oauth (OIDC)
+
+---
+
+#### User Pools
+
+- User Pools are user directories used to manage the actions for web and mobile apps such as:
+- Sign-up
+- Sign-in
+- Account recovery
+- Account confirmation
+- Allows users to sign-in directly to the User Pool, or using Web Identity Federation.
+- Uses AWS Cognito as the identity broker between AWS and the identity provider.
+- Sucessful user authentication generates a JWT.
+- User Pools can be thought of as the account to access the system.
+
+---
+
+#### Identity Pools
+
+- Identity Pools provide temporary AWS credentials to access services eg. S3, DynamoDB.
+- Identity Pools can be thought of as the actual mechanism authorizing access to the AWS resources.
+
+![Identity Pools](./images/identity_pools.png)
+
+---
+
+#### Sync
+
+- Sync user data and preferences across devices with one line of code.
+- Cognito uses push synchronization to push updates and synchronize data.
+- Uses SNS to send notifications to all user devices when data in the cloud changes.
+
+---
+
+### Command Line Interface
+
+Control multiple AWS services from the command line and automate them through scripts.
+
+You can perform actions such as:
+
+- List buckets, upload data to S3.
+- Launch, stop, start and terminate EC2 instances.
+- Update security groups, create subnets.
+
+Important AWS CLI flags to know:
+
+- Easily switch between AWS accounts using `--profile`.
+- Change the `--output` between JSON, table and text
+
+---
+
+#### SKD (Software Development Kit)
+
+Control multiple AWS services using popular programming languages.
+
+SDK is a set of tools and libraries that you can use to create applications for a specific software package.
+
+The AWS SDK is a set of API libraries that let you integrate AWS services into your applications. The SDK is available in C++, Go, Java, JS, .NET, NodeJS, PHP, Python and Ruby.
+
+You have to enable _Programmatic Access_.
+
+---
+
+### DNS
+
+- Domain Name System
+- The phonebook of the internet.
+- DNS translates domain names to IP addresses so browsers can find internet resources.
+
+#### IP (Internet Protocol)
+
+- IP Addresses are what uniquely identifies each computer on a network, and allows communication between them using the Ineternet Protocol.
+- IPv4
+  - Example: 52.216.8.4.
+  - Address space is 32 bits with up to 4,294,967,296 available addresses (we are running out).
+- IPv6
+  - Example: 2001:0db8:95a3:0000:0000:8a2e:0370:7334.
+  - Address space is 128 bits with up to 340 undeceillion potential addresses (1 + 36 zeroes).
+  - Invented to solve available addresss limitations of IPv4.
+
+---
+
+#### Domain Registrars
+
+- Domain registrars are authorities who have the ability to assign domain names under one or more top-level domains.
+- Common registrars:
+  - HostGator
+  - GoDaddy
+  - AWS
+
+---
+
+#### Top-Level Domains
+
+- The last word within a domain represents the top-level domain name: example.com.
+- The second word within a domain name is known as the second-level domain name: example.co.uk.
+- Top-level domain names are controlled by the Internet Assigned Numbers Authority (IANA).
+- AWS has their own top level domain .aws.
+
+---
+
+#### Start of Authority (SOA)
+
+- Every domain must have an SOA record. The SOA is a way for the Domain Admins to provide information about the domain:
+  - how often it is updated.
+  - what is the admin's email address.
+- A zone file can contain only one SOA record.
+
+---
+
+#### A Records
+
+- Address Records (A Records) are one of the fundamental types of DNS records.
+- An A Record allows you to convert the name of a domain directly into an IP address. They can also be used on the root (naked domain name) itself.
+
+---
+
+#### CNAME Records
+
+- Canonical Names (CNAME) are another fundamental DNS record used to resolve one domain name to another - rather than an IP address.
+- The advantage of CNAMES is they are unlikely to change where IP addresses can change over time.
+
+---
+
+#### NS Records
+
+- Name Server Records (NS) are used by top-level domain servers to direct traffic to the DNS server containing the authoritative DNS records. Typically multiple name servers are provided for redundancy.
+- If you were managing your DNS records with Route53, the NS records for your domain would be pointing at the AWS servers.
+
+---
+
+#### Time to Live (TTL)
+
+- TTL is the length of time that a DNS record gets cached on the resolving server or the users own local machine.
+- The lower the TTL - the faster the changes to DNS records will propagate across the internet.
+- TTL is always measured in seconds under IPv4.
+
+---
+
+### Route 53
+
+- Highly available and scalable cloud Domain Name System.
+- Register domains, create DNS routing rules eg. failovers.
+- You can:
+  - register and domain domains.
+  - create various records set on a domain.
+  - Implement complex traffic flows eg. blue/green deploy, failovers.
+  - Continiously monitor record via health checks.
+  - resolve VPCs outisde of AWS.
+
+---
+
+#### Route 53 Use Case
+
+- Use Route 53 to get your custom domains to point to your AWS resource.
+  - 1. Incoming internet traffic
+  - 2. Route traffic to web-app backend by ALB
+  - 3. Route traffic to an instance to tweak AMI
+  - 4. Route traffic to API Gateway which powers API
+  - 5. Route traffic to CloudFront which serves S3 static content
+  - 6. Route traffic to Elastic IP (EIP) which is a static IP that hosts a company Minecraft server
+
+---
+
+#### Record Sets
+
+- We create record sets which allows us to point our naked domain and subdomains via Domain records.
+- AWS has their own special Alias Record which extends DNS functionality. It route traffic to specific AWS resources.
+- Alias records are smart where they can detect that change of an IP address and continuously keep that endpoint pointed to the correct resource.
+- In most cases, you ant to be using aliases when routing traffic to AWS resources.
+
+---
+
+#### Routing Policies
+
+There are _7 different types_ of Routing Policies:
+
+- **Simple** - default policy, multiple addresses result in random selection.
+  - You have 1 record and provide single or multiple IP addresses.
+- **Weighted** - route traffic based on weighted values to split traffic.
+  - This allows you to send a certain percentage of overall traffic to one server and have any other traffic from that directed to a completely different server.
+  - Good use case is to test out experimental features.
+- **Latency-Based** - route traffic to region resource with lowest latency.
+  - Based on region
+- **Failover** route traffic if primary endpoints is unhealthy to secondary endpoint.
+  - Allows you to create active/passive setups.
+  - Route 53 automatically monitors health-checks from your primary site to determine the health of end-points. If an endpoint is determined to be in a failed state, all traffic is automatically directed to the secondary location.
+- **Geolocation** - route traffic based on the location of your users.
+- **Geo-proximity** - route traffic based on the location of your resources and optionally shift traffic from resources in one location to another.
+  - You cannot use Record Sets; you have to use Traffic Flow.
+  - You can give biases for different regions.
+- **Multi-value Answer** - respond to DNS queries with up to eight healthy records selected at random.
+
+---
+
+#### Traffic Flow
+
+- Visual editor that lets you create sophisticated routing configurations for your resources using existing routing types.
+- Supports versioning so you can roll out or roll back updates.
+- \$50 per policy record / month
+
+---
+
+#### Health Check
+
+- Checks health every 30s be default. Can be reduced to every 10s.
+- A health check can initiate a failover if status is returned unhealthy.
+- A CloudWatch Alarm can be created to alert you of status unhealthy.
+- A health check can monitor other health checks to create a chain of reactions.
+- Can create up to 50 health checks for AWS endpoints that are linked to one account.
+
+---
+
+#### Resolver
+
+- Formally known as .2 resolver.
+- A regional service that lets you route DNS queries between your VPCs and your network.
+- DNS Resolution for Hybrid Environments (On-Premise and Cloud).
+
+---
+
+### EC2
+
+- Cloud computing service.
+- Choose your OS, Storage, Memory, Network Throughput.
+- Launch and SSH into your server within minutes.
+- EC2 is a highly configurable server.
+- EC2 is resizable compute capacity.
+- Anything and everything on AWS uses EC2 instances underneath.
+
+---
+
+#### Instance Types
+
+- **General Purpose**
+  - A1, T3, T3a, T2, M5, M5a, M4.
+  - Balance of compute, memory and networking resources.
+  - Use-cases: web servers and code repositories.
+- **Compute Optimized**
+  - C5, C5n, C4.
+  - Ideal for compute bound applications that benefit form high performance processor.
+  - Use-cases: scientific modeling, dedicated gaming servers and ad server engines.
+- **Memory Optimized**
+  - R5, R5a, X1e, X1, High Memory, z1d.
+  - Fast performance for workloads that process large data sets in memory.
+  - Use-cases: In-memory caches, in-memory databases, real time big data analytics.
+- **Accelerated Optimized**
+  - P3, P2, G3, F1
+  - Hardware accelerators, or co-processors
+  - Use-cases: Machine learning, computational finance, seismic analysis, speech recognition
+- **Storage Optimized**
+  - High, sequential read and write access to very large data sets on local storage.
+  - Use-cases: NoSQL, in-memory or transactional databases, data warehousing
+
+---
+
+#### Instance Sizes
+
+EC2 instances generally double in price and key attributes.
+
+![EC2](./images/ec2.png)
+
+---
+
+#### Instance Profile
+
+- You can attach a role to an instance via an instance profile.
+- You want to always avoid _embedding your AWS credentials (Access Key and Secret)_.
+- IAM Policy -> IAM Role -> Instance Profile <- EC2 Instance
+- An instance profile holds a reference to a role.
+- Instance profiles are not easily viewed via the AWS console.
+
+---
+
+#### Placement Groups
+
+- Placement Groups let you choose the logical placement of your instances to optimize for communication, performance or durability. Placement groups are free and optional.
+- Cluster
+  - Packs instances close together inside an AZ.
+  - Low-latency network performance for tightly-coupled node-to-node communication.
+  - Well-suited for High Performance Computing (HPC) applications.
+  - Clusters cannot be multi-AZ.
+- Partition
+  - Spreads instances across logical partitions.
+  - Each partition do not share the underlying hardware with each other (rack per partition).
+  - Well-suited for large, distributed and replicated workloads (Hadoop, Cassandra, Kafka).
+- Spread
+  - Each instance is placed on a different rack.
+  - When critical instances should be kept separate from each other.
+  - You can spread a max of 7 instances.
+  - Spreads can be multi-az.
+
+---
+
+#### Userdata
+
+You can provide an EC2 with Userdata which is a _script_ that will be automatically run when launching an EC2 instance. You could install packages, apply updates.
+
+---
+
+#### Metadata
+
+- From within your EC2 instance you access information about the EC2 via a special url endpoint at **169.254.169.254**.
+
+`curl http://169.254.169.254/latest/meta-data`
+
+- `/public-ipv4` - gets current public IPV4 address
+- `/ami-id` - gets the AMI ID used to launch this instance
+- `/instance-type` - gets the instance type
+
+Combine metadata with userdata scripts to perform all sorts of advanced AWS staging automation.
+
+---
+
+#### Pricing Introduction
+
+**On-Demand (Least Commitment)**
+
+- default
+- low cost and flexible
+- only pay her hour
+- short-term, spiky, unpredictable workloads
+- cannot be interrupted
+- for first time apps
+
+**Spot (up to 90% off; biggest savings)**
+
+- request spare computing capacity
+- flexible start and end times
+- can handle interruptions (server randomly stopping and starting)
+- for non-critical background jobs
+- AWS Batch is an easy and convenient way to use Spot Pricing
+- instances can be terminated by AWS at any time
+- if your instance is terminated, you don't get charged for a partial hour of usage
+- if YOU terminate an instance, you will still be charged
+
+**Reserved Instances (up to 75% off; best long-term)**
+
+- steady state or predictable usage
+- can resell unused reserved instances
+- RIs can be shared between multiple accounts within an org
+- unused RIs can be sold in the Reserved Instance Marketplace
+- reduced pricing is based on Term X Class Offering X Payment Option
+
+**Term**
+
+- 1 Year
+- 3 Years
+
+**Class Offerings**
+
+- Standard - up to 75% savings; cannot change RI attributes
+- Convertible - up to 54% savings; allows you to change RI attributes if greater or equal in value
+- Scheduled - you reserve instances for specific time periods eg. once a week for a few hours; savings may vary
+
+**Payment Options**
+
+- All upfront
+- Partial upfront
+- No upfront
+
+**Dedicated (most expensive)**
+
+- dedicated servers
+- multi-tenant vs single tenant
+- can be on-demand or reserved (up to 70% off)
+- when you need a guarantee of isolate hardware (enterprise requirements)
+
+---
+
+### Amazon Machine Image (AMI)
+
+- A template to configure new instances.
+- AMI provides the information required to launch an instance.
+- You can turn your EC2 instances into AMIs so you can create copies of your servers.
+- An AMI holds the following information:
+  - A template for the root volume (EBS Snapshot or Instance Store template) eg. an OS, an app server and applications.
+  - Launch permissions that control which AWS accounts can use the AMI to launch instances.
+  - A block device mapping that specifies the volumes to attach to the instance when it's launched.
+- AMIs are _Region Specific!_
+
+![AMI](./images/ami.png)
+
+---
+
+#### Use Case
+
+- AMIs help you keep incremental changes to your OS, application code and system packages.
+- Using **Systems Manager Automation** you can routinely patch your AMIS with security updates.
+- AMIs are used with **LaunchConfigurations**.
+
+---
+
+#### Marketplace
+
+AWS Marketplace is a curated digital catalogue with thousands of software listings from independen software vendors.
+
+- Easily find, buy, test and deploy software that already runs on AWS.
+- The product can be free to use or can have associated charge.
+- The sales channel for ISVs and Consulting Partners allows you to sell your solutions to other AWS customers.
+
+Products can be offered as:
+
+- Amazon Machine Images (AMIs)
+- AWS CloudFormation templates
+- SaaS offerings
+- Web ACL
+- AWS WAF rules
+
+---
+
+#### Creating an AMI
+
+You can create an AMI from an existing AMI that's either running or stopped.
+
+---
+
+#### Choosing an AMI
+
+- AWS has hundreds of AMIs you can search and select from.
+- Community AMIs are free and maintained by the community.
+- AWS Marketplace has free and paid AMIs maintained by vendors.
+- AMIs can be selected based on:
+  - Region
+  - OS
+  - Architecture (32bit or 64bit)
+  - Launch permissions
+  - Root Device Volume
+    - Instance store (ephemeral storage)
+    - EBS Backed Volumes
+
+#### Copying an AMI
+
+AMIs are region specific. If you want to use an AMI from another region. You need to **Copy the AMI** and then select destination region.
+
+---
+

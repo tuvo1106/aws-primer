@@ -210,7 +210,7 @@ Rolling with Addtional Batch's ensure our capacity is never reduced. **This is i
 2. Deploy the updated version of the app on the new EC2 instances
 3. Point the ELB to the new ASG and delete the old ASG which will terminate the old EC2
 
-#### EB - Deployment Methods
+#### EB Deployment Methods
 
 
 | Method        | Impact of failed deployment | Deploy time | No downtime | No DNS change | Rollback process | Code deployed to instances
@@ -223,7 +223,7 @@ Rolling with Addtional Batch's ensure our capacity is never reduced. **This is i
 
 * times may vary
 
-#### In-Place vs Blue/Green Deployment
+#### In Place vs Blue Green Deployment
 
 *In-Place and Blue/Green Deployment **are not definitive in definition** and the context can change the scope of what they mean*
 
@@ -338,8 +338,9 @@ You run these two commands to install
 - If you let Elastic Beanstalk create the RDS instance, that means when you delete your environment it will delete the database. This setup is inteded for development and test environments
 - **Dockerrun.aws.json** is similar to an ECS Task Definition files and defines multi-container configuration
 
+---
 
-### Elastic Beanstalk Follow Along
+## Elastic Beanstalk Follow Along
 
 #### Cloud9 Setup
 

@@ -418,3 +418,42 @@ option_settings:
 
 #### EB Create
 
+We will now create our EB environment
+1. Run the `eb create --single` command
+  - The `--single` is important, otherwise EB will spin up ELB which costs money!
+2. It will prompt you with several options
+  - Environment Name
+  - DNS CNAME prefix
+  - Enable Spot Fleet requests
+3. The environment should be created as long as there are no errors in the config files
+4. Run `eb status` to check the health of the environment
+
+#### Immutable Deployment
+
+We will now try an immutable deploy
+1. go into **.ebextensions**
+2. create a new config file which should look something like this:
+```
+option_settings:
+    aws:elasticbeanstalk:command:
+        DeploymentPolicy: Immutable
+        HealthCheckSuccessThreshold: Warning
+        IgnoreHealthCheck: true
+        Timeout: "600"
+```
+3. Make sure to add the changes to git (CodeCommit for this example) and push
+4. Then to deploy run `eb deploy`
+
+To remove the immutable deploy settings, simply delete the config file in **.ebextensions** and push your changes
+
+#### Blue Green Deployment
+
+To do a Blue/Green deploy we will first need to create a clone of our EB environment. This can be done easily on the AWS concole but we will do this through the command line.
+*We will refer to the original environment as blue and the cloned environment as green*
+1. First run `eb clone` which will clone your current environment to create your green environment. There will be several prompts
+  - Name for the new environment
+  - DNS CNAME prefix
+2. Once the green environment is created you can deploy to that environment using `eb deploy <name of the green environment>`
+3. Next we will swap the urls so that the traffic is redirected to the cloned environment using `eb swap <name if blue environment --destination_name <name of green environment>`
+4. The green environment should have the url of the blue environment
+5. Once you have confirmed that the green environment is using the blue url we can now terminate the blue environment using `eb terminate <name of blue environment>`

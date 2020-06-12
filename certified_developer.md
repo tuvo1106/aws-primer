@@ -24,7 +24,6 @@
   - [EB CLI](#eb-cli)
   - [Configuration RDS](#configuration-rds)
   - [Elastic Beanstalk Cheat Sheet](#elastic-beanstalk-cheat-sheet)
-  - [back to top](#table-of-contents)
 - [Elastic Beanstalk Follow Along](#elastic-beanstalk-follow-along)
   - [Cloud9 Setup](#cloud9-setup)
   - [Security Groups](#security-groups)
@@ -33,8 +32,7 @@
   - [EB Config](#eb-config)
   - [Immutable Deployment](#immutable-deployment)
   - [Blue Green Deployment](#blue-green-deployment)
-  
-  - [back to top](#table-of-contents)
+
 
 
 ---
@@ -348,6 +346,9 @@ You run these two commands to install
 - If you let Elastic Beanstalk create the RDS instance, that means when you delete your environment it will delete the database. This setup is inteded for development and test environments
 - **Dockerrun.aws.json** is similar to an ECS Task Definition files and defines multi-container configuration
 
+
+[back to top](#table-of-contents)
+
 ---
 
 ## Elastic Beanstalk Follow Along
@@ -459,3 +460,6 @@ To do a Blue/Green deploy we will first need to create a clone of our EB environ
 3. Next we will swap the urls so that the traffic is redirected to the cloned environment using `eb swap <name if blue environment --destination_name <name of green environment>`
 4. The green environment should have the url of the blue environment
 5. Once you have confirmed that the green environment is using the blue url we can now terminate the blue environment using `eb terminate <name of blue environment>`
+
+
+ [back to top](#table-of-contents)

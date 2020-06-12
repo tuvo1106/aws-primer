@@ -24,15 +24,17 @@
   - [EB CLI](#eb-cli)
   - [Configuration RDS](#configuration-rds)
   - [Elastic Beanstalk Cheat Sheet](#elastic-beanstalk-cheat-sheet)
-- [Elastic Beanstalk Follow Along](#elastic_beanstalk_follow_along)
-  - [Cloud9 Setup](#cloud9_setup)
-  - [Security Groups](#security_groups)
-  - [EB CLI Setup](#eb_cli_setup)
-  - [EB Init](#eb_init)
-  - [EB Config](#eb_config)
-  - [Immutable Deployment](#immutable_deployment)
-  - [Blue Green Deployment](#blue_green_deployment)
-
+  - [back to top](#table-of-contents)
+- [Elastic Beanstalk Follow Along](#elastic-beanstalk-follow-along)
+  - [Cloud9 Setup](#cloud9-setup)
+  - [Security Groups](#security-groups)
+  - [EB CLI Setup](#eb-cli-setup)
+  - [EB Init](#eb-init)
+  - [EB Config](#eb-config)
+  - [Immutable Deployment](#immutable-deployment)
+  - [Blue Green Deployment](#blue-green-deployment)
+  
+  - [back to top](#table-of-contents)
 
 
 ---

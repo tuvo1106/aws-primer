@@ -16,6 +16,13 @@
 - [Auto Scaling Groups](#auto-scaling-groups)
 - [Elastic Load Balancers](#elastic-load-balancers)
 - [Elastic File System](#elastic-file-system)
+  - [Introduction](#ebs-introduction)
+  - [Storage Volumes](#ebs-storage-volumes)
+  - [Medium SSD](#ebs-medium-ssd)
+  - [Magnetic Tapes](#magnetic-tapes)
+  - [Moving Volumes](#ebs-moving-volumes)
+  - [Encrypted Root Volumes](#ebs-encrypted-root-volumes)
+  - [EBS vs Instance Store Volumes](#ebs-vs-instance-store-volumes)
 
 ---
 
@@ -1277,11 +1284,15 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 - A virtual hard drive in the cloud.
 - Creates new volumes attached to EC2 instances.
-- Backup via snapshots and easy encryption.
+- Snapshots are a point-in-time copy of that disk.
+- Volumes exist on EBS. Snapshots exist on S3.
+- Snapshots are incremental, only changes made since the last snapshot are moved to S3.
+- Initial Snapshot of an EC2 instance will take longer to create than subsequent Snapshots.
+- You can take Snapshots while the instance is running.  
 
 ---
 
-#### Introduction
+#### EBS Introduction
 
 - **What is IOPS?** - Input/Output per second. It is the speed at which non-contiguous reads and writes can be performed on a storage medium. High I/O = lots of small fast reads and writes.
 - **What is Throughput?** - The data transfer rate to and from the storage medium in megabytes per second.
@@ -1300,9 +1311,74 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Storage Volumes
+#### EBS Storage Volumes
 
 - (Hard Disk Drive) HDD is magnetic storage that uses rotating platters, an actuator arm and a magnetic head (similar to a record player).
 - HDD is very good at writing a continuous amount of data.
 - HDD not great for writing many small reads and writes (think of the arm of record player having to lift up and down and move around).
 - Better for throughput.
+
+---
+
+#### EBS Medium SSD
+
+- SSD (Solid State Drive) uses integrated circuits assemblies as memory to store data persistently, typically using flash memory. SSDs are typically more resistant to physical shock, run silently and have quicker access time and lower latency.
+- Very good at frequent reads/writes (I/O).
+- No physical moving parts.
+
+---
+
+#### EBS Magnetic Tapes
+
+- A large reel of magnetic tape. A tape drive is used to write data to the tapel. Medium and large-sized data centers deploy both tape and disk formats. They normally come in the form of cassettes. Magnetic is very cheap to produce and can store considerable amount of fata.
+- Durable for decades.
+
+---
+
+#### EBS Moving Volumes
+
+- **From one AZ to another**
+  - Take a snapshot of the volume.
+  - Create AMI from the snapshot.
+  - Launch new EC2 instance in desired AZ.
+- **From one region to another**
+  - Take a snapshot of the volume.
+  - Create AMI from the snapshot.
+  - Copy the AMI to another region.
+  - Launch a new EC2 instance from the copied AMI.
+
+![EBS Moving Volumes](./ebs_moving_volumes)
+
+---
+
+#### EBS Encrypted Root Volumes
+
+- When you are through the wizard launch an EC2 instance, you can encrypt the volume on creation.
+- If you want to encrypt an existing volume, you'll have to do the following:
+  - Take a snapshot of the unencrypted volume.
+  - Create a copy of that snapshot and select the _encryption option_.
+  - Create a new AMI from the encrypted Snapshot.
+  - Launch new EC2 instance in from the created AMI.
+
+![Ebs Encryption](./images/ebs_encryption.png)
+
+---
+
+#### EBS vs Instance Store Volumes
+
+- An EC2 instance can be backed (root device) by an **EBS Volume** or **Instance Store Volume**.
+- EBS Volumes
+  - A _durable_, block-level storage device that you can attach to an EC2.
+  - EBS Volume created from an EBS Snapshot...
+    - Can start and stop instances.
+    - Data will persist if you reboot your system.
+  - Ideal for when you want data to persist. In most cases, you'll want EBS backed volume.
+- Instance Store Volumes (Ephermeral)
+  - A _temporary_ storage type located on disks that are physically attached to a host machine.
+  - An ISV is created from a template stored in S3.
+  - It cannot stop instances; can only terminate.
+  - Data will be loss in case of host failure or instance is terminated.
+  - Ideal for temporary backup and for storing an application's cache, logs or other random data.
+
+---
+

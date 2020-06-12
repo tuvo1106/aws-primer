@@ -23,6 +23,11 @@
   - [Moving Volumes](#ebs-moving-volumes)
   - [Encrypted Root Volumes](#ebs-encrypted-root-volumes)
   - [EBS vs Instance Store Volumes](#ebs-vs-instance-store-volumes)
+- [CloudFront]
+  - [Cloudfront Core Components](#cloudfront-core-components)
+  - [Cloudfront Distributions](#cloudfront-distributions)
+  - [Cloudfront Lambda@Edge](#cloudfront-lambda@Edge)
+  - [#### Cloudfront Protection](#cloudfront-protection)
 
 ---
 
@@ -1288,7 +1293,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - Volumes exist on EBS. Snapshots exist on S3.
 - Snapshots are incremental, only changes made since the last snapshot are moved to S3.
 - Initial Snapshot of an EC2 instance will take longer to create than subsequent Snapshots.
-- You can take Snapshots while the instance is running.  
+- You can take Snapshots while the instance is running.
 
 ---
 
@@ -1382,3 +1387,56 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
+### CloudFront
+
+- A CDN (Content Delivery Network) is a distributed network of servers which delivers web pages and content to user based on their geographical location, the origin of the webpage and a content delivery server.
+- Cloudfront can be used as a CDN to deliver an entire website including static, dynamic and streaming.
+- Requests for content are served from the nearest Edge Location for the best possible performance.
+- TTL defines how long until cache expire. When you invalidate your cache, you forcing it to immediately expire.
+- Refreshing the cache costs money because of transfer costs to update Edge locations.
+
+---
+
+### Cloudfront Core Components
+
+- **Origin** - The location where all of the original files are located. Eg. S3, EC2, ELB or Route53.
+- **Edge Location** - The location where web content will be cached. This is different than an AWS Region or AZ.
+- **Distribution** - A collection of Edge Locations which defines how cached content should behave.
+
+---
+
+#### Cloudfront Distributions
+
+- It replicates copies based on your **Price Class**.
+- There are 2 Types of Distributions:
+  - Web (for websites)
+  - RTMP (for streaming media)
+- **Behaviors** - Redirect to HTTPS, Restrict HTTP Methods, Restrict Viewer Access, Set TTLs.
+- **Invalidations** - You can manually invalidate cache on specific files via Invalidations.
+- **Error Pages** - You can serve up custom error pages eg. 404.
+- **Restrictions** - You can use Geo Restricton to blacklist or whitelist specific countries.
+
+---
+
+#### Cloudfront Lambda@Edge
+
+- We use Lambda@Edge functions to **override the behavior** of requests and responses.
+- 4 types:
+  - Viewer request - When CF recieves a request from a viewer.
+  - Origin request - Before CF forwards a request to the origin.
+  - Origin response - When CF receives a response from the origin.
+  - Viewer response - Before CF returns the response to the viewer.
+- Common use is for authentication.
+
+---
+
+#### Cloudfront Protection
+
+- By default, a distribution **allows everyone to have access.**
+- **Original Identity Access (OAI)** - A virtual user identity that will be used to give your CF distribution permission to fetch a private object.
+  - Used to access private S3 buckets.
+- **Signed URLS** - A url that provides temporary access to cached objects.
+- **Signed Cookies** - A cookie which is passed along with the request to CF. The advantage of using a cookie is you want to provide access to multiple restricted files eg. video streaming.
+- In order to use Signed URLs or Signed Cookies, you need to have an OIA.
+
+---

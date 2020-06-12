@@ -17,7 +17,7 @@
   - [Rolling with Additional Batch](#rolling-with-additional-batch)
   - [Immutable](#immutable)
   - [EB - Deployment Methods](#eb-deployment-methods)
-  - [In-Place vs Blue/Green Deployment](#in-place-vs-blue/green-deployment)
+  - [In-Place vs Blue/Green Deployment](#in-place-vs-blue-green-deployment)
   - [Configuration Files](#configuration-files)
   - [Env Manifest](#env-manifest)
   - [Linux Server Configuration](#linux-server-configuration)
@@ -387,4 +387,26 @@ TAGS    aws:cloud9:environment  08e6543c08554c57a272f337df0f96df
 2. Make sure to add the eb cli to PATH given their recommended command `echo 'export PATH="/home/ec2-user/.ebcli-virtual-env/executables:$PATH"' >> ~/.bash_profile && source ~/.bash_profile` and `echo 'export PATH=/home/ec2-user/.pyenv/versions/3.7.2/bin:$PATH' >> /home/ec2-user/.bash_profile && source /home/ec2-user/.bash_profile` if you are using bash
 
 #### EB init
+
+Once you have the EB CLI installed
+1. Check to make sure you have the cli by using the command `eb`
+  - If you see a long list of possible commands, you have the cli
+2. To initialize the project use the command `eb init`
+  - You will find several prompts to help set up the elastic beanstalk environment
+
+#### EB Config
+
+Configurations of the EB environment depends on the type of environment and can be found in the **.ebextensions** directory. This is not created by `eb init` therefore you will have to create one yourself.
+1. Create the directory using `mkdir .exextensions`
+2. Go into the directory
+3. Create a config file
+Here is an example of what one might look like:
+```
+option_settings:
+    aws:elasticbeanstalk:application:environment:
+        PORT: 8081
+        NODE_ENV: production
+```
+
+#### EB Create
 

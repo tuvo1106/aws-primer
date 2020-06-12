@@ -4,7 +4,27 @@
 
 - [FAQ](#faq)
 - [Exam Guide Overview](#exam-guide-overview)
+  - [Exam Breakdown](#exam-breakdown)
+  - [Recommended Whitepapers](#recommended-whitepapers)
 - [Elastic Beanstalk](#elastic_beanstalk)
+  - [Introduction](#introduction)
+  - [Supported Languages](#supported-languages)
+  - [Web vs Worker Environment](#web-vs-worker-environment)
+  - [Web Environments](#web-environments)
+  - [Deployment Policies](#deployment-policies)
+  - [All At Once Deployment](#all-at-once-deployment)
+  - [Rolling](#rolling)
+  - [Rolling with Additional Batch](#rolling-with-additional-batch)
+  - [Immutable](#immutable)
+  - [EB - Deployment Methods](#eb-deployment-methods)
+  - [In-Place vs Blue/Green Deployment](#in-place-vs-blue/green-deployment)
+  - [Configuration Files](#configuration-files)
+  - [Env Manifest](#env-manifest)
+  - [Linux Server Configuration](#linux-server-configuration)
+  - [EB CLI](#eb-cli)
+  - [Configuration RDS](#configuration-rds)
+  - [Elastic Beanstalk Cheat Sheet](#elastic-beanstalk-cheat-sheet)
+
 
 
 ---
@@ -41,7 +61,7 @@
 - ~72% for a passing score
 - Valid for 3 years
   
-## Exam Guide
+## Exam Guide Overview
 
 #### Exam Breakdown
 
@@ -190,7 +210,7 @@ Rolling with Addtional Batch's ensure our capacity is never reduced. **This is i
 2. Deploy the updated version of the app on the new EC2 instances
 3. Point the ELB to the new ASG and delete the old ASG which will terminate the old EC2
 
-#### EB - Deployment Methods
+#### EB Deployment Methods
 
 
 | Method        | Impact of failed deployment | Deploy time | No downtime | No DNS change | Rollback process | Code deployed to instances
@@ -203,7 +223,7 @@ Rolling with Addtional Batch's ensure our capacity is never reduced. **This is i
 
 * times may vary
 
-#### In-Place vs Blue/Green Deployment
+#### In Place vs Blue Green Deployment
 
 *In-Place and Blue/Green Deployment **are not definitive in definition** and the context can change the scope of what they mean*
 
@@ -318,4 +338,53 @@ You run these two commands to install
 - If you let Elastic Beanstalk create the RDS instance, that means when you delete your environment it will delete the database. This setup is inteded for development and test environments
 - **Dockerrun.aws.json** is similar to an ECS Task Definition files and defines multi-container configuration
 
+---
+
+## Elastic Beanstalk Follow Along
+
+#### Cloud9 Setup
+
+- Make sure you are in the right region!
+- Create a developer environment in Cloud9 through the AWS console
+
+#### Security Groups
+
+Once you have your web application we will need to open up the ports
+- By default Cloud9 have ports 8080, 8081, 8082 open
+1. Identify the MAC Address with `curl -s http://169.254.169.254/latest/meta-data/mac`
+2. Find the security group using `curl -s http://169.254.169.254/latest/meta-data/network/interfaces/macs/**yourMacId**/security-group-ids`
+3. Find your IP address by going to http://checkip.amazonaws.com/
+4. We will need the IP address to add to the cidr block
+5. Use the command `aws ec2 authorize-security-group-ingress --group-id **yourSecurityGroupID** --port 8080 --protocol tcp --cid **yourIP**/32`
+*the /32 at the end. 
+5. Use the command `aws ec2 authorize-security-group-ingress --group-id **yourSecurityGroupID** --port 8080 --protocol tcp --cidr **yourIP**/32`
+*The /32 at the end of the cidr block is important because it says only this IP address*
+6. Check that your Security Group has been edited `aws ec2 describe-security-groups --group-ids **yourSecurityGroupID**  --output text --filters Name=ip-permission.to-port,Values=8080`
+7. If the Security Group is not set nothing would show otherwise it should look something like this:
+```
+SECURITYGROUPS  Security group for AWS Cloud9 environment aws-cloud9-DevEnv-08e6543c08554c57a272f337df0f96df sg-0938552a4807d9570    aws-cloud9-DevEnv-08e6543c08554c57a272f337df0f96df-InstanceSecurityGroup-2AM4ALIQ5DHX        540908314583    vpc-fdd1c687
+IPPERMISSIONS   8080    tcp     8080
+IPRANGES        76.126.6.216/32
+IPPERMISSIONS   22      tcp     22
+IPRANGES        35.172.155.192/27
+IPRANGES        35.172.155.96/27
+IPPERMISSIONSEGRESS     -1
+IPRANGES        0.0.0.0/0
+TAGS    aws:cloud9:owner        AIDAX34FF37LSKQTQVJES
+TAGS    aws:cloudformation:stack-id     arn:aws:cloudformation:us-east-1:540908314583:stack/aws-cloud9-DevEnv-08e6543c08554c57a272f337df0f96df/1a523520-ac14-11ea-b406-0e706f74ed45
+TAGS    aws:cloudformation:logical-id   InstanceSecurityGroup
+TAGS    Name    aws-cloud9-DevEnv-08e6543c08554c57a272f337df0f96df
+TAGS    aws:cloudformation:stack-name   aws-cloud9-DevEnv-08e6543c08554c57a272f337df0f96df
+TAGS    aws:cloud9:environment  08e6543c08554c57a272f337df0f96df
+```
+8. Next find the public ip with the command `curl -s http://169.254.169.254/latest/meta-data/public-ipv4`
+9. Run your web application and check to see if it runs at the IP and port 8080 (eg. 54.165.37.183:8080)
+10. Add your project to a Git repo
+
+#### EB CLI Setup
+
+1. We will download the EB CLI following the directions here: https://github.com/aws/aws-elastic-beanstalk-cli-setup
+2. Make sure to add the eb cli to PATH given their recommended command `echo 'export PATH="/home/ec2-user/.ebcli-virtual-env/executables:$PATH"' >> ~/.bash_profile && source ~/.bash_profile` and `echo 'export PATH=/home/ec2-user/.pyenv/versions/3.7.2/bin:$PATH' >> /home/ec2-user/.bash_profile && source /home/ec2-user/.bash_profile` if you are using bash
+
+#### EB init
 

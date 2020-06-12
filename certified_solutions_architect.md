@@ -1306,7 +1306,6 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - Think of bandwidth as the pipe and throughput as the water.
 - EBS is a highly available and durable solution for attaching persistent block storage volumes to an EC2 instance. Volumes are automatically replicated within their AZ to protect from component failure.
 - There are 5 Types of EBS Storage:
-
   - General purpose (SSD) - gp2 - for general usage without specific requirements
   - Provisioned IOPS (SSD) - io1 - when you require really fast input and output
   - Throughput Optimized HDD - st1 - magnetic drive optimised for quick throughput
@@ -1353,7 +1352,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
   - Copy the AMI to another region.
   - Launch a new EC2 instance from the copied AMI.
 
-![EBS Moving Volumes](./ebs_moving_volumes)
+![EBS Moving Volumes](./images/ebs_moving_volumes.png)
 
 ---
 

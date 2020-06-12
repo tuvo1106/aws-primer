@@ -16,18 +16,19 @@
 - [Auto Scaling Groups](#auto-scaling-groups)
 - [Elastic Load Balancers](#elastic-load-balancers)
 - [Elastic File System](#elastic-file-system)
+- [Elastic Block Store](#elastic-block-store)
   - [Introduction](#ebs-introduction)
   - [Storage Volumes](#ebs-storage-volumes)
   - [Medium SSD](#ebs-medium-ssd)
-  - [Magnetic Tapes](#magnetic-tapes)
+  - [Magnetic Tapes](#ebs-magnetic-tapes)
   - [Moving Volumes](#ebs-moving-volumes)
   - [Encrypted Root Volumes](#ebs-encrypted-root-volumes)
   - [EBS vs Instance Store Volumes](#ebs-vs-instance-store-volumes)
-- [CloudFront]
+- [CloudFront](#cloudfront)
   - [Cloudfront Core Components](#cloudfront-core-components)
   - [Cloudfront Distributions](#cloudfront-distributions)
-  - [Cloudfront Lambda@Edge](#cloudfront-lambda@Edge)
-  - [#### Cloudfront Protection](#cloudfront-protection)
+  - [Cloudfront Lambda@Edge](#cloudfront-lambda-edge)
+  - [Cloudfront Protection](#cloudfront-protection)
 
 ---
 
@@ -1418,7 +1419,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Cloudfront Lambda@Edge
+#### Cloudfront Lambda Edge
 
 - We use Lambda@Edge functions to **override the behavior** of requests and responses.
 - 4 types:

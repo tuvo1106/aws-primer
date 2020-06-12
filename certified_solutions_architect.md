@@ -15,6 +15,7 @@
 - [EC2](#ec2)
 - [Auto Scaling Groups](#auto-scaling-groups)
 - [Elastic Load Balancers](#elastic-load-balancers)
+- [Elastic File System](#elastic-file-system)
 
 ---
 
@@ -1253,3 +1254,55 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
   - Source IP
   - Path
   - Query string
+
+---
+
+### Elastic File System
+
+- Scalable, elastic, cloud-native NFS file system for EC2 instances.
+- Attach a single file system to multiple EC2 instances.
+- Don't worry about running out or managing disk space.
+- Storage capacity grows (up to petabytes) and shrinks automatically.
+- Multiple EC2 instances in same VPC can mount a single EFS volume.
+- EC2 instances install the _NFSv4.1 client_ and then mount the EFS volume.
+- EFS is using NFSv4 protocol.
+- EFS creates multiple mount targets in all your VPC subnets.
+- You pay GB of storage per month.
+- Your data is stored across multiple AZs withing a region.
+- Provides Read After Write Consistency.
+
+---
+
+### Elastic Block Store
+
+- A virtual hard drive in the cloud.
+- Creates new volumes attached to EC2 instances.
+- Backup via snapshots and easy encryption.
+
+---
+
+#### Introduction
+
+- **What is IOPS?** - Input/Output per second. It is the speed at which non-contiguous reads and writes can be performed on a storage medium. High I/O = lots of small fast reads and writes.
+- **What is Throughput?** - The data transfer rate to and from the storage medium in megabytes per second.
+- **What is Bandwidth?** - - The measurement of the total possible speed of data movement along the network.
+- Think of bandwidth as the pipe and throughput as the water.
+- EBS is a highly available and durable solution for attaching persistent block storage volumes to an EC2 instance. Volumes are automatically replicated within their AZ to protect from component failure.
+- There are 5 Types of EBS Storage:
+
+  - General purpose (SSD) - gp2 - for general usage without specific requirements
+  - Provisioned IOPS (SSD) - io1 - when you require really fast input and output
+  - Throughput Optimized HDD - st1 - magnetic drive optimised for quick throughput
+  - Cold HDD - sc1 - lowest cost HDD for infrequently accessed workloads
+  - EBS Magnetic - standard - previous generation HDD
+
+![EBS](./images/ebs.png)
+
+---
+
+#### Storage Volumes
+
+- (Hard Disk Drive) HDD is magnetic storage that uses rotating platters, an actuator arm and a magnetic head (similar to a record player).
+- HDD is very good at writing a continuous amount of data.
+- HDD not great for writing many small reads and writes (think of the arm of record player having to lift up and down and move around).
+- Better for throughput.

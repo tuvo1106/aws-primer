@@ -17,13 +17,21 @@
   - [Rolling with Additional Batch](#rolling-with-additional-batch)
   - [Immutable](#immutable)
   - [EB - Deployment Methods](#eb-deployment-methods)
-  - [In-Place vs Blue/Green Deployment](#in-place-vs-blue/green-deployment)
+  - [In-Place vs Blue/Green Deployment](#in-place-vs-blue-green-deployment)
   - [Configuration Files](#configuration-files)
   - [Env Manifest](#env-manifest)
   - [Linux Server Configuration](#linux-server-configuration)
   - [EB CLI](#eb-cli)
   - [Configuration RDS](#configuration-rds)
   - [Elastic Beanstalk Cheat Sheet](#elastic-beanstalk-cheat-sheet)
+- [Elastic Beanstalk Follow Along](#elastic-beanstalk-follow-along)
+  - [Cloud9 Setup](#cloud9-setup)
+  - [Security Groups](#security-groups)
+  - [EB CLI Setup](#eb-cli-setup)
+  - [EB Init](#eb-init)
+  - [EB Config](#eb-config)
+  - [Immutable Deployment](#immutable-deployment)
+  - [Blue Green Deployment](#blue-green-deployment)
 
 
 
@@ -338,6 +346,9 @@ You run these two commands to install
 - If you let Elastic Beanstalk create the RDS instance, that means when you delete your environment it will delete the database. This setup is inteded for development and test environments
 - **Dockerrun.aws.json** is similar to an ECS Task Definition files and defines multi-container configuration
 
+
+[back to top](#table-of-contents)
+
 ---
 
 ## Elastic Beanstalk Follow Along
@@ -388,3 +399,67 @@ TAGS    aws:cloud9:environment  08e6543c08554c57a272f337df0f96df
 
 #### EB init
 
+Once you have the EB CLI installed
+1. Check to make sure you have the cli by using the command `eb`
+  - If you see a long list of possible commands, you have the cli
+2. To initialize the project use the command `eb init`
+  - You will find several prompts to help set up the elastic beanstalk environment
+
+#### EB Config
+
+Configurations of the EB environment depends on the type of environment and can be found in the **.ebextensions** directory. This is not created by `eb init` therefore you will have to create one yourself.
+1. Create the directory using `mkdir .exextensions`
+2. Go into the directory
+3. Create a config file
+Here is an example of what one might look like:
+```
+option_settings:
+    aws:elasticbeanstalk:application:environment:
+        PORT: 8081
+        NODE_ENV: production
+```
+
+#### EB Create
+
+We will now create our EB environment
+1. Run the `eb create --single` command
+  - The `--single` is important, otherwise EB will spin up ELB which costs money!
+2. It will prompt you with several options
+  - Environment Name
+  - DNS CNAME prefix
+  - Enable Spot Fleet requests
+3. The environment should be created as long as there are no errors in the config files
+4. Run `eb status` to check the health of the environment
+
+#### Immutable Deployment
+
+We will now try an immutable deploy
+1. go into **.ebextensions**
+2. create a new config file which should look something like this:
+```
+option_settings:
+    aws:elasticbeanstalk:command:
+        DeploymentPolicy: Immutable
+        HealthCheckSuccessThreshold: Warning
+        IgnoreHealthCheck: true
+        Timeout: "600"
+```
+3. Make sure to add the changes to git (CodeCommit for this example) and push
+4. Then to deploy run `eb deploy`
+
+To remove the immutable deploy settings, simply delete the config file in **.ebextensions** and push your changes
+
+#### Blue Green Deployment
+
+To do a Blue/Green deploy we will first need to create a clone of our EB environment. This can be done easily on the AWS concole but we will do this through the command line.
+*We will refer to the original environment as blue and the cloned environment as green*
+1. First run `eb clone` which will clone your current environment to create your green environment. There will be several prompts
+  - Name for the new environment
+  - DNS CNAME prefix
+2. Once the green environment is created you can deploy to that environment using `eb deploy <name of the green environment>`
+3. Next we will swap the urls so that the traffic is redirected to the cloned environment using `eb swap <name if blue environment --destination_name <name of green environment>`
+4. The green environment should have the url of the blue environment
+5. Once you have confirmed that the green environment is using the blue url we can now terminate the blue environment using `eb terminate <name of blue environment>`
+
+
+ [back to top](#table-of-contents)

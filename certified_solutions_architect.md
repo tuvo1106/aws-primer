@@ -117,10 +117,25 @@
   - [Encrypted Root Volumes](#encrypted-root-volumes)
   - [EBS vs Instance Store Volumes](#ebs-vs-instance-store-volumes)
 - [CloudFront](#cloudfront)
-  - [Cloudfront Core Components](#cloudfront-core-components)
-  - [Cloudfront Distributions](#cloudfront-distributions)
-  - [Cloudfront Lambda@Edge](#cloudfront-lambda-edge)
-  - [Cloudfront Protection](#cloudfront-protection)
+  - [Core Components](#cloudfront-core-components)
+  - [Distributions](#cloudfront-distributions)
+  - [Lambda@Edge](#cloudfront-lambda-edge)
+  - [Protection](#cloudfront-protection)
+- [Relational Database Service](#relational-database-service)
+  - [Introduction](#rds-introduction)
+  - [Encryption](#rds-encryption)
+  - [Backups](#rds-backups)
+  - [Restoring Backup](#rds-restoring-backup)
+  - [Multi-AZ](#rds-multi-az)
+  - [Read Replicas](#rds-read-replicas)
+  - [Multi-AZ vs Read Replicas](#multi-az-vs-read-replicas)
+- [Aurora](#aurora)
+  - [Introduction](#aurora-introduction)
+  - [Scaling With Aurora](#scaling-with-aurora)
+  - [Availabilty With Aurora](#availabilty-with-aurora)
+  - [Fault Tolerance and Durability](#fault-tolerance-and-durability)
+  - [Aurora Replicas](#aurorar-replicas)
+  - [Aurora Serverless](#aurora-serverless)
 
 ---
 
@@ -196,6 +211,7 @@
   - Choose design features in solutions that enable operational resilience.
 
 Whitepapers
+
 - AWS Well-Achitected Framework.
 - Architecting for the Cloud: AWS Best Practices.
 
@@ -359,7 +375,7 @@ Only the bucket owner logged in as **Root User** can DELETE objects from bucket.
 
 ---
 
-### AWS Snowball
+## AWS Snowball
 
 - Petabyte-scale data transfer service.
 - Move data onto AWS via physical briefcase computer.
@@ -1130,7 +1146,7 @@ Combine metadata with userdata scripts to perform all sorts of advanced AWS stag
 
 ---
 
-### Amazon Machine Image
+## Amazon Machine Image
 
 - A template to configure new instances.
 - AMI provides the information required to launch an instance.
@@ -1361,7 +1377,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-### Elastic File System
+## Elastic File System
 
 - Scalable, elastic, cloud-native NFS file system for EC2 instances.
 - Attach a single file system to multiple EC2 instances.
@@ -1377,7 +1393,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-### Elastic Block Store
+## Elastic Block Store
 
 - A virtual hard drive in the cloud.
 - Creates new volumes attached to EC2 instances.
@@ -1478,7 +1494,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-### CloudFront
+## CloudFront
 
 - A CDN (Content Delivery Network) is a distributed network of servers which delivers web pages and content to user based on their geographical location, the origin of the webpage and a content delivery server.
 - Cloudfront can be used as a CDN to deliver an entire website including static, dynamic and streaming.
@@ -1488,7 +1504,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-### Cloudfront Core Components
+#### Cloudfront Core Components
 
 - **Origin** - The location where all of the original files are located. Eg. S3, EC2, ELB or Route53.
 - **Edge Location** - The location where web content will be cached. This is different than an AWS Region or AZ.
@@ -1529,5 +1545,135 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - **Signed URLS** - A url that provides temporary access to cached objects.
 - **Signed Cookies** - A cookie which is passed along with the request to CF. The advantage of using a cookie is you want to provide access to multiple restricted files eg. video streaming.
 - In order to use Signed URLs or Signed Cookies, you need to have an OIA.
+
+---
+
+## Relational Database Service
+
+#### RDS Introduction
+
+- A managed relational database service.
+- Supports multiple SQL engines, easy to scale, backup and secure.
+- There are 6 available database options currently available on AWS:
+  - Amazon Aurora
+  - MySQL
+  - MariaDB
+  - PostgreSQL
+  - Oracle
+  - Microsoft SQL Server
+- RDS instances are managed by AWS. You cannot SSH into the VM running the database.
+
+---
+
+#### RDS Encryption
+
+- You can turn on encryption at-rest for all RDS engines.
+- You may not be able to turn on encryption on older versions.
+- It will also encrypt automated backups, snapshots, and read replicas.
+- Encryption is handled using the AWS Key Management Service (KMS).
+
+---
+
+#### RDS Backups
+
+- There are 2 backup solutions available:
+- **Automated Backups**
+  - Choose a retention period between 1 and 35 days.
+  - Stores transaction logs throughout the day.
+  - Automated backups are enabled by default.
+  - All data is stored inside S3.
+  - There is no additional charge for backup storage.
+  - You define your backup window.
+  - Storage I/O may be suspended during backup.
+- **Manual Snapshots**
+  - Taken manually by the user.
+  - Backup persist even if you delete the original RDS instance.
+
+---
+
+#### RDS Restoring Backup
+
+- When recovering, AWS will take the most recent daily backup and apply transaction log data relevant to that day. This allows point-in-time recovery down to a second inside a retention period.
+- Backup is never restored overtop of an existing instance.
+- When you restore a RDS instance from Automated Backup or a Manual Snapshot, a new instance is created for the restored database.
+- Restored RDS instances will also have a new DNS endpoint.
+
+---
+
+#### RDS Multi-AZ
+
+- Multi-AZ deployement ensures database remains available if another AZ becomes unavailable.
+- Makes an exact copy of your database in another AZ. AWS automatically synchronizes changes to the standby copy.
+- **Automatic Failover Protection** - if one AZ goes down, failover will occur and standby slave will be promoted to master.
+
+---
+
+#### RDS Read Replicas
+
+- Read-replicas allow you to run multiple copies of your database.
+- These copies only allows **reads** (no writes) and is intended to alleviate workload to your primary database to improve performance.
+- You must have automatic backups enabled to use Read Replicas.
+- There is Asynchronous replication between primary RDS and the replications.
+- You can have up to 5 replicas of a database.
+- Each Read Replica will have its own DNS Endpoint.
+- You can Multi-AZ replicas, replicas in other regions, or even replicas or other Read Replicas.
+- Replicas can be promoted to their own datbase, but this breaks replication.
+- No automatic failover if primary copy fails; you must manually update URLs to point at copy.
+
+---
+
+#### Multi-AZ vs Read Replicas
+
+![Multi-AZ vs Read Replicas](./images/multi-az_vs_read-replicas.png)
+
+---
+
+## Aurora
+
+#### Aurora Introduction
+
+- Fully managed Postgres or MySQL compatible database designed by default to scale and fine-tuned to be really fast.
+- Combines the **speed** and **availability** of high-end databases with the **simplicity** and **cost-effectiveness** of open source databases.
+- Aurora MySQL: 5x better performance than MySQL.
+- Aurora Postgres: 3x better performance than Postgres.
+- 1/10th the cost of other solutions offering similar performance and availability.
+
+---
+
+#### Scaling with Aurora
+
+- Starts with 10GB of storage and can scale in 10GB increments up to 64TB (autoscaling).
+- Computing resources can scale all the way up to 32 vCPUs and 244GB of memory.
+
+#### Availabilty with Aurora
+
+- A minimum of 3 availability zones that each contain 2 copies of your data at all times (6 total copies!).
+- You can lose up to 2 copies of your data without affecting **write** availabilty.
+- You can lose up to 3 copies of your data without affecting **read** availabilty.
+- Aurora is allowed up to 15 replicas.
+- Aurora can span multiple regions via Aurora Global Database.
+
+![aurora_availabilty](./images/aurora_availabilty.png)
+
+---
+
+#### Fault Tolerance and Durability
+
+- Aurora Backup and Failover is handled **automatically**.
+- Snapshots of data can be shared with other AWS accounts.
+- Storage is self-healing - data blocks and disks are continuously scanned for errors and repaired automatically.
+
+---
+
+#### Aurora Replicas
+
+![Aurora Replicas](./images/aurora_replicas.png)
+
+---
+
+#### Aurora Serverless
+
+- Aurora except the database will automatically start up, shut down and scale capacity up or down based on your application's needs.
+- Pay for database storage, database capacity and I/O your database consumes while it is active.
 
 ---

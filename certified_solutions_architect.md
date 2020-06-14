@@ -196,9 +196,8 @@
   - Choose design features in solutions that enable operational resilience.
 
 Whitepapers
-
-Read _AWS Well-Achitected Framework_.
-Read _Architecting for the Cloud: AWS Best Practices_.
+- AWS Well-Achitected Framework.
+- Architecting for the Cloud: AWS Best Practices.
 
 ---
 
@@ -229,7 +228,7 @@ Objects may consist of:
 - Version ID - when versioning available, the version of object.
 - Metadata - additional information attached to the object.
 
-You can stre data from _0 Bytes_ to _5 Terabytes_ in size.
+You can sotre data from _0 Bytes_ to _5 Terabytes_ in size.
 
 #### _S3 Bucket_
 
@@ -679,8 +678,6 @@ NAT Gateways is a managed service which launches redundant instances within the 
 ---
 
 ## IAM
-
----
 
 - Identity Access Management
 - Manages access of AWS users and resources.

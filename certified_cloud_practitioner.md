@@ -5,12 +5,62 @@
 - [FAQ](#faq)
 - [About the Exam](#about-the-exam)
 - [Cloud Concepts](#cloud-concepts)
+  - [What is Cloud Computing?](#what-is-cloud-computing?)
+  - [Six advantages and benefits of cloud computing](#six-advantages-and-benefits-of-cloud-computing)
+  - [Types of Cloud Computing](#types-of-cloud-computing)
+  - [Cloud Computing Models](#cloud-computing-models)
 - [AWS Global Infrastructure](#aws-global-infrastructure)
-- [Hands On](#hands-on)
+  - [Where does all this cloud computing run?](#where-does-all-this-cloud-computing-run?)
+  - [Regions](#regions)
+  - [Availabilty Zones](#availabilty-zones)
+  - [Edge Locations](#edge-locations)
+  - [GovCloud Regions](#govcloud-regions)
 - [Billing and Pricing](#billing-and-pricing)
+  - [Introduction to EC2 Pricing Models](introduction-to-ec2-pricing-models)
+  - [Free Services](#free-services)
+  - [AWS Support Plans](#aws-support-plans)
+  - [AWS Marketplace](#aws-marketplace)
+  - [AWS Trusted Advisor](#aws-trusted-advisor)
+  - [Consolidated Billing](#consolidated-billing)
+  - [AWS Budgets](#aws-budgets)
+  - [TCO Calculator](#tco-calculator)
+  - [AWS Landing Zone](#aws-landing-zone)
+  - [Resource Groups and Tagging](#resource-groups-and-tagging)
+  - [AWS Quickstart](#aws-quickstart)
+  - [AWS Cost and Usage Report](#aws-cost-and-usage-report)
+  - [Organizations and Accounts](#organizations-and-accounts)
 - [Technology Overview](#technology-overview)
+  - [AWS Networking](#aws-networking)
+  - [Database Services](#database-services)
+  - [Provisioning](#provisioning)
+  - [Computing Services](#computing-services)
+  - [Storage Services](#storage-services)
+  - [Business Centric Services](#business-centric-services)
+  - [Enterprise Integration](#enterprise-integration)
+  - [Logging Services](#logging-services)
+  - [Know your Initialisms](know-your-initialisms)
 - [Security](#security)
+  - [Shared Responsibility Model](#shared-responsibility-model)
+  - [AWS Compliance programs](#aws-compliance-programs)
+  - [AWS Artifact](#aws-artifact)
+  - [Amazon Inspector](#amazon-inspector)
+  - [AWS WAF](#aws-waf)
+  - [AWS Shield](#aws-shield)
+  - [Penetration Testing](#penetration-testing)
+  - [Guard Duty](#guard-duty)
+  - [Key Management Service](#key-management-service)
+  - [Amazon Macie](#amazon-macie)
+  - [Security Groups vs NACLs](#security-groups-vs-nacls)
+  - [AWS VPN](#aws-vpn)
 - [Variation](#variation-study)
+  - [Cloud Services](#cloud-services)
+  - [Connect Service](#connect-service)
+  - [Elastic Transcoder vs MediaConvert](#elastic-transcoder-vs-mediaConvert)
+  - [SNS vs SQS](#sns-vs-sqs)
+  - [Amazon Inspector vs AWS Trusted Advisor](#amazon-inspector-vs-aws-trusted)
+  - [ALB vs NLB vs CLB](#alb-vs-nlb-vs-clb)
+  - [SNS vs SES](sns-vs-ses)
+  - [AWS Artifact vs AWS Inspector](#aws-artifact-vs-aws-inspector)
 
 ---
 
@@ -208,50 +258,6 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 - AWS GovCloud Regions allow customers to host sensitive Controlled Unclassified Information and other types of regulated workloads.
 - GovCloud Regions are only operated by employees who are US citizens.
-
----
-
-## Hands On
-
-#### _To set billing alarms_
-
-- CloudWatch, Alarms
-
-#### _Create individual IAM user_
-
-- Root account should not be used
-
-#### _Log in with Systems Manager_
-
-- Session manager
-
-#### _AMI (Amazon Machine Instance)_
-
-- In instance, Actions, Image, Create image
-
-#### _Auto Scaling Groups_
-
-- Guarantee one server is running
-
-#### _Elastic Load Balancer (ELB)_
-
-- Load Balancers, Create New Load Balancer, Application Load Balancer
-- Need to be running in at least 2 AZs
-
-#### _Simple Storage Server (S3)_
-
-#### _Cloudfront_
-
-- Used as a CDN
-- Serve static content as fast as possible
-
-#### _Relational Database Service (RDS)_
-
-- Production ~\$600/month
-- Dev/Test ~\$250/month
-- Free (750 hours)
-
-#### _Lambda_
 
 ---
 

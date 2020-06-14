@@ -1,4 +1,4 @@
-# AWS Certified Cloud Practitioner
+# AWS Certified Solutions Architect
 
 ## Table of Contents
 
@@ -12,7 +12,7 @@
   - [S3 Security](#s3-security)
   - [S3 Encryption](#s3-encryption)
   - [Data Consistency](#data-consistency)
-  - [Cross Region Replication (CRR)](#cross-region-replication-(crr))
+  - [Cross Region Replication (CRR)](#cross-region-replication-crr)
   - [S3 Versioning](#s3-versioning)
   - [S3 Lifecycle Management](#s3-lifecycle-management)
   - [Transfer Acceleration](#transfer-acceleration)

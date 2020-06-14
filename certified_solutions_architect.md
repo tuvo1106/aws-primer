@@ -5,16 +5,108 @@
 - [FAQ](#faq)
 - [Exam Guide Overview](#exam-guide-overview)
 - [S3](#s3)
+  - [Introduction to S3](#introduction-to-s3)
+  - [S3 Object](#s3-object)
+  - [S3 Bucket](#s3-bucket)
+  - [Storage Classes](#storage-classes)
+  - [S3 Security](#s3-security)
+  - [S3 Encryption](#s3-encryption)
+  - [Data Consistency](#data-consistency)
+  - [Cross Region Replication (CRR)](#cross-region-replication-(crr))
+  - [S3 Versioning](#s3-versioning)
+  - [S3 Lifecycle Management](#s3-lifecycle-management)
+  - [Transfer Acceleration](#transfer-acceleration)
+  - [Presigned URLs](#presigned-urls)
+  - [MFA Delete](#mfa-delete)
 - [AWS Snowball](#aws-snowball)
+  - [Snowball](#snowball)
+  - [Snowball Edge](#snowball-edge)
+  - [Snowmobile](#snowmobile)
 - [Virtual Private Cloud](#virtual-private-cloud)
+  - [VPC Introduction](#vpc-introduction)
+  - [VPC Core Components](#vpc-core-components)
+  - [VPC Key Features](#vpc-key-features)
+  - [Default VPC](#default-vpc)
+  - [Default Everywhere IP](#default-everywhere-ip)
+  - [VPC Peering](#vpc-peering)
+  - [Route Tables](#route-tables)
+  - [Internet Gateway (IGW)](#internet-gateway-(igw))
+  - [Bastion/Jumpbox](#bastion/jumpbox)
+  - [Direct Connect](#direct-connect)
+  - [VPC Endpoints](#vpc-endpoints)
+  - [Interface Endpoints](#interface-endpoints)
+  - [Gateway Endpoints](#gateway-endpoints)
+  - [VPC Flow Logs Introduction](#vpc-flow-logs-introduction)
+  - [VPC Flow Logs Log Breakdown](#vpc-flow-logs-log-breakdown)
+  - [VPC Flow Logs Cheatsheet](#vpc-flow-logs-cheatsheet)
+  - [Network Access Control List (NACLs)](#network-access-control-list-(nacls))
+  - [Security Groups](#security-groups)
+  - [Security Groups Limits](#security-groups-limits)
+  - [NAT instances vs NAT Gateways](#nat-instances-vs-nat-gateways)
 - [IAM](#iam)
+  - [IAM Core Components](#iam-core-components)
+  - [Managed vs Customer vs Inline Policy](#managed-vs-customer-vs-inline-policy)
+  - [IAM Policy Structure](#iam-policy-structure)
+  - [IAM Password Policy](#iam-password-policy)
+  - [Programmatic Access Keys](#programmatic-access-keys)
+  - [IMA MFA](#ima-mfa)
 - [Cognito](#cognito)
+  - [Web Identity Federation and IpD](#web-identity-federation-and-ipd)
+  - [User Pools](#user-pools)
+  - [Identity Pools](#identity-pools)
+  - [Sync](#sync)
+  - [IAM Password Policy](#iam-password-policy)
+  - [Programmatic Access Keys](#programmatic-access-keys)
+  - [IMA MFA](#ima-mfa)
 - [Command Line Interface](#command-line-interface)
+  - [SKD (Software Development Kit)](<#skd-(software-development-kit)>)
 - [DNS](#dns)
+  - [IP (Internet Protocol)](<#ip-(internet-protocol)>)
+  - [Domain Registrars](#domain-registrars)
+  - [Top-Level Domains](#top-level-domains)
+  - [Start of Authority (SOA)](<#start-of-authority-(soa)>)
+  - [A Records](#a-records)
+  - [CNAME Records](#cname-records)
+  - [NS Records](#ns-records)
+  - [Time to Live (TTL)](<#time-to-live-(ttl)>)
 - [Route 53](#route-53)
+  - [Route 53 Use Case](#route-53-use-case)
+  - [Record Sets](#record-sets)
+  - [Routing Policies](#routing-policies)
+  - [Traffic Flow](#traffic-flow)
+  - [Health Check](#health-check)
+  - [Resolver](#resolver)
 - [EC2](#ec2)
+  - [Instance Types](#instance-types)
+  - [Instance Sizes](#instance-sizes)
+  - [Instance Profile](#instance-profile)
+  - [Placement Groups](#placement-groups)
+  - [Userdata](#userdata)
+  - [Metadata](#metadata)
+  - [Pricing Introduction](#pricing-introduction)
+- [AMI](#ami)
+  - [Use Case](#use-case)
+  - [Marketplace](#marketplace)
+  - [Creating an AMI](#creating-an-ami)
+  - [Choosing an AMI](#choosing-an-ami)
+  - [Copying an AMI](#copying-an-ami)
 - [Auto Scaling Groups](#auto-scaling-groups)
+  - [Capacity Settings](#capacity-settings)
+  - [Health Check Replacements](#health-check-replacements)
+  - [Scaling Policies](#scaling-policies)
+  - [ELB Integration](#elb-integration)
+  - [ASG Use Case](#asg-use-case)
+  - [Launch Configuration](#launch-configuration)
 - [Elastic Load Balancers](#elastic-load-balancers)
+  - [ELB Rules of Traffic](#elb-rules-of-traffic)
+  - [Application Load Balancer (ALB)](<#application-load-balancer-(alb)>)
+  - [Network Load Balancer (NLB)](<#network-load-balancer-(nlb)>)
+  - [Classic Load Balancer (NLB)](<#classic-load-balancer-(nlb)>)
+  - [Sticky Sessions](#sticky-sessions)
+  - [X-Forward-For Header](#x-forward-for-header)
+  - [Health Checks](#health-checks)
+  - [Cross-Zone Load Balancing](#cross-zone-load-balancing)
+  - [ALB - Request Routing](#alb---request-routing)
 - [Elastic File System](#elastic-file-system)
 - [Elastic Block Store](#elastic-block-store)
   - [Introduction](#ebs-introduction)
@@ -333,13 +425,13 @@ Security Features
 
 #### Virtual Private Cloud
 
-#### Introduction
+#### VPC Introduction
 
 Provision a _logically isolated section of the AWS cloud_ where you can launch AWS resources in a virtual network that you define.
 
 ---
 
-#### Core Components
+#### VPC Core Components
 
 Think of a AWS VPC as your own _personal data center_.
 Gives you complete control over your virtual networking environment.
@@ -362,7 +454,7 @@ Combining these components and services is what makes up your VPC:
 
 ---
 
-#### Key Features
+#### VPC Key Features
 
 - VPCs are _Region Specific_; they do not span regions.
 - You can create up to _5 VPC_ per region.
@@ -588,6 +680,8 @@ NAT Gateways is a managed service which launches redundant instances within the 
 
 ## IAM
 
+---
+
 - Identity Access Management
 - Manages access of AWS users and resources.
 - IAM is a universal system (applied to all regions at the same time). IAM is a free service.
@@ -608,7 +702,7 @@ NAT Gateways is a managed service which launches redundant instances within the 
 
 ---
 
-#### IAM - Managed vs Customer vs Inline Policy
+#### Managed vs Customer vs Inline Policy
 
 - Managed Policies - a policy which is managed by AWS, which you cannot edit. Managed policies are labeled with an orange box.
 - Customer Managed Policies - a policy created by the customer which is editable. Customer policies have no symbol beside them.
@@ -616,7 +710,7 @@ NAT Gateways is a managed service which launches redundant instances within the 
 
 ---
 
-#### Policy Structure
+#### IAM Policy Structure
 
 - Version
 - Statement
@@ -629,7 +723,7 @@ NAT Gateways is a managed service which launches redundant instances within the 
 
 ---
 
-#### Password Policy
+#### IAM Password Policy
 
 In IAM, you can set a Password Policy. To set the minimum requirements of a password and rotate passwords so users have to update their passwords after X days.
 
@@ -643,7 +737,7 @@ You're allowed two Access keys per user.
 
 ---
 
-#### MFA
+#### IMA MFA
 
 - MFA can be turned on per user.
 - The user has to turn on the MFA themselves, Admin cannot directly enforce users to have MFA.
@@ -1248,7 +1342,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Cross-Zone Load Balacning
+#### Cross-Zone Load Balancing
 
 - Only for CLB and NLB.
 - When enabled:

@@ -84,8 +84,8 @@
   - [Userdata](#userdata)
   - [Metadata](#metadata)
   - [Pricing Introduction](#pricing-introduction)
-- [AMI](#ami)
-  - [Use Case](#use-case)
+- [Amazon Machine Image](#amazon-machine-image)
+  - [AMI Use Case](#ami-use-case)
   - [Marketplace](#marketplace)
   - [Creating an AMI](#creating-an-ami)
   - [Choosing an AMI](#choosing-an-ami)
@@ -1133,7 +1133,7 @@ Combine metadata with userdata scripts to perform all sorts of advanced AWS stag
 
 ---
 
-### Amazon Machine Image (AMI)
+### Amazon Machine Image
 
 - A template to configure new instances.
 - AMI provides the information required to launch an instance.
@@ -1148,7 +1148,7 @@ Combine metadata with userdata scripts to perform all sorts of advanced AWS stag
 
 ---
 
-#### Use Case
+#### AMI Use Case
 
 - AMIs help you keep incremental changes to your OS, application code and system packages.
 - Using **Systems Manager Automation** you can routinely patch your AMIS with security updates.

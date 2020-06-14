@@ -106,7 +106,7 @@
   - [X-Forward-For Header](#x-forward-for-header)
   - [Health Checks](#health-checks)
   - [Cross-Zone Load Balancing](#cross-zone-load-balancing)
-  - [ALB - Request Routing](#alb-request-routing)
+  - [ALB Request Routing](#alb-request-routing)
 - [Elastic File System](#elastic-file-system)
 - [Elastic Block Store](#elastic-block-store)
   - [Introduction](#ebs-introduction)
@@ -1352,7 +1352,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### ALB - Request Routing
+#### ALB Request Routing
 
 - Apply rules to incoming request and then forward or redirect traffic.
   - Host header

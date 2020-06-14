@@ -31,7 +31,7 @@
   - [VPC Peering](#vpc-peering)
   - [Route Tables](#route-tables)
   - [Internet Gateway (IGW)](#internet-gateway-igw)
-  - [Bastion/Jumpbox](#bastion-jumpbox)
+  - [Bastion and Jumpbox](#bastion-and-jumpbox)
   - [Direct Connect](#direct-connect)
   - [VPC Endpoints](#vpc-endpoints)
   - [Interface Endpoints](#interface-endpoints)
@@ -110,11 +110,11 @@
 - [Elastic File System](#elastic-file-system)
 - [Elastic Block Store](#elastic-block-store)
   - [Introduction](#ebs-introduction)
-  - [Storage Volumes](#ebs-storage-volumes)
-  - [Medium SSD](#ebs-medium-ssd)
-  - [Magnetic Tapes](#ebs-magnetic-tapes)
-  - [Moving Volumes](#ebs-moving-volumes)
-  - [Encrypted Root Volumes](#ebs-encrypted-root-volumes)
+  - [Storage Volumes](#storage-volumes)
+  - [Medium SSD](#medium-ssd)
+  - [Magnetic Tapes](#magnetic-tapes)
+  - [Moving Volumes](#moving-volumes)
+  - [Encrypted Root Volumes](#encrypted-root-volumes)
   - [EBS vs Instance Store Volumes](#ebs-vs-instance-store-volumes)
 - [CloudFront](#cloudfront)
   - [Cloudfront Core Components](#cloudfront-core-components)
@@ -521,7 +521,7 @@ VPC Peering allows you to connect one VPC to another over a direct network route
 
 ---
 
-#### Bastion/Jumpbox
+#### Bastion and Jumpbox
 
 Bastions are EC2 instances which are security harden. They are designed to help you gain access to your EC2 instances via SSH or RCP that are in a _private subnet_.
 
@@ -1410,7 +1410,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### EBS Storage Volumes
+#### Storage Volumes
 
 - (Hard Disk Drive) HDD is magnetic storage that uses rotating platters, an actuator arm and a magnetic head (similar to a record player).
 - HDD is very good at writing a continuous amount of data.
@@ -1419,7 +1419,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### EBS Medium SSD
+#### Medium SSD
 
 - SSD (Solid State Drive) uses integrated circuits assemblies as memory to store data persistently, typically using flash memory. SSDs are typically more resistant to physical shock, run silently and have quicker access time and lower latency.
 - Very good at frequent reads/writes (I/O).
@@ -1427,14 +1427,14 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### EBS Magnetic Tapes
+#### Magnetic Tapes
 
 - A large reel of magnetic tape. A tape drive is used to write data to the tapel. Medium and large-sized data centers deploy both tape and disk formats. They normally come in the form of cassettes. Magnetic is very cheap to produce and can store considerable amount of fata.
 - Durable for decades.
 
 ---
 
-#### EBS Moving Volumes
+#### Moving Volumes
 
 - **From one AZ to another**
   - Take a snapshot of the volume.
@@ -1450,7 +1450,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### EBS Encrypted Root Volumes
+#### Encrypted Root Volumes
 
 - When you are through the wizard launch an EC2 instance, you can encrypt the volume on creation.
 - If you want to encrypt an existing volume, you'll have to do the following:

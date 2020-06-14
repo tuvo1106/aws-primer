@@ -204,7 +204,7 @@ Read _Architecting for the Cloud: AWS Best Practices_.
 
 ## S3
 
-#### Introduction to S3
+#### _Introduction to S3_
 
 - Object-based storage service.
 - Serverless storage in the cloud.
@@ -219,7 +219,7 @@ Read _Architecting for the Cloud: AWS Best Practices_.
 S3 provides you with unlimited storage. You do not need to think about the underlying infrastructure.
 The S3 console provides an interface for you to uploaad and access your data.
 
-##### S3 Object
+#### _S3 Object_
 
 Objects contain your data. They are like files.
 Objects may consist of:
@@ -231,14 +231,14 @@ Objects may consist of:
 
 You can stre data from _0 Bytes_ to _5 Terabytes_ in size.
 
-##### S3 Bucket
+#### _S3 Bucket_
 
 Buckets hold objects. Buckets can also have folders which in turn hold objects.
 S3 is a a universal namespace so bucket names must be unique (think like having a domain name).
 
 ---
 
-#### Storage Classes
+#### _Storage Classes_
 
 Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
 
@@ -264,7 +264,7 @@ Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
 
 ---
 
-#### S3 Security
+#### _S3 Security_
 
 - All new buckets are **PRIVATE** when created by default.
 - Logging per request can be turned on in a bucket. Log files are generated and saved in a different bucket (even a bucket in a different AWS account if desired).
@@ -272,7 +272,7 @@ Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
 
 ---
 
-#### S3 Encryption
+#### _S3 Encryption_
 
 **Encryption In Transit**
 
@@ -292,7 +292,7 @@ Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
 
 ---
 
-#### Data Consistency
+#### _Data Consistency_
 
 **New Objects (PUTS)**
 
@@ -307,7 +307,7 @@ Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
 
 ---
 
-#### Cross Region Replication (CRR)
+#### _Cross Region Replication (CRR)_
 
 - When enabled, any object that is uploaded will be _automatically replicated_ to another region(s).
 - Provides higher durability and potential disaster recovery for objects.
@@ -316,7 +316,7 @@ Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
 
 ---
 
-#### S3 Versioning
+#### _S3 Versioning_
 
 - Store all versions of an object in S3.
 - Once enabled, it cannot be disabled, only suspended in bucket.
@@ -325,7 +325,7 @@ Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
 
 ---
 
-#### S3 Lifecycle Management
+#### _S3 Lifecycle Management_
 
 - Automate the process of moving objects to different Storage classes or deleting objects all together.
 - Can be used togethe with _versioning_.
@@ -333,7 +333,7 @@ Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
 
 ---
 
-#### Transfer Acceleration
+#### _Transfer Acceleration_
 
 - Fast and secure transfer of files _over long distances_ between your end users and an S3 bucket.
 - Utilizes _CloudFront's_ distributed Edge Locations.
@@ -342,14 +342,14 @@ Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
 
 ---
 
-#### Presigned URLs
+#### _Presigned URLs_
 
 - Generate a URL which provides you temporary access to an object to either upload or download object data. Presigned URLs are commoonly used to _provide access to private objects_. You can use AWS CLI or AWS SDK to generate Presigned URLs.
 - For example, you have a web app which needs to allow users to download files from a password-protected area. Your web app generates a presigned URL which expires after 5 seconds. The user downloads the file.
 
 ---
 
-#### MFA Delete
+#### _MFA Delete_
 
 - **MFA Delete** ensures users cannot delete objects from a bucket unless they provide their MFA code.
 - MFA Delete can only be enabled under these conditions:
@@ -365,7 +365,7 @@ Only the bucket owner logged in as **Root User** can DELETE objects from bucket.
 - Petabyte-scale data transfer service.
 - Move data onto AWS via physical briefcase computer.
 
-#### Snowball
+#### _Snowball_
 
 - Low Cost - it cost thousands of dollars to transfer 100TB over high speed internet. Snowball can reduce that costs by _1/5th_.
 - Speed - It can take 100TB over 100 days to transfer over high speed internet. Snowball can reduce that transfer time by _less than a week_.
@@ -382,7 +382,7 @@ Only the bucket owner logged in as **Root User** can DELETE objects from bucket.
 
 ---
 
-#### Snowball Edge
+#### _Snowball Edge_
 
 - Petabyte-scale data transfer service.
 - Move data onto AWS via physical briefcase computer.
@@ -407,7 +407,7 @@ Snowball Edge comes in 2 sizes:
 
 ---
 
-#### Snowmobile
+#### _Snowmobile_
 
 A _45-foot long_ ruggedized _shipping container_, pulled by a _semi-trailer truck_.
 Transfer up to _100PB_ per Snowmobile, exabyte-scale migration.
@@ -423,15 +423,15 @@ Security Features
 
 ---
 
-#### Virtual Private Cloud
+## Virtual Private Cloud
 
-#### VPC Introduction
+#### _VPC Introduction_
 
 Provision a _logically isolated section of the AWS cloud_ where you can launch AWS resources in a virtual network that you define.
 
 ---
 
-#### VPC Core Components
+#### _VPC Core Components_
 
 Think of a AWS VPC as your own _personal data center_.
 Gives you complete control over your virtual networking environment.
@@ -454,7 +454,7 @@ Combining these components and services is what makes up your VPC:
 
 ---
 
-#### VPC Key Features
+#### _VPC Key Features_
 
 - VPCs are _Region Specific_; they do not span regions.
 - You can create up to _5 VPC_ per region.
@@ -467,7 +467,7 @@ Combining these components and services is what makes up your VPC:
 
 ---
 
-#### Default VPC
+#### _Default VPC_
 
 AWS has a default VPC in every region so you can immediately deploy instances.
 
@@ -480,7 +480,7 @@ AWS has a default VPC in every region so you can immediately deploy instances.
 
 ---
 
-#### Default Everywhere IP
+#### _Default Everywhere IP_
 
 - 0.0.0.0/0 is also known as default.
 - It represents all possile IP addresses.
@@ -490,7 +490,7 @@ AWS has a default VPC in every region so you can immediately deploy instances.
 
 ---
 
-#### VPC Peering
+#### _VPC Peering_
 
 VPC Peering allows you to connect one VPC to another over a direct network route using private IP addresses.
 
@@ -503,7 +503,7 @@ VPC Peering allows you to connect one VPC to another over a direct network route
 
 ---
 
-#### Route Tables
+#### _Route Tables_
 
 - Route tables are used to determine where network traffic is directed.
 - Each subnet in your VPC _must be associated_ with a route table.
@@ -511,7 +511,7 @@ VPC Peering allows you to connect one VPC to another over a direct network route
 
 ---
 
-#### Internet Gateway (IGW)
+#### _Internet Gateway (IGW)_
 
 - The IGW allows your VPC access to the internet.
 - The IGW does 2 things:
@@ -521,7 +521,7 @@ VPC Peering allows you to connect one VPC to another over a direct network route
 
 ---
 
-#### Bastion and Jumpbox
+#### _Bastion and Jumpbox_
 
 Bastions are EC2 instances which are security harden. They are designed to help you gain access to your EC2 instances via SSH or RCP that are in a _private subnet_.
 
@@ -533,7 +533,7 @@ System Manager's Sessions Manager replaces the need for Bastions.
 
 ---
 
-#### Direct Connect
+#### _Direct Connect_
 
 AWS Direct Connect is the AWS solution for establishing dedicated network connections from on-premises locations to AWS.
 
@@ -543,7 +543,7 @@ AWS Direct Connect is the AWS solution for establishing dedicated network connec
 
 ---
 
-#### VPC Endpoints
+#### _VPC Endpoints_
 
 Think of a secret tunnel where you don't have to leave the AWS network.
 
@@ -562,7 +562,7 @@ There are 2 Types of VPC Endpoints:
 
 ---
 
-#### Interface Endpoints
+#### _Interface Endpoints_
 
 Interface Endpoints are Elastic Network Interfaces (ENI) with a private IP address. They serve as an entry point for traffic going to a supported service.
 
@@ -574,7 +574,7 @@ Interface Endpoints are powered by AWS PrivateLink.
 
 ---
 
-#### Gateway Endpoints
+#### _Gateway Endpoints_
 
 A Gateway Endpoint is a gateway that is a target for a specific route in your route table, used for traffic destined for a supported AWS service.
 
@@ -582,7 +582,7 @@ A Gateway Endpoint is a gateway that is a target for a specific route in your ro
 - To create a Gateway Endpoint, you must specify the VPC in which you want to create the endpoint, and the service to which you want to establish the connection.
 - AWS Gateway Endpoint currently only supports 2 services: S3 and DynamoDB
 
-#### VPC Flow Logs Introduction
+#### _VPC Flow Logs Introduction_
 
 VPC Flow Logs allow you to capture IP traffic information in-and-out of Network Interfaces within your VPC.
 
@@ -596,7 +596,7 @@ All log data is stored and accesible using Amazon CloudWatch Logs or S3.
 
 ---
 
-#### VPC Flow Logs Log Breakdown
+#### _VPC Flow Logs Log Breakdown_
 
 - Version
 - Account ID
@@ -615,7 +615,7 @@ All log data is stored and accesible using Amazon CloudWatch Logs or S3.
 
 ---
 
-#### VPC Flow Logs Cheatsheet
+#### _VPC Flow Logs Cheatsheet_
 
 - VPC Flow Logs cannot be tagged like other AWS resources.
 - You cannot change the configuration of a flow after it's created.
@@ -628,7 +628,7 @@ All log data is stored and accesible using Amazon CloudWatch Logs or S3.
 
 ---
 
-#### Network Access Control List (NACLs)
+#### _Network Access Control List (NACLs)_
 
 An (optional) layer of security that acts as a firewall for controlling traffic in and out of subnet(s).
 
@@ -641,7 +641,7 @@ NACLs act as a virtual firewall at the subnet level.
 
 ---
 
-#### Security Groups
+#### _Security Groups_
 
 - You can specify the source to be an IP range or a specific IP
 - You can specify the source to be another security group
@@ -650,7 +650,7 @@ NACLs act as a virtual firewall at the subnet level.
 
 ---
 
-#### Security Groups Limits
+#### _Security Groups Limits_
 
 - You can have up to 10,000 SGs in a Region (default is 2,500).
 - You can have 60 inbound rules and 60 outbound rules per security group.
@@ -658,7 +658,7 @@ NACLs act as a virtual firewall at the subnet level.
 
 ---
 
-#### Network Address Translation (NAT)
+#### _Network Address Translation (NAT)_
 
 NAT is the method of re-mapping one IP address space to another.
 
@@ -668,7 +668,7 @@ If you have two networks which have conflicting network addresses, you can use a
 
 ---
 
-#### NAT instances vs NAT Gateways
+#### _NAT instances vs NAT Gateways_
 
 NATs have to run within a Public Subnet.
 
@@ -693,7 +693,7 @@ NAT Gateways is a managed service which launches redundant instances within the 
 
 ---
 
-#### IAM Core Components
+#### _IAM Core Components_
 
 - Users - End users who log into the console or interact with AWS resource programatically
 - Groups - Group up your Users so they share permission levels of the group eg. Administrators, Develops, Auditors
@@ -702,7 +702,7 @@ NAT Gateways is a managed service which launches redundant instances within the 
 
 ---
 
-#### Managed vs Customer vs Inline Policy
+#### _Managed vs Customer vs Inline Policy_
 
 - Managed Policies - a policy which is managed by AWS, which you cannot edit. Managed policies are labeled with an orange box.
 - Customer Managed Policies - a policy created by the customer which is editable. Customer policies have no symbol beside them.
@@ -710,7 +710,7 @@ NAT Gateways is a managed service which launches redundant instances within the 
 
 ---
 
-#### IAM Policy Structure
+#### _IAM Policy Structure_
 
 - Version
 - Statement
@@ -723,13 +723,13 @@ NAT Gateways is a managed service which launches redundant instances within the 
 
 ---
 
-#### IAM Password Policy
+#### _IAM Password Policy_
 
 In IAM, you can set a Password Policy. To set the minimum requirements of a password and rotate passwords so users have to update their passwords after X days.
 
 ---
 
-#### Programmatic Access Keys
+#### _Programmatic Access Keys_
 
 Access keys allow users to interact with AWS service programatically via the AWS CLI or AWS SDK.
 
@@ -737,7 +737,7 @@ You're allowed two Access keys per user.
 
 ---
 
-#### IMA MFA
+#### _IMA MFA_
 
 - MFA can be turned on per user.
 - The user has to turn on the MFA themselves, Admin cannot directly enforce users to have MFA.
@@ -745,7 +745,7 @@ You're allowed two Access keys per user.
 
 ---
 
-### Cognito
+## Cognito
 
 - Decentralized Managed Authentication.
 - Sign-up, sign-in integration for your apps.
@@ -758,7 +758,7 @@ You're allowed two Access keys per user.
 
 ---
 
-#### Web Identity Federation and IpD
+#### _Web Identity Federation and IpD_
 
 - **Web Identity Federation** - to exchange identity and security information betwen an identity provider (IdP) and an application.
 - **Identity Provider** - a trusted provider of your user identity that lets you use authenticate to access other services. IdP could be: Facebook, Amazon, Google, Twitter, Github, LinkedIn.
@@ -766,7 +766,7 @@ You're allowed two Access keys per user.
 
 ---
 
-#### User Pools
+#### _User Pools_
 
 - User Pools are user directories used to manage the actions for web and mobile apps such as:
 - Sign-up
@@ -780,7 +780,7 @@ You're allowed two Access keys per user.
 
 ---
 
-#### Identity Pools
+#### _Identity Pools_
 
 - Identity Pools provide temporary AWS credentials to access services eg. S3, DynamoDB.
 - Identity Pools can be thought of as the actual mechanism authorizing access to the AWS resources.
@@ -789,7 +789,7 @@ You're allowed two Access keys per user.
 
 ---
 
-#### Sync
+#### _Sync_
 
 - Sync user data and preferences across devices with one line of code.
 - Cognito uses push synchronization to push updates and synchronize data.
@@ -797,7 +797,7 @@ You're allowed two Access keys per user.
 
 ---
 
-### Command Line Interface
+## Command Line Interface
 
 Control multiple AWS services from the command line and automate them through scripts.
 
@@ -814,7 +814,7 @@ Important AWS CLI flags to know:
 
 ---
 
-#### SKD (Software Development Kit)
+#### _SKD (Software Development Kit)_
 
 Control multiple AWS services using popular programming languages.
 
@@ -826,13 +826,13 @@ You have to enable _Programmatic Access_.
 
 ---
 
-### DNS
+## DNS
 
 - Domain Name System
 - The phonebook of the internet.
 - DNS translates domain names to IP addresses so browsers can find internet resources.
 
-#### IP (Internet Protocol)
+#### _IP (Internet Protocol)_
 
 - IP Addresses are what uniquely identifies each computer on a network, and allows communication between them using the Ineternet Protocol.
 - IPv4
@@ -845,7 +845,7 @@ You have to enable _Programmatic Access_.
 
 ---
 
-#### Domain Registrars
+#### _Domain Registrars_
 
 - Domain registrars are authorities who have the ability to assign domain names under one or more top-level domains.
 - Common registrars:
@@ -855,7 +855,7 @@ You have to enable _Programmatic Access_.
 
 ---
 
-#### Top-Level Domains
+#### _Top-Level Domains_
 
 - The last word within a domain represents the top-level domain name: example.com.
 - The second word within a domain name is known as the second-level domain name: example.co.uk.
@@ -864,7 +864,7 @@ You have to enable _Programmatic Access_.
 
 ---
 
-#### Start of Authority (SOA)
+#### _Start of Authority (SOA)_
 
 - Every domain must have an SOA record. The SOA is a way for the Domain Admins to provide information about the domain:
   - how often it is updated.
@@ -880,14 +880,14 @@ You have to enable _Programmatic Access_.
 
 ---
 
-#### CNAME Records
+#### _CNAME Records_
 
 - Canonical Names (CNAME) are another fundamental DNS record used to resolve one domain name to another - rather than an IP address.
 - The advantage of CNAMES is they are unlikely to change where IP addresses can change over time.
 
 ---
 
-#### NS Records
+#### _NS Records_
 
 - Name Server Records (NS) are used by top-level domain servers to direct traffic to the DNS server containing the authoritative DNS records. Typically multiple name servers are provided for redundancy.
 - If you were managing your DNS records with Route53, the NS records for your domain would be pointing at the AWS servers.
@@ -902,7 +902,7 @@ You have to enable _Programmatic Access_.
 
 ---
 
-### Route 53
+## Route 53
 
 - Highly available and scalable cloud Domain Name System.
 - Register domains, create DNS routing rules eg. failovers.
@@ -915,7 +915,7 @@ You have to enable _Programmatic Access_.
 
 ---
 
-#### Route 53 Use Case
+#### _Route 53 Use Case_
 
 - Use Route 53 to get your custom domains to point to your AWS resource.
   - 1. Incoming internet traffic
@@ -927,7 +927,7 @@ You have to enable _Programmatic Access_.
 
 ---
 
-#### Record Sets
+#### _Record Sets_
 
 - We create record sets which allows us to point our naked domain and subdomains via Domain records.
 - AWS has their own special Alias Record which extends DNS functionality. It route traffic to specific AWS resources.
@@ -936,7 +936,7 @@ You have to enable _Programmatic Access_.
 
 ---
 
-#### Routing Policies
+#### _Routing Policies_
 
 There are _7 different types_ of Routing Policies:
 
@@ -958,7 +958,7 @@ There are _7 different types_ of Routing Policies:
 
 ---
 
-#### Traffic Flow
+#### _Traffic Flow_
 
 - Visual editor that lets you create sophisticated routing configurations for your resources using existing routing types.
 - Supports versioning so you can roll out or roll back updates.
@@ -966,7 +966,7 @@ There are _7 different types_ of Routing Policies:
 
 ---
 
-#### Health Check
+#### _Health Check_
 
 - Checks health every 30s be default. Can be reduced to every 10s.
 - A health check can initiate a failover if status is returned unhealthy.
@@ -976,7 +976,7 @@ There are _7 different types_ of Routing Policies:
 
 ---
 
-#### Resolver
+#### _Resolver_
 
 - Formally known as .2 resolver.
 - A regional service that lets you route DNS queries between your VPCs and your network.
@@ -984,7 +984,7 @@ There are _7 different types_ of Routing Policies:
 
 ---
 
-### EC2
+## EC2
 
 - Cloud computing service.
 - Choose your OS, Storage, Memory, Network Throughput.
@@ -995,7 +995,7 @@ There are _7 different types_ of Routing Policies:
 
 ---
 
-#### Instance Types
+#### _Instance Types_
 
 - **General Purpose**
   - A1, T3, T3a, T2, M5, M5a, M4.
@@ -1019,7 +1019,7 @@ There are _7 different types_ of Routing Policies:
 
 ---
 
-#### Instance Sizes
+#### _Instance Sizes_
 
 EC2 instances generally double in price and key attributes.
 
@@ -1027,7 +1027,7 @@ EC2 instances generally double in price and key attributes.
 
 ---
 
-#### Instance Profile
+#### _Instance Profile_
 
 - You can attach a role to an instance via an instance profile.
 - You want to always avoid _embedding your AWS credentials (Access Key and Secret)_.
@@ -1037,7 +1037,7 @@ EC2 instances generally double in price and key attributes.
 
 ---
 
-#### Placement Groups
+#### _Placement Groups_
 
 - Placement Groups let you choose the logical placement of your instances to optimize for communication, performance or durability. Placement groups are free and optional.
 - Cluster
@@ -1057,13 +1057,13 @@ EC2 instances generally double in price and key attributes.
 
 ---
 
-#### Userdata
+#### _Userdata_
 
 You can provide an EC2 with Userdata which is a _script_ that will be automatically run when launching an EC2 instance. You could install packages, apply updates.
 
 ---
 
-#### Metadata
+#### _Metadata_
 
 - From within your EC2 instance you access information about the EC2 via a special url endpoint at **169.254.169.254**.
 
@@ -1077,7 +1077,7 @@ Combine metadata with userdata scripts to perform all sorts of advanced AWS stag
 
 ---
 
-#### Pricing Introduction
+#### _Pricing Introduction_
 
 **On-Demand (Least Commitment)**
 
@@ -1148,7 +1148,7 @@ Combine metadata with userdata scripts to perform all sorts of advanced AWS stag
 
 ---
 
-#### AMI Use Case
+#### _AMI Use Case_
 
 - AMIs help you keep incremental changes to your OS, application code and system packages.
 - Using **Systems Manager Automation** you can routinely patch your AMIS with security updates.
@@ -1156,7 +1156,7 @@ Combine metadata with userdata scripts to perform all sorts of advanced AWS stag
 
 ---
 
-#### Marketplace
+#### _Marketplace_
 
 AWS Marketplace is a curated digital catalogue with thousands of software listings from independen software vendors.
 
@@ -1174,13 +1174,13 @@ Products can be offered as:
 
 ---
 
-#### Creating an AMI
+#### _Creating an AMI_
 
 You can create an AMI from an existing AMI that's either running or stopped.
 
 ---
 
-#### Choosing an AMI
+#### _Choosing an AMI_
 
 - AWS has hundreds of AMIs you can search and select from.
 - Community AMIs are free and maintained by the community.
@@ -1194,13 +1194,13 @@ You can create an AMI from an existing AMI that's either running or stopped.
     - Instance store (ephemeral storage)
     - EBS Backed Volumes
 
-#### Copying an AMI
+#### _Copying an AMI_
 
 AMIs are region specific. If you want to use an AMI from another region. You need to **Copy the AMI** and then select destination region.
 
 ---
 
-### Auto Scaling Groups
+## Auto Scaling Groups
 
 - Set scaling rules which automatically launch additional EC2 instances or shut them down to meet current demand.
 - Automatic scaling can occur via:
@@ -1210,7 +1210,7 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 
 ---
 
-#### Capacity Settings
+#### _Capacity Settings_
 
 - The size of an ASG is based on:
   - Min - number of EC2 instances that should be at least running.
@@ -1220,7 +1220,7 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 
 ---
 
-#### Health Check Replacements
+#### _Health Check Replacements_
 
 - EC2 - ASG will perform a health check on EC2 instances to determine if there is a software or hardware issue. This is based on the **EC2 Status Checks**.
 - ELB - ASG will perform a health check based on the ELB health check. ELB pings an HTTP(S) endpoint with an expected response.
@@ -1228,7 +1228,7 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 
 ---
 
-#### Scaling Policies
+#### _Scaling Policies_
 
 - **Scaling out**: adding instances; **Scaling in**: removing instances.
 - Target Tracking - maintains a specific metric at a target value.
@@ -1238,7 +1238,7 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 
 ---
 
-#### ELB Integration
+#### _ELB Integration_
 
 - ASG can be associated with ELB. When ASG is associated with ELB, richer health checks can be set.
 - Classic Load Balancers are associated **directly** to the ASG.
@@ -1246,7 +1246,7 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 
 ---
 
-#### ASG Use Case
+#### _ASG Use Case_
 
 1. Burst of traffic from the internet hits our domain.
 2. Route 53 points that traffic to our load balancer
@@ -1257,7 +1257,7 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 
 ---
 
-#### Launch Configuration
+#### _Launch Configuration_
 
 - A launch configuration is an instance configuration template that an ASG uses to launch EC2s.
 - Launch configurations **cannot be edited**. When you need to update your LC, you create a new one or clone the existing one and manually associate it.
@@ -1265,7 +1265,7 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 
 ---
 
-### Elastic Load Balancers
+## Elastic Load Balancers
 
 - Distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses and Lambda functions.
 - Load balancers can by physical hardware or virtual software that accepts incoming traffic and distributes traffic to multiple targets. They can balance the load via different rules.
@@ -1279,7 +1279,7 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 
 ---
 
-#### ELB Rules of Traffic
+#### _ELB Rules of Traffic_
 
 - **Listeners** - Incoming traffic is evaluated against listeners that match traffic with the port.
 - **Rules** - Listeners wil then invoke rules to decide what to do with traffic. Generally the next step is to forward traffic to a Target Group.
@@ -1287,7 +1287,7 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 
 ---
 
-#### Application Load Balancer (ALB)
+#### _Application Load Balancer (ALB)_
 
 - ALB is designed to balance HTTP and HTTPS traffic.
 - They operate at Layer 7 (application) of the OSI model.
@@ -1297,7 +1297,7 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 
 ---
 
-#### Network Load Balancer (NLB)
+#### _Network Load Balancer (NLB)_
 
 - NLM is designed to balance TCP/UDP.
 - They operate at Layer 4 (transport) of the OSI model.
@@ -1307,7 +1307,7 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 
 ---
 
-#### Classic Load Balancer (NLB)
+#### _Classic Load Balancer (NLB)_
 
 - Can balance HTTP, HTTPS or TCP (not at the same time).
 - It can use Layer 7-specific features such as sticky sessions.
@@ -1318,7 +1318,7 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 
 ---
 
-#### Sticky Sessions
+#### _Sticky Sessions_
 
 - Sticky Sessions is an advanced load balancing method that allows you to bind a user's session to a specific EC2 isntance.
 - Ensures all requests from that session are sent to the same instance.
@@ -1329,20 +1329,20 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 
 ---
 
-#### X-Forward-For Header
+#### _X-Forward-For Header_
 
 The X-Forwarded-For (XFF) header is a command method for identifying the originating IP address of a client connecting to a serb server through an HTTP proxy or a load balancer.
 
 ---
 
-#### Health Checks
+#### _Health Checks_
 
 - Instances that are monitored by the ELB report back Health Checks as **Inservice**, or **OutofService**.
 - ELB _does not terminate unhealthy instances_. It will just redirect traffic to healthy ones.
 
 ---
 
-#### Cross-Zone Load Balancing
+#### _Cross-Zone Load Balancing_
 
 - Only for CLB and NLB.
 - When enabled:
@@ -1352,7 +1352,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### ALB Request Routing
+#### _ALB Request Routing_
 
 - Apply rules to incoming request and then forward or redirect traffic.
   - Host header
@@ -1392,7 +1392,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### EBS Introduction
+#### _EBS Introduction_
 
 - **What is IOPS?** - Input/Output per second. It is the speed at which non-contiguous reads and writes can be performed on a storage medium. High I/O = lots of small fast reads and writes.
 - **What is Throughput?** - The data transfer rate to and from the storage medium in megabytes per second.
@@ -1410,7 +1410,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Storage Volumes
+#### _Storage Volumes_
 
 - (Hard Disk Drive) HDD is magnetic storage that uses rotating platters, an actuator arm and a magnetic head (similar to a record player).
 - HDD is very good at writing a continuous amount of data.
@@ -1419,7 +1419,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Medium SSD
+#### _Medium SSD_
 
 - SSD (Solid State Drive) uses integrated circuits assemblies as memory to store data persistently, typically using flash memory. SSDs are typically more resistant to physical shock, run silently and have quicker access time and lower latency.
 - Very good at frequent reads/writes (I/O).
@@ -1427,14 +1427,14 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Magnetic Tapes
+#### _Magnetic Tapes_
 
 - A large reel of magnetic tape. A tape drive is used to write data to the tapel. Medium and large-sized data centers deploy both tape and disk formats. They normally come in the form of cassettes. Magnetic is very cheap to produce and can store considerable amount of fata.
 - Durable for decades.
 
 ---
 
-#### Moving Volumes
+#### _Moving Volumes_
 
 - **From one AZ to another**
   - Take a snapshot of the volume.
@@ -1450,7 +1450,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Encrypted Root Volumes
+#### _Encrypted Root Volumes_
 
 - When you are through the wizard launch an EC2 instance, you can encrypt the volume on creation.
 - If you want to encrypt an existing volume, you'll have to do the following:
@@ -1463,7 +1463,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### EBS vs Instance Store Volumes
+#### _EBS vs Instance Store Volumes_
 
 - An EC2 instance can be backed (root device) by an **EBS Volume** or **Instance Store Volume**.
 - EBS Volumes
@@ -1499,7 +1499,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Cloudfront Distributions
+#### _Cloudfront Distributions_
 
 - It replicates copies based on your **Price Class**.
 - There are 2 Types of Distributions:
@@ -1512,7 +1512,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Cloudfront Lambda Edge
+#### _Cloudfront Lambda Edge_
 
 - We use Lambda@Edge functions to **override the behavior** of requests and responses.
 - 4 types:
@@ -1524,7 +1524,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Cloudfront Protection
+#### _Cloudfront Protection_
 
 - By default, a distribution **allows everyone to have access.**
 - **Original Identity Access (OAI)** - A virtual user identity that will be used to give your CF distribution permission to fetch a private object.

@@ -136,6 +136,17 @@
   - [Fault Tolerance and Durability](#fault-tolerance-and-durability)
   - [Aurora Replicas](#aurorar-replicas)
   - [Aurora Serverless](#aurora-serverless)
+- [Redshift](#redshift)
+  - [What is a Data Warehouse](#what-is-a-data-warehouse)
+  - [Introduction](#redshift-introduction)
+  - [Use Case](#redshift-use-case)
+  - [Columnar Storage](#columnar-storage)
+  - [Redshift Configuration](#redshift-configuration)
+  - [Redshift Processing](#redshift-processing)
+  - [Redshift Backups](#redshift-backups)
+  - [Redshift Billing](#redshift-billing)
+  - [Redshift Security](#redshift-security)
+  - [Redshift Availability](#redshift-availability)
 
 ---
 
@@ -1504,7 +1515,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Cloudfront Core Components
+#### _Cloudfront Core Components_
 
 - **Origin** - The location where all of the original files are located. Eg. S3, EC2, ELB or Route53.
 - **Edge Location** - The location where web content will be cached. This is different than an AWS Region or AZ.
@@ -1550,7 +1561,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ## Relational Database Service
 
-#### RDS Introduction
+#### _RDS Introduction_
 
 - A managed relational database service.
 - Supports multiple SQL engines, easy to scale, backup and secure.
@@ -1565,7 +1576,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### RDS Encryption
+#### _RDS Encryption_
 
 - You can turn on encryption at-rest for all RDS engines.
 - You may not be able to turn on encryption on older versions.
@@ -1574,7 +1585,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### RDS Backups
+#### _RDS Backups_
 
 - There are 2 backup solutions available:
 - **Automated Backups**
@@ -1591,7 +1602,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### RDS Restoring Backup
+#### _RDS Restoring Backup_
 
 - When recovering, AWS will take the most recent daily backup and apply transaction log data relevant to that day. This allows point-in-time recovery down to a second inside a retention period.
 - Backup is never restored overtop of an existing instance.
@@ -1600,7 +1611,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### RDS Multi-AZ
+#### _RDS Multi-AZ_
 
 - Multi-AZ deployement ensures database remains available if another AZ becomes unavailable.
 - Makes an exact copy of your database in another AZ. AWS automatically synchronizes changes to the standby copy.
@@ -1608,7 +1619,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### RDS Read Replicas
+#### _RDS Read Replicas_
 
 - Read-replicas allow you to run multiple copies of your database.
 - These copies only allows **reads** (no writes) and is intended to alleviate workload to your primary database to improve performance.
@@ -1622,7 +1633,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Multi-AZ vs Read Replicas
+#### _Multi-AZ vs Read Replicas_
 
 ![Multi-AZ vs Read Replicas](./images/multi-az_vs_read-replicas.png)
 
@@ -1630,7 +1641,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ## Aurora
 
-#### Aurora Introduction
+#### _Aurora Introduction_
 
 - Fully managed Postgres or MySQL compatible database designed by default to scale and fine-tuned to be really fast.
 - Combines the **speed** and **availability** of high-end databases with the **simplicity** and **cost-effectiveness** of open source databases.
@@ -1640,12 +1651,12 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Scaling with Aurora
+#### _Scaling with Aurora_
 
 - Starts with 10GB of storage and can scale in 10GB increments up to 64TB (autoscaling).
 - Computing resources can scale all the way up to 32 vCPUs and 244GB of memory.
 
-#### Availabilty with Aurora
+#### _Availabilty with Aurora_
 
 - A minimum of 3 availability zones that each contain 2 copies of your data at all times (6 total copies!).
 - You can lose up to 2 copies of your data without affecting **write** availabilty.
@@ -1657,7 +1668,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Fault Tolerance and Durability
+#### _Fault Tolerance and Durability_
 
 - Aurora Backup and Failover is handled **automatically**.
 - Snapshots of data can be shared with other AWS accounts.
@@ -1665,15 +1676,134 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Aurora Replicas
+#### _Aurora Replicas_
 
 ![Aurora Replicas](./images/aurora_replicas.png)
 
 ---
 
-#### Aurora Serverless
+#### _Aurora Serverless_
 
 - Aurora except the database will automatically start up, shut down and scale capacity up or down based on your application's needs.
 - Pay for database storage, database capacity and I/O your database consumes while it is active.
+
+---
+
+## Redshift
+
+- Fully managed Petabyte-size data warehouse.
+- You can analyze and run complex SQL queries on massive amounts of data.
+- Columnar store database - good for optimizing analytic query performance because it drastically reduces overall disk I/O requirements and amount of data you need to load from disk.
+
+---
+
+#### _What is a Data Warehouse?_
+
+- **Database Transaction** - a unit of work performed within a database management system eg. reads and writes.
+- **Database**
+  - Online Transaction Processing (OLTP)
+  - A database was built to store current transactions and enable fast access to specific transactions for ongoing business processes.
+  - For example, adding items to your shopping list (single source).
+  - Databases specialize in short transactions (small and simple queries) with an emphasis on writes.
+- **Data Warehouse**
+  - Online Analytical Processing (OLAP)
+  - A data warehouse is built to store large quantities of historical data and enable fast, complex queries across all the data.
+  - For example, generating reports (multiple resources).
+  - Data warehouses specialize in long transactions (long and complex queries) with an emphasis on reads.
+
+---
+
+#### _Redshift Introduction_
+
+- Pricing starts at \$0.25 / hour with no upfront costs or commitments.
+- Scales up to petabytes for \$1000 per terabyte per year.
+- Redshift is priced at 1/10th cost of similar services.
+- Uses OLAP.
+- Used primary for Business Intelligence.
+
+---
+
+#### _Redshift Use Case_
+
+- We want to continously COPY data from EMR, S3, and DynamoDB to power a custome Business Intelligence tool.
+- Using a third party library, we can connect and query Redshift for data.
+
+---
+
+#### _Columnar Storage_
+
+- Stores data together as columns instead of rows.
+- OLAP apps look at multiple records at the same time. You save memory because you fetch just the columns of data you need instead of whole roles.
+- Since data is stored via column, that means all data is of the same data-type allowing for easy compression.
+
+---
+
+#### _Redshift Configuration_
+
+- **Single Node** - nodes come in sizes of 160 GB. You can launch a single node to get started.
+- **Multi-Node** - cluster of nodes.
+  - **Leader Node** - manages client connections and recieves queries.
+  - **Compute Node** - stores data and perform queries (up to 128 nodes).
+- There are 2 types of Nodes.
+  - **Dense Compute** (dc) - best for high performance, but they have less storage.
+  - **Dense Storage** (ds) - clusters in which you have a lot of data.
+
+---
+
+#### _Redshift Compression_
+
+- There are multiple compression techniques used to achieve significant compression relative to traditional relational data stores.
+- Similar data is stored sequentially.
+- Does not require indexes or materialized views, which saves a lot of space.
+- When loading data to an empty table, data is sample and the most compression scheme is selected automatically.
+
+---
+
+#### _Redshift Processing_
+
+- RS uses **Massively Parallel Processing**.
+- Automatically distributes data and query loads across all nodes.
+- Lets you easily add new nodes to your data warehouse while still maintaining fast query performance.
+
+---
+
+#### _Redshift Backups_
+
+- Backups are enabled by default with a 1 day retention period. Retention period can be modified up to 35 days.
+- RS always attempts to maintain at least 3 copies of your data.
+  - original
+  - replica on compute nodes
+  - backup in S3
+- Can asynchronously replicate your snapshots to S3 in a different region.
+
+---
+
+#### _Redshift Billing_
+
+- Compute Node Hours
+  - The total number of hours ran across all nodes in the billing period.
+  - Billed for 1 unit per node per hour.
+  - Not charged for leader node hours, only compute nodes incur charges.
+- Backup
+  - Backups are stored on S3 and you are billed for the S3 storage fees.
+- Data Transfer
+  - Billed only for transfers within a VPN, not outside of it.
+
+---
+
+#### _Redshift Security_
+
+- Data-in-transit - encrypted using SSL
+- Data-at-rest - encrypted using AES-256 encryption
+- Database encryption can be applied using:
+  - KMS (Key Management Service) multi-tenant HSM
+  - CloudHSM single-tentant HSM
+
+---
+
+#### _Redshift Availability_
+
+- RS is single-AZ. To run in multi-AZ, you would have to run multiple RS Clusters in different AZs with same inputs.
+- Snapshots can be restored to a different AZ in the event an outage occurs.
 
 ---

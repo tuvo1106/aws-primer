@@ -141,12 +141,21 @@
   - [Introduction](#redshift-introduction)
   - [Use Case](#redshift-use-case)
   - [Columnar Storage](#columnar-storage)
-  - [Redshift Configuration](#redshift-configuration)
-  - [Redshift Processing](#redshift-processing)
-  - [Redshift Backups](#redshift-backups)
-  - [Redshift Billing](#redshift-billing)
-  - [Redshift Security](#redshift-security)
-  - [Redshift Availability](#redshift-availability)
+  - [Configuration](#redshift-configuration)
+  - [Processing](#redshift-processing)
+  - [Backups](#redshift-backups)
+  - [Billing](#redshift-billing)
+  - [Security](#redshift-security)
+  - [Availability](#redshift-availability)
+- [DynamoDB](#dynamodb)
+  - [Introduction](#dynamodb-introduction)
+  - [Table Structure](#table-structure)
+  - [DynamoDB Reads](#dynamodb-reads)
+- [CloudFormation](#cloudformation)
+  - [Introduction](#cloudformation-introduction)
+  - [Template Formats](#template-formats)
+  - [Template Anatomy](#template-anatomy)
+  - [Quick Starts](#quick-starts)
 
 ---
 
@@ -1805,5 +1814,82 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 - RS is single-AZ. To run in multi-AZ, you would have to run multiple RS Clusters in different AZs with same inputs.
 - Snapshots can be restored to a different AZ in the event an outage occurs.
+
+---
+
+## DynamoDB
+
+#### _DynamoDB Introduction_
+
+- NoSQL - a database which is not relational and does not use SQL to query the data for results.
+- Key/Value store - a form of data which has a key that references a value ad nothing more.
+- Document store - a form of data storage that has nested data structures.
+- DynamoDB is a key-value **and** document database (NoSQL) which can guarantee consistent reads and writes at any scale.
+- Features:
+  - Fully managed
+  - Multiregion
+  - Multimaster
+  - Durable
+  - Built-in security
+  - Backup and restore
+  - In-memory caching
+- Provides:
+  - Eventual Consistent Reads (default)
+  - Strongly Consistent Reads
+- All data is stored on SSD storage and is spread across 3 different regions.
+
+---
+
+#### _Table Structure_
+
+![DynamoDB Table Structure](images/dynamodb_table_structure.png)
+
+---
+
+#### _DynamoDB Reads_
+
+- When data needs to be updated, it has to write updates to all of its copies. It is possible for this data to be inconsistent if you area reading from a copy that has not been updated. You have the ability to choose the read consistency in DynamoDB to meet your needs.
+- **Eventual Consistent Reads** (default)
+  - Reads are fast but there is no gaurantee of consistency.
+  - All copies of data eventually become consistent within a second.
+- **Strongly Consistent Reads**
+  - When copies are being updated and you attempt to read, it will not return a result until all copies are consistent.
+  - You have a guarantee of consistency but the tradeoff is higher latency (slower reads).
+  - All copies of data will be consistent within a second.
+
+---
+
+## CloudFormation
+
+#### _CloudFormation Introduction_
+
+- **Infrastructure as Code** - the process of managing and provisioning computer data centers through machine-readable definition files (eg. YAML, JSON) rather than physical hardware configuration or interactive configuration tools.
+- Can be uploaded to S3 or directly if under 0.05 MB.
+- **NestedStacks** helps you break up your CF template into smaller reusable templates that can be composed into larger templates.
+
+---
+
+#### _Template Formats_
+
+- JSON, YAML (indent-based)
+
+---
+
+#### _Template Anatomy_
+
+![Template Anatomy](./images/template_anatomy.png)
+
+---
+
+#### _CloudFormation Introduction_
+
+- A templating language that defines AWS resources to be provisioned.
+- Used to automate the creation of resourcs via code.
+
+---
+
+#### _Quick Starts_
+
+- Quick Starts are a collection of pre-built CloudFormation templates.
 
 ---

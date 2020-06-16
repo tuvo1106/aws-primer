@@ -158,14 +158,19 @@
   - [Quick Starts](#quick-starts)
 - [CloudWatch](#cloudwatch)
   - [Introduction](#cloudwatch-introduction)
-  - [CW Logs](#cloudwatch-logs)
-  - [CW Metrics](#cloudwatch-metrics)
-  - [CW Events](#cloudwatch-events)
-  - [CW Alarms](#cloudwatch-alarms)
-  - [CW Dashboard](#cloudwatch-dashboard)
-  - [CW Availability](#cloudwatch-availability)
+  - [Logs](#cloudwatch-logs)
+  - [Metrics](#cloudwatch-metrics)
+  - [Events](#cloudwatch-events)
+  - [Alarms](#cloudwatch-alarms)
+  - [Dashboard](#cloudwatch-dashboard)
+  - [Availability](#cloudwatch-availability)
   - [Agent & Host Level Metrics](#agent-&-host-level-metrics)
-- []()
+- [CloudTrail](#cloudtrail)
+  - [Introduction](#cloudtrail-introduction)
+  - [CloudTrail Event History](#cloudtrail-event-history)
+  - [Trail Options](#trail-options)
+  - [CloudTrail to CloudWatch](#cloudtrail-to-cloudwatch)
+  - [Management vs Data Events](management-vs-data-events)
 
 ---
 
@@ -2002,4 +2007,52 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-### CloudTrail Introduction
+#### _CloudTrail Introduction_
+
+---
+
+- AWS CloudTrail is a service that enables goverance, compliance, operational auditing and risk auditing of your AWS account.
+- Logs API calls and actions between AWS services.
+- When you need to know who to blame.
+- Easily identify which users and accounts made the call to AWS:
+  - Where (Source IP address)
+  - When (Event time)
+  - Who (User, UserAgent)
+  - What (Region, Resource, Action)
+
+---
+
+#### _CloudTrail Event History_
+
+- CT is already logging by default and will collect logs for last 90 days via **Event History**.
+- If you need more than 90 days, you will need to create a **Trail**.
+- Trails are output to S3 and do not have a GUI like Event History. To analyze a Trail, you'd have to use **Amazon Athena**.
+
+---
+
+#### _Trail Options_
+
+- A Trail can be set to log all regions.
+- A Trail can be set across all accounts in an organization.
+- You can encrypt your logs using Server Side Encryption via Key Management System (SSE-KMS).
+- You can ensure the integrity of your logs to see if they have been tempered with by turning on Log File Validation.
+
+---
+
+#### _CloudTrail to CloudWatch_
+
+- CT can be set to deliver events to a CW log.
+
+---
+
+#### _Management vs Data Events_
+
+- Management Events - tracks management operations. Turned on by default. Can't be turned off.
+  - Configuring security (IAM AttachRolePolicy)
+  - Registering devices (EC2 CreateDefaultVPC)
+  - Configuring rules for routing data (EC2 CreateSubnet)
+  - Setting up logging (CloudTrail CreateTrail)
+- Data Events - tracks specific operations for specific AWS services. Data events are high volume logging and will resilt in additional charges. Turned off by default.
+  - The two services taht can be tracked are S3 and Lambda. It would track actions such as: GetObject, DeleteObject, PutObject.
+
+---

@@ -461,10 +461,122 @@ To do a Blue/Green deploy we will first need to create a clone of our EB environ
 4. The green environment should have the url of the blue environment
 5. Once you have confirmed that the green environment is using the blue url we can now terminate the blue environment using `eb terminate <name of blue environment>`
 
+#### Docker Single
+
+#### Single Docker Container with ECR
+
+0. Before we start, make sure to create an ECR Repository in the console which would look sometimg like `<your-account-number>.dkr.ecr.us-east-1.amazon.com/<add-your-project-name-here>`
+0.5 Also before we start, make sure to attach Permissions for the EC2 to have access to ECR
+  1. Go to the IAM console
+  2. Go to Roles
+  3. Go to EC2 Roles
+  4. Click *Attach Roles*
+  5. Look for **AmazonEC2ContainerRegistryReadOnly** and attach
+1.  Create a Dockerrun.aws.json with the command `docker build -t <name-of-project> .` This will create a Docker image
+2. Authenticate to ECR using `aws ecr get-login-password | docker login --username AWS --password-stdin <your-account-number>.dkr.ecr.us-east-1.amazon.com`. This will create a token for ECR (stored as `/home/ec2-user/.docker/config.json`
+3. Next we will find the docker image id with the command `docker images`
+4. Find the associated Docker image id with the repository you've created with the `docker build` command.
+5. Next add the tag to docker with `docker tag <image-id> <account-number>.dkr.ecr.us-east-1.amazon.com/<your=project>`
+6. Then run `docker push <account-number>.dkr.ecr.us-east-1.amazon.com/<your-project>` to push your Docker image to ECR
+7. Then create a new directory (e.g. <your-project>-external)
+8. Create within that create a json file called `Dockerrun.aws.json`
+An example of what a Dockerrun.aws.json might look like:
+```
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "<account-number>.dkr.ecr.us-east-1.amazon.com/<your-project>"
+  },
+  "Ports": [{
+    "ContainerPort": 8080,
+    "HostPort": 8080
+  }]
+}
+```
+9. Once you have your `Dockerrun.aws.json` you can go ahead and go through the steps of creating your environment/instance with Elastic Beanstalk as we have done before (eg. `eb init`, `eb create --single`, etc.)
+
 
  [back to top](#table-of-contents)
 
 ---
 
-## ECS
+## Elastic Container Service
+
+Fully-managed **container** orchestration service. 
+Highly secure, reliable, and scalable way to run containers./
+
+#### Components of ECS
+
+
+![ECS Components](./images/ebs_components.png)
+
+- Cluster
+  - Multiple EC2 instnances which will house the docker containers
+- Task Definition
+  - A JSON fole that defines the configuration of (up to 10) containers you want to run
+- Task
+  - Lauches containers defined in Task Definition. Tasks do not remain running once workload is complete
+- Service
+  - Ensures tasks remaining running
+- Container Agent
+  - Binary on each EC2 instnace which monitors, starts and stops them
+ 
+#### Creating an ECS Cluster
+
+Create a Cluster
+- Use Spot or On Demand
+- EC2 instance type
+- Number of Instances
+- EBS Storage Volume
+- EC2 can be Amazon Linux 2 or Amazon Linux 1
+- Choose a VPC or create new
+- Assign an IAM Role
+- Option to turn on CloudWatch Container Insights
+- *Choose key pair
+- EC2 Linux + Networking
+  - Cluster
+  - VPC
+  - Subnets
+  - Auto Scaling group with Linux AMI
+
+#### Task Definition JSON File Example
+
+Create new Task Definition
+- You can definte multiple containers within a task definition.
+- The Docker images can be provided either via ECR or an official docker repository eg. Docker Hub
+- You must have one essential container. Of this container fails or stops then all other containers will be stopped.
+- AWS had a wizard to create Task Definitions instead having to create a file by hand
+
+#### Elastic Container Registry
+
+![ECR](./images/ebs_elastic_container_registry.png)
+
+A full-managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker container images.
+
+#### Creating an ECS Service
+
+First start by creating an `ecsInstanceRole` by going to IAM
+1. Create a new Role for EC2 by selecting `Amazon Service` and `EC2`
+2. Select the `AmazonEC2ContainerServiceforEC2Role`
+3. Finish creating that Role
+4. Also go ahead and create an `ecsTaskExecutionRole` as well
+
+We will then create an ECS Cluster
+1. Go to the ECS service through the console.
+2. Create a Cluster (Careful not to select Fargate, which will not create a Cluster)
+3. It will spin up several services sich as an instance, security group, EC2 route, Auto scaling group, etc.
+4. Once created, create a new Task Definition through the menu on the left
+5. You will need to specify a Task Memory
+6. Make sure to add a container as well as the image repo from ECR
+7. Make sure to map the ports (Host port and Container port)
+8. Also make sure to attach a Task role and you should be good to go
+
+Once you have your Cluster let's create a Service
+1. Click the create button under the Service tab
+2. Make sure to select EC2 and go through the prompts
+
+---
+
+## Fargate
+
 

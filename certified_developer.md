@@ -32,7 +32,17 @@
   - [EB Config](#eb-config)
   - [Immutable Deployment](#immutable-deployment)
   - [Blue Green Deployment](#blue-green-deployment)
-
+  - [Docker Single](#docker-single)
+  - [Single Docker Container with ECR](#single-docker-container-with-ecr)
+  - [Elastic Container SEervice](#elastic-container-service)
+  - [Components of ECS](#components-of-ecs)
+  - [Creating an ECS Cluster](#creating-an-ecs-cluster)
+  - [Task Definition JSON file Example](#task-definition-json-file-example)
+  - [Elastic Container Registry](#elastic-container-registry)
+  - [Creating an ECS Service](#creating-an-ecs-service)
+- [Fargate](#fargate)
+  - [Fargate Tasks](#fargate-tasks)
+  - [Fargate vs Lambda](#fargate-vs-lambda)
 
 
 ---

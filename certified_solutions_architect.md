@@ -156,6 +156,16 @@
   - [Template Formats](#template-formats)
   - [Template Anatomy](#template-anatomy)
   - [Quick Starts](#quick-starts)
+- [CloudWatch](#cloudwatch)
+  - [Introduction](#cloudwatch-introduction)
+  - [CW Logs](#cloudwatch-logs)
+  - [CW Metrics](#cloudwatch-metrics)
+  - [CW Events](#cloudwatch-events)
+  - [CW Alarms](#cloudwatch-alarms)
+  - [CW Dashboard](#cloudwatch-dashboard)
+  - [CW Availability](#cloudwatch-availability)
+  - [Agent & Host Level Metrics](#agent-&-host-level-metrics)
+- []()
 
 ---
 
@@ -1893,3 +1903,103 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - Quick Starts are a collection of pre-built CloudFormation templates.
 
 ---
+
+## CloudWatch
+
+---
+
+#### _CloudWatch Introduction_
+
+- A collection of monitoring services for loggin, react and visualizing log data.
+- **CloudWatch Logs** - any custom log data, Memory usage, Rails logs, NGINX logs
+- **CloudWatch Metrics** - metrics that are based off of logs eg. Memory usage
+- **CloudWatch Events** - triggers an event based on conditions eg.
+- **CloudWatch Alarms** - triggers notifications based on metrics
+- **CloudWatch Dashboard** - create visualizations based on metrics
+
+---
+
+#### _CloudWatch Logs_
+
+- CW Logs are used to monitor, store and access your log files.
+- A **Log Group** is a collection of logs; log files must belong to a Log Group.
+- A Log in a Log Group is called a **Log Stream**.
+- By default, logs are kept indefinitely and never expire.
+- Most AWS services are integrated with CW Logs. Logging of services sometimes needs to be turned on or requires the IAM Permissions to write.
+
+---
+
+#### _CloudWatch Metrics_
+
+- Represents a time-ordered set of data points.
+- EC2 Per-Instance Metrics:
+  - CPUUtilization
+  - DiskReadOps
+  - DiskWriteOps
+  - DiskReadBytes
+  - DiskWriteBytes
+  - NetworkIn
+  - NetworkOut
+  - NetworkPacketsIn
+  - NetworkPacketsOut
+
+---
+
+#### _CloudWatch Events_
+
+- Trigger an event based on a condition or on schedule.
+- Event Source (How to trigger the event) -> Target (What to trigger).
+- Use case: CRON jobs.
+- You can create and publish your own custom metric using the AWS CLI or SDK.
+- Custom metric can be standard or high resolution:
+  - High resolution lets you track under 1 minute down to 1 second.
+
+---
+
+#### _CloudWatch Alarms_
+
+- Triggers a notification based on metrics which breach a defined threshold.
+- Use case: billing alarm.
+
+---
+
+#### _CloudWatch Dashboard_
+
+- Create custom dashboards from CW Metrics.
+
+---
+
+#### _CloudWatch Availability_
+
+- How often CW will collect and make available data.
+- Detailed monitoring is a paid servce.
+
+![CW Availability](./images/cw_availability.png)
+
+---
+
+#### _Agent & Host Level Metrics_
+
+- Some metrics you might think are tracked by default for EC2 instances are not and require the **CW Agent**.
+- The CW Agent is a script whcih can be installed via Systems Manager Run Command onto the target EC2 instance.
+- CW will track at the Host Level by default:
+  - CPU Usage
+  - Network Usage
+  - Disk Usage
+  - Status Checks
+    - Underlying Hypervisor status
+    - Underlying EC2 instance status
+- The following require the agent to get detailed metrics for:
+  - **Memory utilization**
+  - Disk utilization
+  - **Disk space utilization**
+  - Page file utilization
+  - Log collection
+
+---
+
+## CloudTrail
+
+---
+
+### CloudTrail Introduction

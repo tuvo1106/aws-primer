@@ -4,6 +4,35 @@
 
 - [FAQ](#faq)
 - [Exam Guide Overview](#exam-guide-overview)
+  - [Exam Breakdown](#exam-breakdown)
+  - [Recommended Whitepapers](#recommended-whitepapers)
+- [Elastic Beanstalk](#elastic_beanstalk)
+  - [Introduction](#introduction)
+  - [Supported Languages](#supported-languages)
+  - [Web vs Worker Environment](#web-vs-worker-environment)
+  - [Web Environments](#web-environments)
+  - [Deployment Policies](#deployment-policies)
+  - [All At Once Deployment](#all-at-once-deployment)
+  - [Rolling](#rolling)
+  - [Rolling with Additional Batch](#rolling-with-additional-batch)
+  - [Immutable](#immutable)
+  - [EB - Deployment Methods](#eb-deployment-methods)
+  - [In-Place vs Blue/Green Deployment](#in-place-vs-blue-green-deployment)
+  - [Configuration Files](#configuration-files)
+  - [Env Manifest](#env-manifest)
+  - [Linux Server Configuration](#linux-server-configuration)
+  - [EB CLI](#eb-cli)
+  - [Configuration RDS](#configuration-rds)
+  - [Elastic Beanstalk Cheat Sheet](#elastic-beanstalk-cheat-sheet)
+- [Elastic Beanstalk Follow Along](#elastic-beanstalk-follow-along)
+  - [Cloud9 Setup](#cloud9-setup)
+  - [Security Groups](#security-groups)
+  - [EB CLI Setup](#eb-cli-setup)
+  - [EB Init](#eb-init)
+  - [EB Config](#eb-config)
+  - [Immutable Deployment](#immutable-deployment)
+  - [Blue Green Deployment](#blue-green-deployment)
+
 
 
 ---
@@ -40,7 +69,7 @@
 - ~72% for a passing score
 - Valid for 3 years
   
-## Exam Guide
+## Exam Guide Overview
 
 #### Exam Breakdown
 
@@ -189,7 +218,7 @@ Rolling with Addtional Batch's ensure our capacity is never reduced. **This is i
 2. Deploy the updated version of the app on the new EC2 instances
 3. Point the ELB to the new ASG and delete the old ASG which will terminate the old EC2
 
-#### EB - Deployment Methods
+#### EB Deployment Methods
 
 
 | Method        | Impact of failed deployment | Deploy time | No downtime | No DNS change | Rollback process | Code deployed to instances
@@ -202,7 +231,7 @@ Rolling with Addtional Batch's ensure our capacity is never reduced. **This is i
 
 * times may vary
 
-#### In-Place vs Blue/Green Deployment
+#### In Place vs Blue Green Deployment
 
 *In-Place and Blue/Green Deployment **are not definitive in definition** and the context can change the scope of what they mean*
 
@@ -316,5 +345,238 @@ You run these two commands to install
 - With EB you can provide **Custom Images** which can improve provisioning times
 - If you let Elastic Beanstalk create the RDS instance, that means when you delete your environment it will delete the database. This setup is inteded for development and test environments
 - **Dockerrun.aws.json** is similar to an ECS Task Definition files and defines multi-container configuration
+
+
+[back to top](#table-of-contents)
+
+---
+
+## Elastic Beanstalk Follow Along
+
+#### Cloud9 Setup
+
+- Make sure you are in the right region!
+- Create a developer environment in Cloud9 through the AWS console
+
+#### Security Groups
+
+Once you have your web application we will need to open up the ports
+- By default Cloud9 have ports 8080, 8081, 8082 open
+1. Identify the MAC Address with `curl -s http://169.254.169.254/latest/meta-data/mac`
+2. Find the security group using `curl -s http://169.254.169.254/latest/meta-data/network/interfaces/macs/**yourMacId**/security-group-ids`
+3. Find your IP address by going to http://checkip.amazonaws.com/
+4. We will need the IP address to add to the cidr block
+5. Use the command `aws ec2 authorize-security-group-ingress --group-id **yourSecurityGroupID** --port 8080 --protocol tcp --cid **yourIP**/32`
+*the /32 at the end. 
+5. Use the command `aws ec2 authorize-security-group-ingress --group-id **yourSecurityGroupID** --port 8080 --protocol tcp --cidr **yourIP**/32`
+*The /32 at the end of the cidr block is important because it says only this IP address*
+6. Check that your Security Group has been edited `aws ec2 describe-security-groups --group-ids **yourSecurityGroupID**  --output text --filters Name=ip-permission.to-port,Values=8080`
+7. If the Security Group is not set nothing would show otherwise it should look something like this:
+```
+SECURITYGROUPS  Security group for AWS Cloud9 environment aws-cloud9-DevEnv-08e6543c08554c57a272f337df0f96df sg-0938552a4807d9570    aws-cloud9-DevEnv-08e6543c08554c57a272f337df0f96df-InstanceSecurityGroup-2AM4ALIQ5DHX        540908314583    vpc-fdd1c687
+IPPERMISSIONS   8080    tcp     8080
+IPRANGES        76.126.6.216/32
+IPPERMISSIONS   22      tcp     22
+IPRANGES        35.172.155.192/27
+IPRANGES        35.172.155.96/27
+IPPERMISSIONSEGRESS     -1
+IPRANGES        0.0.0.0/0
+TAGS    aws:cloud9:owner        AIDAX34FF37LSKQTQVJES
+TAGS    aws:cloudformation:stack-id     arn:aws:cloudformation:us-east-1:540908314583:stack/aws-cloud9-DevEnv-08e6543c08554c57a272f337df0f96df/1a523520-ac14-11ea-b406-0e706f74ed45
+TAGS    aws:cloudformation:logical-id   InstanceSecurityGroup
+TAGS    Name    aws-cloud9-DevEnv-08e6543c08554c57a272f337df0f96df
+TAGS    aws:cloudformation:stack-name   aws-cloud9-DevEnv-08e6543c08554c57a272f337df0f96df
+TAGS    aws:cloud9:environment  08e6543c08554c57a272f337df0f96df
+```
+8. Next find the public ip with the command `curl -s http://169.254.169.254/latest/meta-data/public-ipv4`
+9. Run your web application and check to see if it runs at the IP and port 8080 (eg. 54.165.37.183:8080)
+10. Add your project to a Git repo
+
+#### EB CLI Setup
+
+1. We will download the EB CLI following the directions here: https://github.com/aws/aws-elastic-beanstalk-cli-setup
+2. Make sure to add the eb cli to PATH given their recommended command `echo 'export PATH="/home/ec2-user/.ebcli-virtual-env/executables:$PATH"' >> ~/.bash_profile && source ~/.bash_profile` and `echo 'export PATH=/home/ec2-user/.pyenv/versions/3.7.2/bin:$PATH' >> /home/ec2-user/.bash_profile && source /home/ec2-user/.bash_profile` if you are using bash
+
+#### EB init
+
+Once you have the EB CLI installed
+1. Check to make sure you have the cli by using the command `eb`
+  - If you see a long list of possible commands, you have the cli
+2. To initialize the project use the command `eb init`
+  - You will find several prompts to help set up the elastic beanstalk environment
+
+#### EB Config
+
+Configurations of the EB environment depends on the type of environment and can be found in the **.ebextensions** directory. This is not created by `eb init` therefore you will have to create one yourself.
+1. Create the directory using `mkdir .exextensions`
+2. Go into the directory
+3. Create a config file
+Here is an example of what one might look like:
+```
+option_settings:
+    aws:elasticbeanstalk:application:environment:
+        PORT: 8081
+        NODE_ENV: production
+```
+
+#### EB Create
+
+We will now create our EB environment
+1. Run the `eb create --single` command
+  - The `--single` is important, otherwise EB will spin up ELB which costs money!
+2. It will prompt you with several options
+  - Environment Name
+  - DNS CNAME prefix
+  - Enable Spot Fleet requests
+3. The environment should be created as long as there are no errors in the config files
+4. Run `eb status` to check the health of the environment
+
+#### Immutable Deployment
+
+We will now try an immutable deploy
+1. go into **.ebextensions**
+2. create a new config file which should look something like this:
+```
+option_settings:
+    aws:elasticbeanstalk:command:
+        DeploymentPolicy: Immutable
+        HealthCheckSuccessThreshold: Warning
+        IgnoreHealthCheck: true
+        Timeout: "600"
+```
+3. Make sure to add the changes to git (CodeCommit for this example) and push
+4. Then to deploy run `eb deploy`
+
+To remove the immutable deploy settings, simply delete the config file in **.ebextensions** and push your changes
+
+#### Blue Green Deployment
+
+To do a Blue/Green deploy we will first need to create a clone of our EB environment. This can be done easily on the AWS concole but we will do this through the command line.
+*We will refer to the original environment as blue and the cloned environment as green*
+1. First run `eb clone` which will clone your current environment to create your green environment. There will be several prompts
+  - Name for the new environment
+  - DNS CNAME prefix
+2. Once the green environment is created you can deploy to that environment using `eb deploy <name of the green environment>`
+3. Next we will swap the urls so that the traffic is redirected to the cloned environment using `eb swap <name if blue environment --destination_name <name of green environment>`
+4. The green environment should have the url of the blue environment
+5. Once you have confirmed that the green environment is using the blue url we can now terminate the blue environment using `eb terminate <name of blue environment>`
+
+#### Docker Single
+
+#### Single Docker Container with ECR
+
+0. Before we start, make sure to create an ECR Repository in the console which would look sometimg like `<your-account-number>.dkr.ecr.us-east-1.amazon.com/<add-your-project-name-here>`
+0.5 Also before we start, make sure to attach Permissions for the EC2 to have access to ECR
+  1. Go to the IAM console
+  2. Go to Roles
+  3. Go to EC2 Roles
+  4. Click *Attach Roles*
+  5. Look for **AmazonEC2ContainerRegistryReadOnly** and attach
+1.  Create a Dockerrun.aws.json with the command `docker build -t <name-of-project> .` This will create a Docker image
+2. Authenticate to ECR using `aws ecr get-login-password | docker login --username AWS --password-stdin <your-account-number>.dkr.ecr.us-east-1.amazon.com`. This will create a token for ECR (stored as `/home/ec2-user/.docker/config.json`
+3. Next we will find the docker image id with the command `docker images`
+4. Find the associated Docker image id with the repository you've created with the `docker build` command.
+5. Next add the tag to docker with `docker tag <image-id> <account-number>.dkr.ecr.us-east-1.amazon.com/<your=project>`
+6. Then run `docker push <account-number>.dkr.ecr.us-east-1.amazon.com/<your-project>` to push your Docker image to ECR
+7. Then create a new directory (e.g. <your-project>-external)
+8. Create within that create a json file called `Dockerrun.aws.json`
+An example of what a Dockerrun.aws.json might look like:
+```
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "<account-number>.dkr.ecr.us-east-1.amazon.com/<your-project>"
+  },
+  "Ports": [{
+    "ContainerPort": 8080,
+    "HostPort": 8080
+  }]
+}
+```
+9. Once you have your `Dockerrun.aws.json` you can go ahead and go through the steps of creating your environment/instance with Elastic Beanstalk as we have done before (eg. `eb init`, `eb create --single`, etc.)
+
+
+ [back to top](#table-of-contents)
+
+---
+
+## Elastic Container Service
+
+Fully-managed **container** orchestration service. 
+Highly secure, reliable, and scalable way to run containers./
+
+#### Components of ECS
+
+
+![ECS Components](./images/ebs_components.png)
+
+- Cluster
+  - Multiple EC2 instnances which will house the docker containers
+- Task Definition
+  - A JSON fole that defines the configuration of (up to 10) containers you want to run
+- Task
+  - Lauches containers defined in Task Definition. Tasks do not remain running once workload is complete
+- Service
+  - Ensures tasks remaining running
+- Container Agent
+  - Binary on each EC2 instnace which monitors, starts and stops them
+ 
+#### Creating an ECS Cluster
+
+Create a Cluster
+- Use Spot or On Demand
+- EC2 instance type
+- Number of Instances
+- EBS Storage Volume
+- EC2 can be Amazon Linux 2 or Amazon Linux 1
+- Choose a VPC or create new
+- Assign an IAM Role
+- Option to turn on CloudWatch Container Insights
+- *Choose key pair
+- EC2 Linux + Networking
+  - Cluster
+  - VPC
+  - Subnets
+  - Auto Scaling group with Linux AMI
+
+#### Task Definition JSON File Example
+
+Create new Task Definition
+- You can definte multiple containers within a task definition.
+- The Docker images can be provided either via ECR or an official docker repository eg. Docker Hub
+- You must have one essential container. Of this container fails or stops then all other containers will be stopped.
+- AWS had a wizard to create Task Definitions instead having to create a file by hand
+
+#### Elastic Container Registry
+
+![ECR](./images/ebs_elastic_container_registry.png)
+
+A full-managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker container images.
+
+#### Creating an ECS Service
+
+First start by creating an `ecsInstanceRole` by going to IAM
+1. Create a new Role for EC2 by selecting `Amazon Service` and `EC2`
+2. Select the `AmazonEC2ContainerServiceforEC2Role`
+3. Finish creating that Role
+4. Also go ahead and create an `ecsTaskExecutionRole` as well
+
+We will then create an ECS Cluster
+1. Go to the ECS service through the console.
+2. Create a Cluster (Careful not to select Fargate, which will not create a Cluster)
+3. It will spin up several services sich as an instance, security group, EC2 route, Auto scaling group, etc.
+4. Once created, create a new Task Definition through the menu on the left
+5. You will need to specify a Task Memory
+6. Make sure to add a container as well as the image repo from ECR
+7. Make sure to map the ports (Host port and Container port)
+8. Also make sure to attach a Task role and you should be good to go
+
+Once you have your Cluster let's create a Service
+1. Click the create button under the Service tab
+2. Make sure to select EC2 and go through the prompts
+
+---
+
+## Fargate
 
 

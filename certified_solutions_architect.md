@@ -132,9 +132,9 @@
 - [Aurora](#aurora)
   - [Introduction](#aurora-introduction)
   - [Scaling With Aurora](#scaling-with-aurora)
-  - [Availabilty With Aurora](#availabilty-with-aurora)
+  - [Availability With Aurora](#availability-with-aurora)
   - [Fault Tolerance and Durability](#fault-tolerance-and-durability)
-  - [Aurora Replicas](#aurorar-replicas)
+  - [Aurora Replicas](#aurora-replicas)
   - [Aurora Serverless](#aurora-serverless)
 - [Redshift](#redshift)
   - [What is a Data Warehouse](#what-is-a-data-warehouse)
@@ -176,6 +176,8 @@
   - [Use Cases](#lambda-use-cases)
   - [Triggers](#lambda-triggers)
   - [Pricing](#lambda-pricing)
+  - [Interface](#lambda-interface)
+  - [Lambda Defaults and Limits](#lambda-defaults-and-limits)
 
 ---
 
@@ -191,7 +193,7 @@
 
 #### Who is the Solution Architect Associate for?
 
-- Architectue Diagrams
+- Architecture Diagrams
 - Constant Learning
 - Pricing
 - Security
@@ -233,7 +235,7 @@
 - Design resilient architectures - 34%
   - Choose reliable/resilient storage.
   - Determine how to design decoupling mechanisms using AWS services.
-  - Determine how to design a multi-tier achitectural.
+  - Determine how to design a multi-tier architectural.
     solution.
   - Determine how to design high availability and/or fault tolerant architecture.
 - Design performant architectures - 24%
@@ -252,7 +254,7 @@
 
 Whitepapers
 
-- AWS Well-Achitected Framework.
+- AWS Well-Architected Framework.
 - Architecting for the Cloud: AWS Best Practices.
 
 ---
@@ -263,7 +265,7 @@ Whitepapers
 
 - Object-based storage service.
 - Serverless storage in the cloud.
-- Don't worry about filesystems or disk space.
+- Don't worry about file systems or disk space.
 
 **What is Object Storage (Object-based Storage)?**
 
@@ -272,7 +274,7 @@ Whitepapers
   - block storage - manages data as blocks within sectors and tracks.
 
 S3 provides you with unlimited storage. You do not need to think about the underlying infrastructure.
-The S3 console provides an interface for you to uploaad and access your data.
+The S3 console provides an interface for you to upload and access your data.
 
 #### _S3 Object_
 
@@ -284,7 +286,7 @@ Objects may consist of:
 - Version ID - when versioning available, the version of object.
 - Metadata - additional information attached to the object.
 
-You can sotre data from _0 Bytes_ to _5 Terabytes_ in size.
+You can store data from _0 Bytes_ to _5 Terabytes_ in size.
 
 #### _S3 Bucket_
 
@@ -295,7 +297,7 @@ S3 is a a universal namespace so bucket names must be unique (think like having 
 
 #### _Storage Classes_
 
-Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
+Trade Retrieval Time, Accessibility and Durability for Cheaper Storage.
 
 ```
 11 9's = 99.99999999999
@@ -314,7 +316,7 @@ Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
 **S3 Guarantees**
 
 - Platform is built for 99.99% availability.
-- Amazon gaurantees 99.9% availability.
+- Amazon guarantees 99.9% availability.
 - Amazon guarantees 11 9's of durability.
 
 ---
@@ -383,7 +385,7 @@ Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
 #### _S3 Lifecycle Management_
 
 - Automate the process of moving objects to different Storage classes or deleting objects all together.
-- Can be used togethe with _versioning_.
+- Can be used together with _versioning_.
 - Can be applied to both _current_ and _previous_ versions.
 
 ---
@@ -393,13 +395,13 @@ Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
 - Fast and secure transfer of files _over long distances_ between your end users and an S3 bucket.
 - Utilizes _CloudFront's_ distributed Edge Locations.
 - Instead of uploading to your bucket, users use a _distinct URL_ for an Edge Location.
-- As data arrives at the Edge Location it is automatically routed to S3 over a specially optimized network path(Amazon's backbone netowrk).
+- As data arrives at the Edge Location it is automatically routed to S3 over a specially optimized network path(Amazon's backbone network).
 
 ---
 
 #### _Presigned URLs_
 
-- Generate a URL which provides you temporary access to an object to either upload or download object data. Presigned URLs are commoonly used to _provide access to private objects_. You can use AWS CLI or AWS SDK to generate Presigned URLs.
+- Generate a URL which provides you temporary access to an object to either upload or download object data. Presigned URLs are commonly used to _provide access to private objects_. You can use AWS CLI or AWS SDK to generate Presigned URLs.
 - For example, you have a web app which needs to allow users to download files from a password-protected area. Your web app generates a presigned URL which expires after 5 seconds. The user downloads the file.
 
 ---
@@ -447,7 +449,7 @@ Similar to Snowball but with _more storage_ and with _local processing_.
 
 Snowball Edge features and limitations:
 
-- LCD diplay (shipping information and other functionality).
+- LCD display (shipping information and other functionality).
 - Can undertake local processing and edge-computing workloads.
 - Can use in a cluster in groups of 5 to 10 devices.
 - Three options for device configurations:
@@ -464,7 +466,7 @@ Snowball Edge comes in 2 sizes:
 
 #### _Snowmobile_
 
-A _45-foot long_ ruggedized _shipping container_, pulled by a _semi-trailer truck_.
+A _45-foot long_ rugged _shipping container_, pulled by a _semi-trailer truck_.
 Transfer up to _100PB_ per Snowmobile, exabyte-scale migration.
 
 AWS personnel will help you connect your network to the snowmobile and when data transfer is complete, they'll drive it back to AWS to import into S3 or Glacier.
@@ -538,7 +540,7 @@ AWS has a default VPC in every region so you can immediately deploy instances.
 #### _Default Everywhere IP_
 
 - 0.0.0.0/0 is also known as default.
-- It represents all possile IP addresses.
+- It represents all possible IP addresses.
 - When we specify 0.0.0.0/0 in our route table for IGW we are allowing internet access.
 - When we specify 0.0.0.0/0 in our security groups inbound rules we are allowing all traffic from internet access our public resources.
 - When you see 0.0.0.0/0, just think of giving access from anywhere on the internet.
@@ -593,7 +595,7 @@ System Manager's Sessions Manager replaces the need for Bastions.
 AWS Direct Connect is the AWS solution for establishing dedicated network connections from on-premises locations to AWS.
 
 - Very fast network (lower bandwidth 50M - 500M or higher bandwidth (1GB or 10GB))
-- Helps reduce network costs and increase bandwich thoughput (great for high traffic networks)
+- Helps reduce network costs and increase bandwidth throughput (great for high traffic networks)
 - Provides a more consistent network experience than a typical internet-based connection (reliable and secure)
 
 ---
@@ -604,11 +606,11 @@ Think of a secret tunnel where you don't have to leave the AWS network.
 
 VPC Endpoints allow you to _privately connect your VPC to other AWS services_.
 
-- Eliminates the need for an Intnet Gateway, NAT device, VPN connection, or AWS Direct Connect connections.
+- Eliminates the need for an Internet Gateway, NAT device, VPN connection, or AWS Direct Connect connections.
 - Instances in the VPC do not require a public IP address to communicate with service resources.
 - Traffic between your VPC and other services _does not leave the AWS network_.
 - Horizontally scaled, redundant and highly available VPC component.
-- Allows secure communication between instances and services - without adding availaility risks or bandwidth constraints on your traffic.
+- Allows secure communication between instances and services - without adding availability risks or bandwidth constraints on your traffic.
 
 There are 2 Types of VPC Endpoints:
 
@@ -647,7 +649,7 @@ Flow Logs can be created for:
 - Subnets
 - Network Interface
 
-All log data is stored and accesible using Amazon CloudWatch Logs or S3.
+All log data is stored and accessible using Amazon CloudWatch Logs or S3.
 
 ---
 
@@ -740,7 +742,7 @@ NAT Gateways is a managed service which launches redundant instances within the 
 - IAM is a universal system (applied to all regions at the same time). IAM is a free service.
 - A root account is the account initially created when AWS is set up.
 - New IAM accounts have no permissions by default until granted.
-- New users get assigned an Access key ID and Secret when first created when you give them programattic access.
+- New users get assigned an Access key ID and Secret when first created when you give them programmatic access.
 - Access keys are only used for CLI and SDK (cannot access console).
 - Always set up MFA for Root Accounts.
 
@@ -748,7 +750,7 @@ NAT Gateways is a managed service which launches redundant instances within the 
 
 #### _IAM Core Components_
 
-- Users - End users who log into the console or interact with AWS resource programatically
+- Users - End users who log into the console or interact with AWS resource programmatically
 - Groups - Group up your Users so they share permission levels of the group eg. Administrators, Develops, Auditors
 - Roles - Associate permissions to a Role and then assign this to Users or Groups
 - Policies - JSON documents which grant permissions for a specific user, group or role to access services. Policies are attached to IAM Identities.
@@ -784,7 +786,7 @@ In IAM, you can set a Password Policy. To set the minimum requirements of a pass
 
 #### _Programmatic Access Keys_
 
-Access keys allow users to interact with AWS service programatically via the AWS CLI or AWS SDK.
+Access keys allow users to interact with AWS service programmatically via the AWS CLI or AWS SDK.
 
 You're allowed two Access keys per user.
 
@@ -813,7 +815,7 @@ You're allowed two Access keys per user.
 
 #### _Web Identity Federation and IpD_
 
-- **Web Identity Federation** - to exchange identity and security information betwen an identity provider (IdP) and an application.
+- **Web Identity Federation** - to exchange identity and security information between an identity provider (IdP) and an application.
 - **Identity Provider** - a trusted provider of your user identity that lets you use authenticate to access other services. IdP could be: Facebook, Amazon, Google, Twitter, Github, LinkedIn.
 - **Types of Identity Providers** - the technology that is behind the IdP: Security Assertion Markup Language (SAML), Single Sign On (SSO), Oauth (OIDC)
 
@@ -828,7 +830,7 @@ You're allowed two Access keys per user.
 - Account confirmation
 - Allows users to sign-in directly to the User Pool, or using Web Identity Federation.
 - Uses AWS Cognito as the identity broker between AWS and the identity provider.
-- Sucessful user authentication generates a JWT.
+- Successful user authentication generates a JWT.
 - User Pools can be thought of as the account to access the system.
 
 ---
@@ -882,19 +884,19 @@ You have to enable _Programmatic Access_.
 ## DNS
 
 - Domain Name System
-- The phonebook of the internet.
+- The phone book of the internet.
 - DNS translates domain names to IP addresses so browsers can find internet resources.
 
 #### _IP (Internet Protocol)_
 
-- IP Addresses are what uniquely identifies each computer on a network, and allows communication between them using the Ineternet Protocol.
+- IP Addresses are what uniquely identifies each computer on a network, and allows communication between them using the Internet Protocol.
 - IPv4
   - Example: 52.216.8.4.
   - Address space is 32 bits with up to 4,294,967,296 available addresses (we are running out).
 - IPv6
   - Example: 2001:0db8:95a3:0000:0000:8a2e:0370:7334.
   - Address space is 128 bits with up to 340 undeceillion potential addresses (1 + 36 zeroes).
-  - Invented to solve available addresss limitations of IPv4.
+  - Invented to solve available address limitations of IPv4.
 
 ---
 
@@ -963,8 +965,8 @@ You have to enable _Programmatic Access_.
   - register and domain domains.
   - create various records set on a domain.
   - Implement complex traffic flows eg. blue/green deploy, failovers.
-  - Continiously monitor record via health checks.
-  - resolve VPCs outisde of AWS.
+  - Continuously monitor record via health checks.
+  - resolve VPCs outside of AWS.
 
 ---
 
@@ -1211,7 +1213,7 @@ Combine metadata with userdata scripts to perform all sorts of advanced AWS stag
 
 #### _Marketplace_
 
-AWS Marketplace is a curated digital catalogue with thousands of software listings from independen software vendors.
+AWS Marketplace is a curated digital catalogue with thousands of software listings from independent software vendors.
 
 - Easily find, buy, test and deploy software that already runs on AWS.
 - The product can be free to use or can have associated charge.
@@ -1286,7 +1288,7 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 - **Scaling out**: adding instances; **Scaling in**: removing instances.
 - Target Tracking - maintains a specific metric at a target value.
   - eg. If Average CPU Utilization exceeds 75%, then add another server.
-- Simple Scaling - scales when an alarm is breached (not reccomended).
+- Simple Scaling - scales when an alarm is breached (not recommended).
 - Scaling with steps - scales when an alarm is breached, can escalate based on alarm value changing.
 
 ---
@@ -1373,7 +1375,7 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 
 #### _Sticky Sessions_
 
-- Sticky Sessions is an advanced load balancing method that allows you to bind a user's session to a specific EC2 isntance.
+- Sticky Sessions is an advanced load balancing method that allows you to bind a user's session to a specific EC2 instance.
 - Ensures all requests from that session are sent to the same instance.
 - Typically utilized with CLB.
 - Can be enabled for ALB though it cna only be set on a Target Group, not EC2 instances.
@@ -1455,7 +1457,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - There are 5 Types of EBS Storage:
   - General purpose (SSD) - gp2 - for general usage without specific requirements
   - Provisioned IOPS (SSD) - io1 - when you require really fast input and output
-  - Throughput Optimized HDD - st1 - magnetic drive optimised for quick throughput
+  - Throughput Optimized HDD - st1 - magnetic drive optimized for quick throughput
   - Cold HDD - sc1 - lowest cost HDD for infrequently accessed workloads
   - EBS Magnetic - standard - previous generation HDD
 
@@ -1482,7 +1484,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 #### _Magnetic Tapes_
 
-- A large reel of magnetic tape. A tape drive is used to write data to the tapel. Medium and large-sized data centers deploy both tape and disk formats. They normally come in the form of cassettes. Magnetic is very cheap to produce and can store considerable amount of fata.
+- A large reel of magnetic tape. A tape drive is used to write data to the tape. Medium and large-sized data centers deploy both tape and disk formats. They normally come in the form of cassettes. Magnetic is very cheap to produce and can store considerable amount of data.
 - Durable for decades.
 
 ---
@@ -1525,7 +1527,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
     - Can start and stop instances.
     - Data will persist if you reboot your system.
   - Ideal for when you want data to persist. In most cases, you'll want EBS backed volume.
-- Instance Store Volumes (Ephermeral)
+- Instance Store Volumes (Ephemeral)
   - A _temporary_ storage type located on disks that are physically attached to a host machine.
   - An ISV is created from a template stored in S3.
   - It cannot stop instances; can only terminate.
@@ -1561,7 +1563,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - **Behaviors** - Redirect to HTTPS, Restrict HTTP Methods, Restrict Viewer Access, Set TTLs.
 - **Invalidations** - You can manually invalidate cache on specific files via Invalidations.
 - **Error Pages** - You can serve up custom error pages eg. 404.
-- **Restrictions** - You can use Geo Restricton to blacklist or whitelist specific countries.
+- **Restrictions** - You can use Geo Restriction to blacklist or whitelist specific countries.
 
 ---
 
@@ -1569,7 +1571,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 - We use Lambda@Edge functions to **override the behavior** of requests and responses.
 - 4 types:
-  - Viewer request - When CF recieves a request from a viewer.
+  - Viewer request - When CF receives a request from a viewer.
   - Origin request - Before CF forwards a request to the origin.
   - Origin response - When CF receives a response from the origin.
   - Viewer response - Before CF returns the response to the viewer.
@@ -1642,7 +1644,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 #### _RDS Multi-AZ_
 
-- Multi-AZ deployement ensures database remains available if another AZ becomes unavailable.
+- Multi-AZ deployment ensures database remains available if another AZ becomes unavailable.
 - Makes an exact copy of your database in another AZ. AWS automatically synchronizes changes to the standby copy.
 - **Automatic Failover Protection** - if one AZ goes down, failover will occur and standby slave will be promoted to master.
 
@@ -1657,7 +1659,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - You can have up to 5 replicas of a database.
 - Each Read Replica will have its own DNS Endpoint.
 - You can Multi-AZ replicas, replicas in other regions, or even replicas or other Read Replicas.
-- Replicas can be promoted to their own datbase, but this breaks replication.
+- Replicas can be promoted to their own database, but this breaks replication.
 - No automatic failover if primary copy fails; you must manually update URLs to point at copy.
 
 ---
@@ -1685,15 +1687,15 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - Starts with 10GB of storage and can scale in 10GB increments up to 64TB (autoscaling).
 - Computing resources can scale all the way up to 32 vCPUs and 244GB of memory.
 
-#### _Availabilty with Aurora_
+#### _Availability with Aurora_
 
 - A minimum of 3 availability zones that each contain 2 copies of your data at all times (6 total copies!).
-- You can lose up to 2 copies of your data without affecting **write** availabilty.
-- You can lose up to 3 copies of your data without affecting **read** availabilty.
+- You can lose up to 2 copies of your data without affecting **write** availability.
+- You can lose up to 3 copies of your data without affecting **read** availability.
 - Aurora is allowed up to 15 replicas.
 - Aurora can span multiple regions via Aurora Global Database.
 
-![aurora_availabilty](./images/aurora_availabilty.png)
+![aurora_availability](./images/aurora_availability.png)
 
 ---
 
@@ -1754,7 +1756,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 #### _Redshift Use Case_
 
-- We want to continously COPY data from EMR, S3, and DynamoDB to power a custome Business Intelligence tool.
+- We want to continuously COPY data from EMR, S3, and DynamoDB to power a custom Business Intelligence tool.
 - Using a third party library, we can connect and query Redshift for data.
 
 ---
@@ -1771,7 +1773,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 - **Single Node** - nodes come in sizes of 160 GB. You can launch a single node to get started.
 - **Multi-Node** - cluster of nodes.
-  - **Leader Node** - manages client connections and recieves queries.
+  - **Leader Node** - manages client connections and receives queries.
   - **Compute Node** - stores data and perform queries (up to 128 nodes).
 - There are 2 types of Nodes.
   - **Dense Compute** (dc) - best for high performance, but they have less storage.
@@ -1826,7 +1828,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - Data-at-rest - encrypted using AES-256 encryption
 - Database encryption can be applied using:
   - KMS (Key Management Service) multi-tenant HSM
-  - CloudHSM single-tentant HSM
+  - CloudHSM single-tenant HSM
 
 ---
 
@@ -1870,7 +1872,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 - When data needs to be updated, it has to write updates to all of its copies. It is possible for this data to be inconsistent if you area reading from a copy that has not been updated. You have the ability to choose the read consistency in DynamoDB to meet your needs.
 - **Eventual Consistent Reads** (default)
-  - Reads are fast but there is no gaurantee of consistency.
+  - Reads are fast but there is no guarantee of consistency.
   - All copies of data eventually become consistent within a second.
 - **Strongly Consistent Reads**
   - When copies are being updated and you attempt to read, it will not return a result until all copies are consistent.
@@ -1904,7 +1906,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 #### _CloudFormation Introduction_
 
 - A templating language that defines AWS resources to be provisioned.
-- Used to automate the creation of resourcs via code.
+- Used to automate the creation of resources via code.
 
 ---
 
@@ -1920,7 +1922,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 #### _CloudWatch Introduction_
 
-- A collection of monitoring services for loggin, react and visualizing log data.
+- A collection of monitoring services for logging, react and visualizing log data.
 - **CloudWatch Logs** - any custom log data, Memory usage, Rails logs, NGINX logs
 - **CloudWatch Metrics** - metrics that are based off of logs eg. Memory usage
 - **CloudWatch Events** - triggers an event based on conditions eg.
@@ -1982,7 +1984,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 #### _CloudWatch Availability_
 
 - How often CW will collect and make available data.
-- Detailed monitoring is a paid servce.
+- Detailed monitoring is a paid service.
 
 ![CW Availability](./images/cw_availability.png)
 
@@ -1991,7 +1993,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 #### _Agent & Host Level Metrics_
 
 - Some metrics you might think are tracked by default for EC2 instances are not and require the **CW Agent**.
-- The CW Agent is a script whcih can be installed via Systems Manager Run Command onto the target EC2 instance.
+- The CW Agent is a script which can be installed via Systems Manager Run Command onto the target EC2 instance.
 - CW will track at the Host Level by default:
   - CPU Usage
   - Network Usage
@@ -2016,7 +2018,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-- AWS CloudTrail is a service that enables goverance, compliance, operational auditing and risk auditing of your AWS account.
+- AWS CloudTrail is a service that enables governance, compliance, operational auditing and risk auditing of your AWS account.
 - Logs API calls and actions between AWS services.
 - When you need to know who to blame.
 - Easily identify which users and accounts made the call to AWS:
@@ -2057,8 +2059,8 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
   - Registering devices (EC2 CreateDefaultVPC)
   - Configuring rules for routing data (EC2 CreateSubnet)
   - Setting up logging (CloudTrail CreateTrail)
-- Data Events - tracks specific operations for specific AWS services. Data events are high volume logging and will resilt in additional charges. Turned off by default.
-  - The two services taht can be tracked are S3 and Lambda. It would track actions such as: GetObject, DeleteObject, PutObject.
+- Data Events - tracks specific operations for specific AWS services. Data events are high volume logging and will result in additional charges. Turned off by default.
+  - The two services that can be tracked are S3 and Lambda. It would track actions such as: GetObject, DeleteObject, PutObject.
 
 ---
 
@@ -2081,7 +2083,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 #### Lambda Use Cases
 
 - Lambda is commonly used to **glue different services together** so the use cases are endless.
-- Processing Thumbnails, Contant Email Form
+- Processing Thumbnails, Contact Email Form
 
 ![Lambda Use Cases](./images/lambda_use_cases.png)
 
@@ -2093,7 +2095,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Lamba Pricing
+#### Lambda Pricing
 
 - First million requests per month are free.
 - Thereafter, \$0.20 per additional 1 million requests.
@@ -2101,5 +2103,33 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - Thereafter, \$0.00000166667 for every GB second.
 - This price will vary on the amount of memory you allocate.
 - Eg. 128MB memory X 30M executions X 200ms run time per invocation = \$5.83.
+
+---
+
+#### Lambda Interface
+
+![Lambda Interface](./images/lambda_interface.png)
+
+---
+
+#### Lambda Defaults and Limits
+
+- By default, you can have 1000 Lambda running concurrently (ask AWS support for limit increase).
+- `/tmp` directory can contain up to 500MB.
+- By default, Lambda runs in **No VPC**.
+- You can set them in your own VPC, but your lambda will lose internet access.
+- You can set the timeout to be a maximum of 15 minutes.
+- Memory can be set between 128MB to a maximum of 3008MB at an increment of 64 MB.
+
+---
+
+#### Lambda Cold Starts
+
+- AWS has servers preconfigured for your runtime environment.
+- When Lambda is invoked, these servers need to be turned on and your code needs to be copied over.
+- During that time, there will be a delay which is called a **Cold Start**.
+- If the same Lambda is invoked and the server is still running, the server is not called a **Warm Server**.
+- Serverless functions are cheap but everything comes with a tradeoff. Cold starts can cause delays in UX. If your web-application relies on being very responsive, you will want to reconsider serverless functions.
+- There are strategies around Cold Starts such as Pre-Warming which keep servers continuously running.
 
 ---

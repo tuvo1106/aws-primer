@@ -180,13 +180,25 @@
   - [Defaults and Limits](#lambda-defaults-and-limits)
   - [Cold Starts](#lambda-cold-starts)
 - [Simple Queue Service](#simple-queue-service)
-  - [SQS Introduction](#sqs-introduction)
+  - [Introduction](#sqs-introduction)
   - [What is a Queuing System?](#what-is-a-queuing-system)
   - [Use Case](#sqs-use-case)
   - [Limits](#sqs-limits)
   - [Queue Types](#queue-types)
   - [Visibility Timeout](#sqs-visibility-timeout)
   - [Short vs Long Polling](#sqs-short-vs-long-polling)
+- [Simple Notification System](#simple-notification-system)
+  - [SNS Introduction](#sns-introduction)
+  - [SNS Topics](#sns-topics)
+  - [SNS Subscriptions](#sns-subscriptions)
+  - [Application as a Subscriber](#application-as-a-subscriber)
+- [Elasticache](#elasticache)
+  - [Elasticache Introduction](#elasticache-introduction)
+  - [What is In-Memory Data Store?](#what-is-in-memory-data-store)
+  - [Caching Comparison](#caching-comparison)
+- [High Availability](#high-availability)
+  - [Introduction](#ha-introduction)
+  - [Scale Up vs Scale Out](#scale-up-vs-scale-out)
 
 ---
 
@@ -1927,8 +1939,6 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ## CloudWatch
 
----
-
 #### _CloudWatch Introduction_
 
 - A collection of monitoring services for logging, react and visualizing log data.
@@ -2021,8 +2031,6 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ## CloudTrail
 
----
-
 #### _CloudTrail Introduction_
 
 ---
@@ -2074,8 +2082,6 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 ---
 
 ## Lambda
-
----
 
 #### _Lambda Introduction_
 
@@ -2145,8 +2151,6 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ## Simple Queue Service
 
----
-
 #### _SQS Introduction_
 
 - Fully managed queuing service that enables you to decouple and scale microservices, distributed systems and serverless applications.
@@ -2157,7 +2161,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-### _What is a Queuing System?_
+#### _What is a Queuing System?_
 
 - What is a Message System?
   - Used to provide asynchronous communication and decouple processes via messages/events from a sender and a receiver (producer and consumer).
@@ -2224,5 +2228,114 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - Long polling waits until message arrives in the queue, or the long poll timeout expires.
 - Using long polling will reduce operational costs because you can reduce the number of empty calls.
 - In most use-cases, you want to use Long Polling.
+
+---
+
+## Simple Notification System
+
+#### _SNS Introduction_
+
+- SNS is a highly available, durable, secure, fully managed pub/sub messaging service that enables you to decouple microservices, distributed systems, and serverless applications.
+- Example of Application Integration.
+- Subscribe and send notifications via text message, webhooks, lambdas, SQS and mobile notifications.
+- What is Pub/Sub?
+  - The publish-subscribe pattern is commonly implemented in messaging systems. The sender of messages (publishers) do not send their messages directly to receivers. They instead send their messages to an event bus. The event bus categorizes their messages into groups. The receivers of messages (subscribers) subscribe to these groups. Whenever new messages appear within their subscription, the messages are immediately delivered to them.
+    - Publishers have no knowledge of who their subscribers are.
+    - Subscribers do not pull for messages.
+    - Messages are instead automatically and immediately pushed to subscribers.
+    - Messages and events are interchangeable terms in pub/sub.
+
+![SNS](./images/sns.png)
+
+---
+
+#### _SNS Topics_
+
+- Topics allow you to group multiple subscriptions together.
+- A topic is able to deliver to multiple protocols at once eg. email, text message, https.
+- When topics deliver messages to subscribers, it will automatically format your message according to the subscriber's chosen protocol.
+- You can encrypt Topics via KMS.
+
+---
+
+#### _SNS Subscriptions_
+
+- To receive messages from a topic, you need to create a subscription.
+- A subscription can only subscribe to one protocol and one topic.
+- Protocols:
+  - HTTP, HTTPS - create webhooks into your web app
+  - Email - good for internal email notifications (only supports plain text)
+  - Email-JSON
+  - SQS - place SNS message into SQS queue
+  - Lambda - triggers a lambda function
+  - SMS - send a text message
+  - Platform application endpoints - mobile push
+
+---
+
+#### _Application as a Subscriber_
+
+- Send push notification messages directly to apps on mobile devices.
+- Can appear as message alerts, badge updates or sound alerts.
+
+---
+
+## Elasticache
+
+#### _Elasticache Introduction_
+
+- Managed caching service which either runs Redis or Memcached.
+- Deploy, run, and scale popular open source compatible in-memory data store.
+- Frequently identical queries are stored in the cache.
+- Elasticache is only accessible to resources operating with the same VPC to ensure low latency.
+
+---
+
+#### _What is In-Memory Data Store?_
+
+- **Caching** - the process of storing data in a cache. A cache is a temporary storage area. Caches are optimized for fast retrieval with the tradeoff of data not being durable.
+- **In-Memory Data Store** - when data is stored In-Memory (think of RAM). The tradeoff is high volatility (low durability, risk of data loss) but access to data is very fast.
+
+---
+
+#### _Caching Comparison_
+
+- **Memcached** is generally preferred for caching HTML fragments. Memcache is a simple key/value store. The tradeoff of it being simple is that it is very fast.
+- **Redis** can perform many different kinds of operations on your data. It's very good for leaderboards, keeps track of unread notification data. It is very fast, but arguably not as fast as Memcached.
+
+---
+
+## High Availability
+
+#### _HA Introduction_
+
+- Think about what could cause a service to become unavailable:
+  - AZ level eg. data-center flooded
+  - Region level eg. meteor strike
+  - App level eg. too much traffic, unresponsiveness due to distance in geographical locations
+  - Instance level eg. instance failure
+- Solutions we should implement to ensure High Availability:
+  - For multi-AZ, an Elastic Load Balancer can route traffic to operational AZs.
+  - We can route traffic to another Region via Route53.
+  - We can use ASG to increase the amount of instances to meet the demand of traffic.
+  - We can use ASG to ensure a minimum amount of instances are running and have ELB route traffic to healthy instances.
+  - We can use CloudFront to cache static content for faster delivery in nearby regions.
+
+---
+
+#### _Scale Up vs Scale Out_
+
+- When utilization increases and we are reaching capacity, we can:
+  - Scale Up (Vertical Scaling)
+    - Increase the size of instances
+    - Simpler to manage
+    - Lower availability (if a single instance fails, service becomes unavailable)
+  - Scale Out (Horizontal Scaling)
+    - Adding more of the same
+    - More complexity to manage
+    - Higher availability (if a single instance fails, it does not matter)
+- You generally want to **scale out** and **then up** to balance complexity and availability.
+
+![Scale Up Out](./images/scale_up_out.png)
 
 ---

@@ -199,6 +199,15 @@
 - [High Availability](#high-availability)
   - [Introduction](#ha-introduction)
   - [Scale Up vs Scale Out](#scale-up-vs-scale-out)
+- [Elastic Beanstalk](#elastic-beanstalk)
+  - [Introduction](#eb-introduction)
+- [API Gateway](#api-gateway)
+  - [Introduction](#apig-introduction)
+  - [Key Features](#apig-key-features)
+  - [Configuration](#apig-configuration)
+  - [Caching](#apig-caching)
+  - [CORS](#apig-cors)
+  - [Same Origin Policy](#same-origin-policy)
 
 ---
 
@@ -2337,5 +2346,100 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - You generally want to **scale out** and **then up** to balance complexity and availability.
 
 ![Scale Up Out](./images/scale_up_out.png)
+
+---
+
+## Elastic Beanstalk
+
+#### _EB Introduction_
+
+- Quickly deploy and manage web apps on AWS without worrying about infrastructure.
+- The Heroku of AWS. Choose a platform, upload your code and it runs.
+- Not recommended for "production" applications.
+- EB is powered by a CloudFormation template that can set up for you:
+  - ELB
+  - ASG
+  - RDS database
+  - EC2 preconfigured or customer
+  - Monitoring (CloudWatch, SNS)
+  - In-Place and Blue/Green deployment methodologies
+  - Security (rotates passwords)
+  - Can run Dockerized environments
+
+---
+
+## API Gateway
+
+#### _APIG Introduction_
+
+- Fully managed service to create, publish, maintain, monitor and secure APIs at any scale.
+- Create APIs that act as a front door for apps to access data, business logic, or functionality from back-end services.
+- API Gateway throttles API endpoints at 10,000 requests per second (can be increased via service request from AWS support).
+- You can require Authorization to your API via AWS Cognito or a custom Lambda.
+
+![API Gateway](./images/api_gateway.png)
+
+---
+
+#### _APIG Key Features_
+
+- API Gateway handles all the tasks involved in accepting and processing up to hundreds of thousands of concurrent API calls, including traffic management, authorization and monitoring.
+- Allows you to track and control any usage of the API. Throttle requests to help prevent attacks.
+- Expose HTTPS endpoints to define a RESTful API.
+- Highly scalable and cost-effective.
+- Send each API endpoint to a different target.
+- Maintain multiple versions of your API.
+
+---
+
+#### _APIG Configuration_
+
+- **Resources**
+  - When you create an API, you need to also create multiple resources.
+  - Resources are the URLS you define eg. `/projects`
+  - Resources can have child resources eg. `/projects/-id-/edit`
+- **Methods**
+  - You need to define Methods on Resources.
+  - You can define multiple Methods on a Resource.
+- **Stages**
+  - In order to use your API, you need to deploy it to Stages.
+  - Stages are versions of your API.
+- **Invoke URL**
+  - For each stage, AWS provides you a Invoke URL.
+  - This is where you'll make your API calls.
+  - It is possible to use a custom domain for your Invoke URL.
+- **Deploy API**
+  - Every time you make a change to your API, you need to deploy it via the **Deploy API** action.
+  - When you deploy, you choose the stage.
+  - When you create an API Method on a resource, you need to choose the Integration type. The most common Integration type is Lambda.
+  - You have to fine tune control over the Request and Response for the Method Execution.
+
+---
+
+#### _APIG Caching_
+
+- API Caching can be enabled to cache your endpoints' responses to API calls.
+- When enabled on a stage, API Gateway caches responses from your endpoint for a specified time-to-live (TTL) period.
+- API Gateway responds to requests by looking up the response from cache (instead of making a request to the endpoint).
+- Reduces the number of calls made to your endpoint and improves latency of the requests made to your API.
+
+---
+
+#### _APIG CORS_
+
+- Cross-Origin Resource Sharing (CORS) is a way that the server at the other end (not client code in the browser) can relax a same-origin policy.
+- Allows restricted resources (eg fonts) on a webpage to be requested from a different domain than the initial resource that it came from.
+- Should always be enabled if using JS/AJAX that uses multiple domains with an API gateway.
+- CORS is always enforced by the client.
+
+---
+
+#### Same Origin Policy
+
+- Same Origin Policy is a concept in the application security model where a web browser permits scripts contained in a first web page to access data in a second webpage.
+  - Same Origin Policies are used to help prevent Cross-Site Scripting (XSS) attacks.
+  - They only work if both web pages have the same origin.
+  - They are enforced at the web browser level.
+  - They ignore tools such as Postman or Curl.
 
 ---

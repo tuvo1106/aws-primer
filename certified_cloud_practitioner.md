@@ -12,7 +12,7 @@
 - [AWS Global Infrastructure](#aws-global-infrastructure)
   - [Where does all this cloud computing run?](#where-does-all-this-cloud-computing-run)
   - [Regions](#regions)
-  - [Availabilty Zones](#availabilty-zones)
+  - [Availability Zones](#availability-zones)
   - [Edge Locations](#edge-locations)
   - [GovCloud Regions](#govcloud-regions)
 - [Billing and Pricing](#billing-and-pricing)
@@ -77,7 +77,7 @@
 
 - Not a gilded title
 - Can help superficially increase your AWS certification count
-- Not recognized as an important recertification for developers on resumes
+- Not recognized as an important certification for developers on resumes
 
 #### Thinking of skipping the CCP? Think again...
 
@@ -218,7 +218,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 #### _Where does all this cloud computing run?_
 
-- 69 availabilty zones within 22 geographic regions
+- 69 availability zones within 22 geographic regions
 - AWS serves over a million active customers in more than 190 countries
 - Regions: physical location in the world with multiple Availability Zones
 - Availability Zones: one or more discrete data centers
@@ -238,7 +238,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 ---
 
-#### _Availabilty Zones_
+#### _Availability Zones_
 
 - An AZ is a datacenter owned and operated by AWS.
 - AZs are represented by a Region Code, followed by a letter identifier eg. `us-east-1a`.
@@ -250,7 +250,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 #### _Edge Locations_
 
 - An edge location is a datacenter owned by a trusted partner of AWS which has a direction connection to the AWS network.
-- These locations serve request sfor CloudFront and Route 53.
+- These locations serve requests for CloudFront and Route 53.
 
 ---
 
@@ -371,7 +371,7 @@ The practice of using a network of remote servers hosted on the Internet to stor
 
 #### _AWS Marketplace_
 
-AWS Marketplace is a curated digital catalogue with thousands of software listings from independen software vendors.
+AWS Marketplace is a curated digital catalogue with thousands of software listings from independent software vendors.
 
 - Easily find, buy, test and deploy software that already runs on AWS.
 - The product can be free to use or can have associated charge.
@@ -453,7 +453,7 @@ The Total Cost of Ownership allows you to estimate how much you would save switc
 #### _AWS Landing Zone_
 
 - Helps Enterprises quickly set-up a secure, AWS multi-account
-- Provides you with a baseline environment to get started with a multi-account achitecture
+- Provides you with a baseline environment to get started with a multi-account architecture
 - AVM (Account Vending Machine)
   - Automatically provisions and configure new accounts via Service Catalog Template
   - Uses Single Sign-on (SSO) for managing and accessing accounts
@@ -498,8 +498,8 @@ Generate a detailed spreadsheet, enabling you to better analyze and understand y
 
 - **Organizations** allow you to centrally manage billing, control access, compliance, security, and share resources
 - **Root Account User** is a single sign-in identity that has complete access to all AWS services and resources in an account. Each account has a Root Account User
-- **Organization Units** are a group of AWS accounts within an organization which can also contain other organizational units - creating a hierachy
-- **Service Control Policies** give central control over the alloed permissions for all accounts in your organization, helping to ensure your accounts stay within your organization's guidelines
+- **Organization Units** are a group of AWS accounts within an organization which can also contain other organizational units - creating a hierarchy
+- **Service Control Policies** give central control over the allowed permissions for all accounts in your organization, helping to ensure your accounts stay within your organization's guidelines
 
 ---
 
@@ -520,7 +520,7 @@ Generate a detailed spreadsheet, enabling you to better analyze and understand y
 
 #### _Database Services_
 
-- **DynamoDB** - NoSQL key/vlue database (Cassandra-like)
+- **DynamoDB** - NoSQL key/value database (Cassandra-like)
 - **DocumentDB** - NoSQL Document database that is MongoDB compatible
 - **RDS** - Relational Database Service that supports multiple engines
   - Engines: MySQL, PostGres, Maria DB, Oracle, Microsoft SQL Server, Aurora
@@ -541,7 +541,7 @@ The allocation or creation of resources and services to a customer.
 - **OpsWorks** - configuration management service that provides managed instances of Chef and Puppet
 - **CloudFormation** - infrastructure as code, JSON or YAML
 - **AWS Quickstart** - pre-made packages that can launch and configure your AWS compute, network, storage, and other services required to deploy a workload on AWS
-- **AWS Marketplace** - a curated digital catalogue with thousands of software listings from independen software vendors.
+- **AWS Marketplace** - a curated digital catalogue with thousands of software listings from independent software vendors.
 
 ---
 
@@ -564,7 +564,7 @@ All services below are running EC2s under the hood
 
 - **S3** - Simple Storage Service - object storage
 - **S3 Glacier** - low cost storage for archiving and long-term backup
-- **Storage Gateway** - hybrid cloud storag with local caching
+- **Storage Gateway** - hybrid cloud storage with local caching
   - File Gateway, Volume Gateway, Tape Gateway
 - **EBS** - Elastic Block Storage - hard drive in the cloud you can attach to EC2 instances
   - SSD, HHD
@@ -582,7 +582,7 @@ All services below are running EC2s under the hood
 - **WorkDocs** - A content creation and collaboration service - easily create, edit and share content saved centrally in AWS (Sharepoint)
 - **Chime** - AWS Platform for online meetings, video conferencing, and business calling
 - **WorkMail** - Managed business email, contacts and calendar service
-- **Pinpoint** - marketing campaign management system you can use for sending targeted email, SMS, push notif, and voice messages
+- **Pinpoint** - marketing campaign management system you can use for sending targeted email, SMS, push notifications, and voice messages
 - **SES** - Simple Email Service. A cloud-based email sending service designed for marketers and application developers to send marketing, emails
 - **QuickSight** - a Business Intelligence (BI) service. Connect multiple datasources and quickly visualize data
 
@@ -665,7 +665,7 @@ Going Hybrid!
   - Customer Data
   - Platforms, Applications, Identity and Access Management (IAM)
   - Operating System, Network and Firewall Configuration
-  - Client-Side Data Engcryption and Data Integrity Authentication
+  - Client-Side Data Encryption and Data Integrity Authentication
   - Server-Side Encryption (File System and/or Data)
   - Network Traffic Protection (Encryption, Integrity, Identity)
 - **AWS**
@@ -686,7 +686,7 @@ Going Hybrid!
 **Compliance Programs**
 Examples
 
-- Health Insruance Portability and Accountability Act (HIPAA)
+- Health Insurance Portability and Accountability Act (HIPAA)
   - US Legislation that provides data privacy and security provisions for safeguarding medical information.
 - The Payment Card Industry Data Security Standard (PCI DSS)
   - Standard for when you want to sell things online and you need to handle credit card information.
@@ -792,7 +792,7 @@ Can you perform PenTesting on AWS? **Yes**
 - **Prohibited Activities**
 
   - DNS zone walking via Amazon Route 53 Hosted Zones
-  - Denial of Service (DoS), Distributed Denial of Service (DDoS), Simluated DoS, Simulated DDoS
+  - Denial of Service (DoS), Distributed Denial of Service (DDoS), Simulated DoS, Simulated DDoS
   - Port flooding
   - Protocol flooding
   - Request flooding (login request flooding, API request flooding)
@@ -831,9 +831,9 @@ A managed service that makes it easy for you to create and control the encryptio
 
 #### _Amazon Macie_
 
-Macie is a fully managed service that continuously monitors **S3 data access** activity for anomolies, and generates detailed alerts when it detects risk of unauthorized access or inadvertent data leaks.
+Macie is a fully managed service that continuously monitors **S3 data access** activity for anomalies, and generates detailed alerts when it detects risk of unauthorized access or inadvertent data leaks.
 
-_Macie works by using Machine Learning to Aaalyze your CloudTrail logs_
+_Macie works by using Machine Learning to Analyze your CloudTrail logs_
 
 - Macie Alerts
   - Anonymized Access
@@ -846,7 +846,7 @@ _Macie works by using Machine Learning to Aaalyze your CloudTrail logs_
   - Open Permissions
   - Privilege Escalation
   - Ransomware
-  - Service Distruption
+  - Service Disruption
   - Suspicious Access
 
 Macie will identify your most at-risk users which could lead to a compromise.
@@ -903,7 +903,7 @@ _Eg. Block a specific IP address known for abuse_
   - CloudWatch Alarms - triggers notifications based on metrics
   - CloudWatch Dashboard - create visualizations based on metrics
 - **CloudSearch**
-  - Search engine, you have an ecommerce website and you want to add a search bar
+  - Search engine, you have an e-commerce website and you want to add a search bar
 
 ---
 
@@ -928,7 +928,7 @@ Both services transcodes videos
 
 They both connect apps via messages.
 
-- **Simple Notification Service** - pass alongs messages
+- **Simple Notification Service** - pass along messages
 
   - send notifications to subscribers of topics via multiple protocol eg. HTTP, email, SQS, SMS
   - SNS is generally used for sending _plain text emails_ which is triggered via other AWS services. The best example of this is billing alarms.
@@ -956,7 +956,7 @@ Both are security tools and they perform audits
 
 - **Trusted Advisor**
   - Trusted Advisor does not generate out a PDF report
-  - Gives you a holistic view of reccomendations across multiple services and best practices
+  - Gives you a holistic view of recommendations across multiple services and best practices
 
 ---
 
@@ -993,7 +993,7 @@ All load balancers
 - **Simple Email Service** - professional, marketing, emails
   - a cloud-based email service e.g. SendGrid
   - SES sends html emails, SNS cannot
-  - SES recieves inbound emails
+  - SES receives inbound emails
   - SES can create Email Templates
   - Custom domain name email
   - Monitor your email reputation

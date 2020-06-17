@@ -208,6 +208,12 @@
   - [Caching](#apig-caching)
   - [CORS](#apig-cors)
   - [Same Origin Policy](#same-origin-policy)
+- [Kinesis](#kinesis)
+  - [Introduction](#kinesis-introduction)
+  - [Data Streams](#kinesis-data-streams)
+  - [Firehose Delivery Stream](#kinesis-firehose-delivery-stream)
+  - [Video Analytics](#kinesis-video-analytics)
+  - [Data Analytics](#kinesis-data-analytics)
 
 ---
 
@@ -2434,12 +2440,63 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ---
 
-#### Same Origin Policy
+#### _Same Origin Policy_
 
 - Same Origin Policy is a concept in the application security model where a web browser permits scripts contained in a first web page to access data in a second webpage.
   - Same Origin Policies are used to help prevent Cross-Site Scripting (XSS) attacks.
   - They only work if both web pages have the same origin.
   - They are enforced at the web browser level.
   - They ignore tools such as Postman or Curl.
+
+---
+
+## Kinesis
+
+#### _Kinesis Introduction_
+
+---
+
+- Fully-managed solution for collecting, processing and analyzing streaming data in the cloud.
+- Scalable, durable and **real-time**.
+- Streaming Data Examples:
+  - Stock prices
+  - Game data
+  - Social Network data
+  - Geospatial data
+  - Click Stream data
+- There are 4 types of Kinesis Streams
+  - Kinesis Data Streams
+  - Kinesis Firehose Delivery Streams
+  - Kinesis Data Analytics
+  - Kinesis Video Analytics
+- KPL (Kinesis Producer Library) is a Java library to write data to a stream.
+
+---
+
+#### _Kinesis Data Streams_
+
+![Kinesis Data Streams](./images/kinesis_data_streams.png)
+
+---
+
+#### _Kinesis Firehose Delivery Stream_
+
+![Kinesis FDS](./images/kinesis_fds.png)
+
+---
+
+#### _Kinesis Video Analytics_
+
+![Kinesis Video Analytics](./images/kinesis_vs.png)
+
+---
+
+#### _Kinesis Data Analytics_
+
+- You specify Firehose or Data Streams as an input and an output.
+- Data that pass through Data Analytics is run through custom SQL you provide and the results are then output.
+- This allows for real-time analytics of your data.
+
+![Kinesis Data Analytics](./images/kinesis_da.png)
 
 ---

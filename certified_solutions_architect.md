@@ -171,6 +171,11 @@
   - [Trail Options](#trail-options)
   - [CloudTrail to CloudWatch](#cloudtrail-to-cloudwatch)
   - [Management vs Data Events](management-vs-data-events)
+- [Lambda](#lambda)
+  - [Introduction](#lambda-introduction)
+  - [Use Cases](#lambda-use-cases)
+  - [Triggers](#lambda-triggers)
+  - [Pricing](#lambda-pricing)
 
 ---
 
@@ -2054,5 +2059,47 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
   - Setting up logging (CloudTrail CreateTrail)
 - Data Events - tracks specific operations for specific AWS services. Data events are high volume logging and will resilt in additional charges. Turned off by default.
   - The two services taht can be tracked are S3 and Lambda. It would track actions such as: GetObject, DeleteObject, PutObject.
+
+---
+
+## Lambda
+
+---
+
+#### Lambda Introduction
+
+- Lambda is a compute service that runs code without provisioning or managing servers.
+- Lambda is **cheap, serverless, scales automatically**.
+- Server starts and stops when needed.
+- Customers pay per invocation.
+- You can also create your own custom runtime environments.
+- Natively supports 7 runtime languages:
+  - Ruby, Python, Java, Go, Powershell, NodeJS, C#
+
+---
+
+#### Lambda Use Cases
+
+- Lambda is commonly used to **glue different services together** so the use cases are endless.
+- Processing Thumbnails, Contant Email Form
+
+![Lambda Use Cases](./images/lambda_use_cases.png)
+
+---
+
+#### Lambda Triggers
+
+- Lambdas can be invoked via the AWS SDK or triggered from another AWS Service.
+
+---
+
+#### Lamba Pricing
+
+- First million requests per month are free.
+- Thereafter, \$0.20 per additional 1 million requests.
+- 400,000 GB seconds free per month.
+- Thereafter, \$0.00000166667 for every GB second.
+- This price will vary on the amount of memory you allocate.
+- Eg. 128MB memory X 30M executions X 200ms run time per invocation = \$5.83.
 
 ---

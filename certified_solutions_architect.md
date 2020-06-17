@@ -214,6 +214,13 @@
   - [Firehose Delivery Stream](#kinesis-firehose-delivery-stream)
   - [Video Analytics](#kinesis-video-analytics)
   - [Data Analytics](#kinesis-data-analytics)
+- [Storage Gateway](#storage-gateway)
+  - [Storage Gateway Introduction](#storage-gateway-introduction)
+  - [File Gateway](#file-gateway)
+  - [Volume Gateway](#volume-gateway)
+  - [Stored Volumes](#stored-volumes)
+  - [Cached Volumes](#cached-volumes)
+  - [Tape Gateway](#tape-gateway)
 
 ---
 
@@ -2500,3 +2507,66 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 ![Kinesis Data Analytics](./images/kinesis_da.png)
 
 ---
+
+## Storage Gateway
+
+#### _Storage Gateway Introduction_
+
+- Storage Gateway connects an on-premises software appliance with cloud-based storage.
+- Provides seamless and secure integration between an organization's on-premises IT environment and AWS's storage infrastructure.
+- Securely store data to the AWS Cloud in scalable and cost-effective manner.
+- Software appliance is available as a virtual machine (VM) image.
+- Supports both VMWare ESXi and Microsoft Hyper-V.
+- Once installed and activated, you can use the AWS Console to create your gateway.
+- There are 3 Types of Gateways:
+  - File (NFS) - store your files on S3
+  - Volume (iSCSI) - store copies of your hard disk drives in S3
+    - Stored Volumes
+    - Cached Volumes
+  - Tape Gateway (VTL - virtual tape library)
+
+#### _File Gateway_
+
+- Access your files through Network File System (NFS) or SMB mount point.
+- Ownership, permissions and timestamps are all stored within S3 metadata of the object associated with the file.
+- Once a file is transferred to S3, it can be managed as a native S3 object.
+- Bucket policies, versioning, lifecycle management, and cross-region replication apply directly to objects stored in your bucket.
+
+---
+
+#### _Volume Gateway_
+
+- VG presents your applications with disk volumes using the Internet Small Computer Systems Interface (iSCSI) block protocol.
+- Data that is written to volumes can be asynchronously backed up as point-in-time snapshots of the volumes and stored in the cloud as AWS EBS Snapshots.
+- Snapshots are incremental backups that capture only changed blocks in the volume.
+- All snapshot storage is also compressed to help minimize your storage charges.
+
+---
+
+#### _Stored Volumes_
+
+- Primary data is stored locally while asynchronously backing up that data to AWS.
+- Provide your on-premises applications with low-latency access to their entire datasets while still providing durable off-site backups.
+- Create storage volumes and mount them as iSCSI devices from your on-premises servers.
+- Any data written to stored volumes is stored on your on-premises storage hardware.
+- EBS snapshots are backed up to S3.
+- Stored Volumes can be between 1GB - 16TB in size.
+
+---
+
+#### _Cached Volumes_
+
+- Lets you use AWS S3 as your primary data storage, while retaining frequently accessed data locally in your storage gateway.
+- Minimizes the need to scale your on-premises storage infrastructure while still providing your applications with low latency data access.
+- Create storage volumes up to 32TB in size and attach them as iSCSI devices from your on-premises servers.
+- Your gateway stores data that you write to these volumes in S3 and retains recently read data in your on-premises storage gateway cache and upload buffer storage.
+- Cached volumes can be between 1GB - 32GB in size.
+
+#### _Tape Gateway_
+
+- A durable, cost-effective solution to archive your data in the AWS cloud.
+- The VTL interface provides leverage over existing tape-based backup application infrastructure.
+- Store data on virtual tape cartridges that you create on your tape gateway.
+- Each tape gateway is pre-configured with a media changer and tape drives, which are available to your existing client backup applications as iSCSI devices.
+- You add tape cartridges as you need to archive your data.
+- Supported by NetBackup, Backup Exec, and Veeam.

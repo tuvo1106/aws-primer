@@ -68,7 +68,6 @@
 - If you are a bootcamp grad
   - 2 months of study
 - If you are a Cloud Engineer
-
   - 30 hours of study
 
 #### Details about the test
@@ -92,7 +91,6 @@
   - Multiple choice (Choose 1 out of 4)
   - Multiple response (Choose 2 or more out of 5 or more)
 - Breakdown
-
   - 22% Deployment (14~15 questions)
   - 26% Security (16~17 questions)
   - 30% Development with AWS Services (19~20 questions)
@@ -118,15 +116,10 @@ Quickly deploy and manage web-apps on AWS
 #### Introduction to Elastic Beanstalk
 
 - What is Platform as a Service? (PaaS)
-
   - A platform allowing customers to develop, run, and manage applications without the complexity of building and maintaining the infrastructure typically associated with developing and launching an app.
-
 - Choose a platform, upload your code and it runs with little knowledge of the infrastructure.
-
   - Not recommended for **Production** for Enterprise level applications
-
 - Elastic Beanstalk is powered by a CloudFormation template:
-
   - Elastic Load Balancer
   - Autoscaling Groups
   - RDS Database
@@ -151,7 +144,6 @@ Quickly deploy and manage web-apps on AWS
   - Python
   - Tomcat
 - Preconfigured - Docker
-
   - GlassFish
   - Go
   - Python
@@ -274,9 +266,7 @@ Blue/Green deployment in the context of Elastic Beanstalk
 - Elastic Beanstalk environments can be customized used configuration files
 - **.ebextensions** is a hidden folder called at the root of your project which contains the config files
 - **.config** is the extension for the config files which need to be stored in ebextensions
-
 - Configuration files can config
-
   1. Option Settings
   2. Linux/Windows Server Configuration
   3. Custom Resources
@@ -311,7 +301,6 @@ The CLI is hosted on Github
 You run these two commands to install
 
 - Commands
-
   - **eb init** - configure your project directory and the EB CLI
   - **eb create** - create your first env
   - **eb create** - see the current status of your env
@@ -323,7 +312,7 @@ You run these two commands to install
   - **eb config** - take a look at the configuration options available for your running env
   - **eb terminate** - delete the environment
 
-  #### EB Custom Image
+#### EB Custom Image
 
 - When you create an EB environment, you can specify an dAMI to use instead of the standard EB AMI
 - A custom AMI can improve provisioning times when instances are launched in your environment

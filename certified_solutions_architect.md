@@ -138,9 +138,9 @@
 - [Aurora](#aurora)
   - [Introduction](#aurora-introduction)
   - [Scaling With Aurora](#scaling-with-aurora)
-  - [Availabilty With Aurora](#availabilty-with-aurora)
+  - [Availability With Aurora](#availability-with-aurora)
   - [Fault Tolerance and Durability](#fault-tolerance-and-durability)
-  - [Aurora Replicas](#aurorar-replicas)
+  - [Aurora Replicas](#aurora-replicas)
   - [Aurora Serverless](#aurora-serverless)
 - [Redshift](#redshift)
   - [What is a Data Warehouse](#what-is-a-data-warehouse)
@@ -192,7 +192,7 @@
 
 #### Who is the Solution Architect Associate for?
 
-- Architectue Diagrams
+- Architecture Diagrams
 - Constant Learning
 - Pricing
 - Security
@@ -234,7 +234,7 @@
 - Design resilient architectures - 34%
   - Choose reliable/resilient storage.
   - Determine how to design decoupling mechanisms using AWS services.
-  - Determine how to design a multi-tier achitectural.
+  - Determine how to design a multi-tier architectural.
     solution.
   - Determine how to design high availability and/or fault tolerant architecture.
 - Design performant architectures - 24%
@@ -253,7 +253,7 @@
 
 Whitepapers
 
-- AWS Well-Achitected Framework.
+- AWS Well-Architected Framework.
 - Architecting for the Cloud: AWS Best Practices.
 
 ---
@@ -328,7 +328,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 
 - Object-based storage service.
 - Serverless storage in the cloud.
-- Don't worry about filesystems or disk space.
+- Don't worry about file systems or disk space.
 
 **What is Object Storage (Object-based Storage)?**
 
@@ -337,7 +337,7 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
   - block storage - manages data as blocks within sectors and tracks.
 
 S3 provides you with unlimited storage. You do not need to think about the underlying infrastructure.
-The S3 console provides an interface for you to uploaad and access your data.
+The S3 console provides an interface for you to upload and access your data.
 
 #### _S3 Object_
 
@@ -349,7 +349,7 @@ Objects may consist of:
 - Version ID - when versioning available, the version of object.
 - Metadata - additional information attached to the object.
 
-You can sotre data from _0 Bytes_ to _5 Terabytes_ in size.
+You can store data from _0 Bytes_ to _5 Terabytes_ in size.
 
 #### _S3 Bucket_
 
@@ -360,7 +360,7 @@ S3 is a a universal namespace so bucket names must be unique (think like having 
 
 #### _Storage Classes_
 
-Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
+Trade Retrieval Time, Accessibility and Durability for Cheaper Storage.
 
 ```
 11 9's = 99.99999999999
@@ -379,7 +379,7 @@ Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
 **S3 Guarantees**
 
 - Platform is built for 99.99% availability.
-- Amazon gaurantees 99.9% availability.
+- Amazon guarantees 99.9% availability.
 - Amazon guarantees 11 9's of durability.
 
 ---
@@ -448,7 +448,7 @@ Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
 #### _S3 Lifecycle Management_
 
 - Automate the process of moving objects to different Storage classes or deleting objects all together.
-- Can be used togethe with _versioning_.
+- Can be used together with _versioning_.
 - Can be applied to both _current_ and _previous_ versions.
 
 ---
@@ -458,13 +458,13 @@ Trade Retrieval Time, Accessibilty and Durability for Cheaper Storage.
 - Fast and secure transfer of files _over long distances_ between your end users and an S3 bucket.
 - Utilizes _CloudFront's_ distributed Edge Locations.
 - Instead of uploading to your bucket, users use a _distinct URL_ for an Edge Location.
-- As data arrives at the Edge Location it is automatically routed to S3 over a specially optimized network path(Amazon's backbone netowrk).
+- As data arrives at the Edge Location it is automatically routed to S3 over a specially optimized network path(Amazon's backbone network).
 
 ---
 
 #### _Presigned URLs_
 
-- Generate a URL which provides you temporary access to an object to either upload or download object data. Presigned URLs are commoonly used to _provide access to private objects_. You can use AWS CLI or AWS SDK to generate Presigned URLs.
+- Generate a URL which provides you temporary access to an object to either upload or download object data. Presigned URLs are commonly used to _provide access to private objects_. You can use AWS CLI or AWS SDK to generate Presigned URLs.
 - For example, you have a web app which needs to allow users to download files from a password-protected area. Your web app generates a presigned URL which expires after 5 seconds. The user downloads the file.
 
 ---
@@ -512,7 +512,7 @@ Similar to Snowball but with _more storage_ and with _local processing_.
 
 Snowball Edge features and limitations:
 
-- LCD diplay (shipping information and other functionality).
+- LCD display (shipping information and other functionality).
 - Can undertake local processing and edge-computing workloads.
 - Can use in a cluster in groups of 5 to 10 devices.
 - Three options for device configurations:
@@ -529,7 +529,7 @@ Snowball Edge comes in 2 sizes:
 
 #### _Snowmobile_
 
-A _45-foot long_ ruggedized _shipping container_, pulled by a _semi-trailer truck_.
+A _45-foot long_ rugged _shipping container_, pulled by a _semi-trailer truck_.
 Transfer up to _100PB_ per Snowmobile, exabyte-scale migration.
 
 AWS personnel will help you connect your network to the snowmobile and when data transfer is complete, they'll drive it back to AWS to import into S3 or Glacier.
@@ -603,7 +603,7 @@ AWS has a default VPC in every region so you can immediately deploy instances.
 #### _Default Everywhere IP_
 
 - 0.0.0.0/0 is also known as default.
-- It represents all possile IP addresses.
+- It represents all possible IP addresses.
 - When we specify 0.0.0.0/0 in our route table for IGW we are allowing internet access.
 - When we specify 0.0.0.0/0 in our security groups inbound rules we are allowing all traffic from internet access our public resources.
 - When you see 0.0.0.0/0, just think of giving access from anywhere on the internet.
@@ -658,7 +658,7 @@ System Manager's Sessions Manager replaces the need for Bastions.
 AWS Direct Connect is the AWS solution for establishing dedicated network connections from on-premises locations to AWS.
 
 - Very fast network (lower bandwidth 50M - 500M or higher bandwidth (1GB or 10GB))
-- Helps reduce network costs and increase bandwich thoughput (great for high traffic networks)
+- Helps reduce network costs and increase bandwidth throughput (great for high traffic networks)
 - Provides a more consistent network experience than a typical internet-based connection (reliable and secure)
 
 ---
@@ -669,11 +669,11 @@ Think of a secret tunnel where you don't have to leave the AWS network.
 
 VPC Endpoints allow you to _privately connect your VPC to other AWS services_.
 
-- Eliminates the need for an Intnet Gateway, NAT device, VPN connection, or AWS Direct Connect connections.
+- Eliminates the need for an Internet Gateway, NAT device, VPN connection, or AWS Direct Connect connections.
 - Instances in the VPC do not require a public IP address to communicate with service resources.
 - Traffic between your VPC and other services _does not leave the AWS network_.
 - Horizontally scaled, redundant and highly available VPC component.
-- Allows secure communication between instances and services - without adding availaility risks or bandwidth constraints on your traffic.
+- Allows secure communication between instances and services - without adding availability risks or bandwidth constraints on your traffic.
 
 There are 2 Types of VPC Endpoints:
 
@@ -712,7 +712,7 @@ Flow Logs can be created for:
 - Subnets
 - Network Interface
 
-All log data is stored and accesible using Amazon CloudWatch Logs or S3.
+All log data is stored and accessible using Amazon CloudWatch Logs or S3.
 
 ---
 
@@ -805,7 +805,7 @@ NAT Gateways is a managed service which launches redundant instances within the 
 - IAM is a universal system (applied to all regions at the same time). IAM is a free service.
 - A root account is the account initially created when AWS is set up.
 - New IAM accounts have no permissions by default until granted.
-- New users get assigned an Access key ID and Secret when first created when you give them programattic access.
+- New users get assigned an Access key ID and Secret when first created when you give them programmatic access.
 - Access keys are only used for CLI and SDK (cannot access console).
 - Always set up MFA for Root Accounts.
 
@@ -813,7 +813,7 @@ NAT Gateways is a managed service which launches redundant instances within the 
 
 #### _IAM Core Components_
 
-- Users - End users who log into the console or interact with AWS resource programatically
+- Users - End users who log into the console or interact with AWS resource programmatically
 - Groups - Group up your Users so they share permission levels of the group eg. Administrators, Develops, Auditors
 - Roles - Associate permissions to a Role and then assign this to Users or Groups
 - Policies - JSON documents which grant permissions for a specific user, group or role to access services. Policies are attached to IAM Identities.
@@ -849,7 +849,7 @@ In IAM, you can set a Password Policy. To set the minimum requirements of a pass
 
 #### _Programmatic Access Keys_
 
-Access keys allow users to interact with AWS service programatically via the AWS CLI or AWS SDK.
+Access keys allow users to interact with AWS service programmatically via the AWS CLI or AWS SDK.
 
 You're allowed two Access keys per user.
 
@@ -878,7 +878,7 @@ You're allowed two Access keys per user.
 
 #### _Web Identity Federation and IpD_
 
-- **Web Identity Federation** - to exchange identity and security information betwen an identity provider (IdP) and an application.
+- **Web Identity Federation** - to exchange identity and security information between an identity provider (IdP) and an application.
 - **Identity Provider** - a trusted provider of your user identity that lets you use authenticate to access other services. IdP could be: Facebook, Amazon, Google, Twitter, Github, LinkedIn.
 - **Types of Identity Providers** - the technology that is behind the IdP: Security Assertion Markup Language (SAML), Single Sign On (SSO), Oauth (OIDC)
 
@@ -893,7 +893,7 @@ You're allowed two Access keys per user.
 - Account confirmation
 - Allows users to sign-in directly to the User Pool, or using Web Identity Federation.
 - Uses AWS Cognito as the identity broker between AWS and the identity provider.
-- Sucessful user authentication generates a JWT.
+- Successful user authentication generates a JWT.
 - User Pools can be thought of as the account to access the system.
 
 ---
@@ -947,19 +947,19 @@ You have to enable _Programmatic Access_.
 ## DNS
 
 - Domain Name System
-- The phonebook of the internet.
+- The phone book of the internet.
 - DNS translates domain names to IP addresses so browsers can find internet resources.
 
 #### _IP (Internet Protocol)_
 
-- IP Addresses are what uniquely identifies each computer on a network, and allows communication between them using the Ineternet Protocol.
+- IP Addresses are what uniquely identifies each computer on a network, and allows communication between them using the Internet Protocol.
 - IPv4
   - Example: 52.216.8.4.
   - Address space is 32 bits with up to 4,294,967,296 available addresses (we are running out).
 - IPv6
   - Example: 2001:0db8:95a3:0000:0000:8a2e:0370:7334.
   - Address space is 128 bits with up to 340 undeceillion potential addresses (1 + 36 zeroes).
-  - Invented to solve available addresss limitations of IPv4.
+  - Invented to solve available address limitations of IPv4.
 
 ---
 
@@ -1028,8 +1028,8 @@ You have to enable _Programmatic Access_.
   - register and domain domains.
   - create various records set on a domain.
   - Implement complex traffic flows eg. blue/green deploy, failovers.
-  - Continiously monitor record via health checks.
-  - resolve VPCs outisde of AWS.
+  - Continuously monitor record via health checks.
+  - resolve VPCs outside of AWS.
 
 ---
 
@@ -1276,7 +1276,7 @@ Combine metadata with userdata scripts to perform all sorts of advanced AWS stag
 
 #### _Marketplace_
 
-AWS Marketplace is a curated digital catalogue with thousands of software listings from independen software vendors.
+AWS Marketplace is a curated digital catalogue with thousands of software listings from independent software vendors.
 
 - Easily find, buy, test and deploy software that already runs on AWS.
 - The product can be free to use or can have associated charge.
@@ -1351,7 +1351,7 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 - **Scaling out**: adding instances; **Scaling in**: removing instances.
 - Target Tracking - maintains a specific metric at a target value.
   - eg. If Average CPU Utilization exceeds 75%, then add another server.
-- Simple Scaling - scales when an alarm is breached (not reccomended).
+- Simple Scaling - scales when an alarm is breached (not recommended).
 - Scaling with steps - scales when an alarm is breached, can escalate based on alarm value changing.
 
 ---
@@ -1438,7 +1438,7 @@ AMIs are region specific. If you want to use an AMI from another region. You nee
 
 #### _Sticky Sessions_
 
-- Sticky Sessions is an advanced load balancing method that allows you to bind a user's session to a specific EC2 isntance.
+- Sticky Sessions is an advanced load balancing method that allows you to bind a user's session to a specific EC2 instance.
 - Ensures all requests from that session are sent to the same instance.
 - Typically utilized with CLB.
 - Can be enabled for ALB though it cna only be set on a Target Group, not EC2 instances.
@@ -1520,7 +1520,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - There are 5 Types of EBS Storage:
   - General purpose (SSD) - gp2 - for general usage without specific requirements
   - Provisioned IOPS (SSD) - io1 - when you require really fast input and output
-  - Throughput Optimized HDD - st1 - magnetic drive optimised for quick throughput
+  - Throughput Optimized HDD - st1 - magnetic drive optimized for quick throughput
   - Cold HDD - sc1 - lowest cost HDD for infrequently accessed workloads
   - EBS Magnetic - standard - previous generation HDD
 
@@ -1547,7 +1547,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 #### _Magnetic Tapes_
 
-- A large reel of magnetic tape. A tape drive is used to write data to the tapel. Medium and large-sized data centers deploy both tape and disk formats. They normally come in the form of cassettes. Magnetic is very cheap to produce and can store considerable amount of fata.
+- A large reel of magnetic tape. A tape drive is used to write data to the tape. Medium and large-sized data centers deploy both tape and disk formats. They normally come in the form of cassettes. Magnetic is very cheap to produce and can store considerable amount of data.
 - Durable for decades.
 
 ---
@@ -1590,7 +1590,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
     - Can start and stop instances.
     - Data will persist if you reboot your system.
   - Ideal for when you want data to persist. In most cases, you'll want EBS backed volume.
-- Instance Store Volumes (Ephermeral)
+- Instance Store Volumes (Ephemeral)
   - A _temporary_ storage type located on disks that are physically attached to a host machine.
   - An ISV is created from a template stored in S3.
   - It cannot stop instances; can only terminate.
@@ -1626,7 +1626,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - **Behaviors** - Redirect to HTTPS, Restrict HTTP Methods, Restrict Viewer Access, Set TTLs.
 - **Invalidations** - You can manually invalidate cache on specific files via Invalidations.
 - **Error Pages** - You can serve up custom error pages eg. 404.
-- **Restrictions** - You can use Geo Restricton to blacklist or whitelist specific countries.
+- **Restrictions** - You can use Geo Restriction to blacklist or whitelist specific countries.
 
 ---
 
@@ -1634,7 +1634,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 - We use Lambda@Edge functions to **override the behavior** of requests and responses.
 - 4 types:
-  - Viewer request - When CF recieves a request from a viewer.
+  - Viewer request - When CF receives a request from a viewer.
   - Origin request - Before CF forwards a request to the origin.
   - Origin response - When CF receives a response from the origin.
   - Viewer response - Before CF returns the response to the viewer.
@@ -1707,7 +1707,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 #### _RDS Multi-AZ_
 
-- Multi-AZ deployement ensures database remains available if another AZ becomes unavailable.
+- Multi-AZ deployment ensures database remains available if another AZ becomes unavailable.
 - Makes an exact copy of your database in another AZ. AWS automatically synchronizes changes to the standby copy.
 - **Automatic Failover Protection** - if one AZ goes down, failover will occur and standby slave will be promoted to master.
 
@@ -1722,7 +1722,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - You can have up to 5 replicas of a database.
 - Each Read Replica will have its own DNS Endpoint.
 - You can Multi-AZ replicas, replicas in other regions, or even replicas or other Read Replicas.
-- Replicas can be promoted to their own datbase, but this breaks replication.
+- Replicas can be promoted to their own database, but this breaks replication.
 - No automatic failover if primary copy fails; you must manually update URLs to point at copy.
 
 ---
@@ -1750,15 +1750,15 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - Starts with 10GB of storage and can scale in 10GB increments up to 64TB (autoscaling).
 - Computing resources can scale all the way up to 32 vCPUs and 244GB of memory.
 
-#### _Availabilty with Aurora_
+#### _Availability with Aurora_
 
 - A minimum of 3 availability zones that each contain 2 copies of your data at all times (6 total copies!).
-- You can lose up to 2 copies of your data without affecting **write** availabilty.
-- You can lose up to 3 copies of your data without affecting **read** availabilty.
+- You can lose up to 2 copies of your data without affecting **write** availability.
+- You can lose up to 3 copies of your data without affecting **read** availability.
 - Aurora is allowed up to 15 replicas.
 - Aurora can span multiple regions via Aurora Global Database.
 
-![aurora_availabilty](./images/aurora_availabilty.png)
+![aurora_availability](./images/aurora_availability.png)
 
 ---
 
@@ -1819,7 +1819,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 #### _Redshift Use Case_
 
-- We want to continously COPY data from EMR, S3, and DynamoDB to power a custome Business Intelligence tool.
+- We want to continuously COPY data from EMR, S3, and DynamoDB to power a custom Business Intelligence tool.
 - Using a third party library, we can connect and query Redshift for data.
 
 ---
@@ -1836,7 +1836,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 - **Single Node** - nodes come in sizes of 160 GB. You can launch a single node to get started.
 - **Multi-Node** - cluster of nodes.
-  - **Leader Node** - manages client connections and recieves queries.
+  - **Leader Node** - manages client connections and receives queries.
   - **Compute Node** - stores data and perform queries (up to 128 nodes).
 - There are 2 types of Nodes.
   - **Dense Compute** (dc) - best for high performance, but they have less storage.
@@ -1891,7 +1891,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - Data-at-rest - encrypted using AES-256 encryption
 - Database encryption can be applied using:
   - KMS (Key Management Service) multi-tenant HSM
-  - CloudHSM single-tentant HSM
+  - CloudHSM single-tenant HSM
 
 ---
 
@@ -1935,7 +1935,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 - When data needs to be updated, it has to write updates to all of its copies. It is possible for this data to be inconsistent if you area reading from a copy that has not been updated. You have the ability to choose the read consistency in DynamoDB to meet your needs.
 - **Eventual Consistent Reads** (default)
-  - Reads are fast but there is no gaurantee of consistency.
+  - Reads are fast but there is no guarantee of consistency.
   - All copies of data eventually become consistent within a second.
 - **Strongly Consistent Reads**
   - When copies are being updated and you attempt to read, it will not return a result until all copies are consistent.
@@ -1969,7 +1969,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 #### _CloudFormation Introduction_
 
 - A templating language that defines AWS resources to be provisioned.
-- Used to automate the creation of resourcs via code.
+- Used to automate the creation of resources via code.
 
 ---
 
@@ -1981,11 +1981,9 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ## CloudWatch
 
----
-
 #### _CloudWatch Introduction_
 
-- A collection of monitoring services for loggin, react and visualizing log data.
+- A collection of monitoring services for logging, react and visualizing log data.
 - **CloudWatch Logs** - any custom log data, Memory usage, Rails logs, NGINX logs
 - **CloudWatch Metrics** - metrics that are based off of logs eg. Memory usage
 - **CloudWatch Events** - triggers an event based on conditions eg.
@@ -2047,7 +2045,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 #### _CloudWatch Availability_
 
 - How often CW will collect and make available data.
-- Detailed monitoring is a paid servce.
+- Detailed monitoring is a paid service.
 
 ![CW Availability](./images/cw_availability.png)
 
@@ -2056,7 +2054,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 #### _Agent & Host Level Metrics_
 
 - Some metrics you might think are tracked by default for EC2 instances are not and require the **CW Agent**.
-- The CW Agent is a script whcih can be installed via Systems Manager Run Command onto the target EC2 instance.
+- The CW Agent is a script which can be installed via Systems Manager Run Command onto the target EC2 instance.
 - CW will track at the Host Level by default:
   - CPU Usage
   - Network Usage
@@ -2075,13 +2073,11 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 ## CloudTrail
 
----
-
 #### _CloudTrail Introduction_
 
 ---
 
-- AWS CloudTrail is a service that enables goverance, compliance, operational auditing and risk auditing of your AWS account.
+- AWS CloudTrail is a service that enables governance, compliance, operational auditing and risk auditing of your AWS account.
 - Logs API calls and actions between AWS services.
 - When you need to know who to blame.
 - Easily identify which users and accounts made the call to AWS:
@@ -2122,7 +2118,475 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
   - Registering devices (EC2 CreateDefaultVPC)
   - Configuring rules for routing data (EC2 CreateSubnet)
   - Setting up logging (CloudTrail CreateTrail)
-- Data Events - tracks specific operations for specific AWS services. Data events are high volume logging and will resilt in additional charges. Turned off by default.
-  - The two services taht can be tracked are S3 and Lambda. It would track actions such as: GetObject, DeleteObject, PutObject.
+- Data Events - tracks specific operations for specific AWS services. Data events are high volume logging and will result in additional charges. Turned off by default.
+  - The two services that can be tracked are S3 and Lambda. It would track actions such as: GetObject, DeleteObject, PutObject.
 
 ---
+
+## Lambda
+
+#### _Lambda Introduction_
+
+- Lambda is a compute service that runs code without provisioning or managing servers.
+- Lambda is **cheap, serverless, scales automatically**.
+- Server starts and stops when needed.
+- Customers pay per invocation.
+- You can also create your own custom runtime environments.
+- Natively supports 7 runtime languages:
+  - Ruby, Python, Java, Go, Powershell, NodeJS, C#
+
+---
+
+#### _Lambda Use Cases_
+
+- Lambda is commonly used to **glue different services together** so the use cases are endless.
+- Processing Thumbnails, Contact Email Form
+
+![Lambda Use Cases](./images/lambda_use_cases.png)
+
+---
+
+#### _Lambda Triggers_
+
+- Lambdas can be invoked via the AWS SDK or triggered from another AWS Service.
+
+---
+
+#### _Lambda Pricing_
+
+- First million requests per month are free.
+- Thereafter, \$0.20 per additional 1 million requests.
+- 400,000 GB seconds free per month.
+- Thereafter, \$0.00000166667 for every GB second.
+- This price will vary on the amount of memory you allocate.
+- Eg. 128MB memory X 30M executions X 200ms run time per invocation = \$5.83.
+
+---
+
+#### _Lambda Interface_
+
+![Lambda Interface](./images/lambda_interface.png)
+
+---
+
+#### _Lambda Defaults and Limits_
+
+- By default, you can have 1000 Lambda running concurrently (ask AWS support for limit increase).
+- `/tmp` directory can contain up to 500MB.
+- By default, Lambda runs in **No VPC**.
+- You can set them in your own VPC, but your lambda will lose internet access.
+- You can set the timeout to be a maximum of 15 minutes.
+- Memory can be set between 128MB to a maximum of 3008MB at an increment of 64 MB.
+
+---
+
+#### _Lambda Cold Starts_
+
+- AWS has servers preconfigured for your runtime environment.
+- When Lambda is invoked, these servers need to be turned on and your code needs to be copied over.
+- During that time, there will be a delay which is called a **Cold Start**.
+- If the same Lambda is invoked and the server is still running, the server is not called a **Warm Server**.
+- Serverless functions are cheap but everything comes with a tradeoff. Cold starts can cause delays in UX. If your web-application relies on being very responsive, you will want to reconsider serverless functions.
+- There are strategies around Cold Starts such as Pre-Warming which keep servers continuously running.
+
+---
+
+## Simple Queue Service
+
+#### _SQS Introduction_
+
+- Fully managed queuing service that enables you to decouple and scale microservices, distributed systems and serverless applications.
+- SQS is for **Application Integration**.
+- SQS is a solution for the distributed queuing of messages generated by an app. It connects isolate apps together by passing along messages.
+- A queue is a temporary repository for messages that are awaiting processing.
+- To use SQS, an app must pull using the AWS SDK. SQS is not push-based.
+
+---
+
+#### _What is a Queuing System?_
+
+- What is a Message System?
+  - Used to provide asynchronous communication and decouple processes via messages/events from a sender and a receiver (producer and consumer).
+- Queuing
+  - Generally will delete messages once they are consumed.
+  - Simple communication; not real-time.
+  - Have to pull; not reactive.
+  - Eg. Sidekiq, RabbitMQ.
+- Streaming
+  - Multiple consumers can react to events (messages).
+  - Events live in the stream for long periods of time, so complex operations can be applied.
+  - Real-time.
+  - Kinesis, Kafka, NATS
+
+---
+
+#### _SQS Use Case_
+
+- App publishes messages to the queue.
+- Other app pulls the queue and finds the message and does something.
+- Other app reports that they completed their task and marks the message for completion.
+- Original app pulls the queue and sees the message is no longer in the queue.
+
+---
+
+#### _SQS Limits_
+
+- Message Size
+  - 1B - 256KB
+  - SQS Extended Client Library for Java lets you send messages 256KB to 2GB. The message will be stored in S3 and library will reference the S3 object.
+- Message Retention
+  - How long SQS will hold on to messages before dropping it
+  - Default is 4 days
+  - Message retention can be adjusted from a minimum of 60 seconds to a max of 14 days.
+
+#### _Queue Types_
+
+- Standard Queue
+  - allows you a nearly-unlimited number of transactions per second.
+  - guarantees that a message will be delivered at least once.
+  - More than one copy of a message could be potentially be delivered out of order.
+  - Provides best-effort ordering to ensure a message is generally delivered in the same order that it was sent.
+- FIFO Queues
+  - Limited to 300 transactions.
+
+---
+
+#### _SQS Visibility Timeout_
+
+- How do we prevent one app from reading a message while another one is busy with that message? (Avoid doing the same task)
+- A visibility time-out is the period that messages are invisible in SQS after a reader picks up that message.
+- Messages will be deleted from the queue after a job has been processed (before visibility timeout expires).
+- If a job is **not** processed before the visibility time-out period, the message will become visible again and another reader will process it.
+- This can result in the same message being delivered twice!
+- 30 second (default) up to 12 hours maximum.
+
+---
+
+#### _SQS Short vs Long Polling_
+
+- Polling is the method in which we retrieve messages from the queues.
+- Short polling (default) returns messages immediately, even if the message queue being polled is empty.
+- When you need a message right away, short polling is what you want to use.
+- Long polling waits until message arrives in the queue, or the long poll timeout expires.
+- Using long polling will reduce operational costs because you can reduce the number of empty calls.
+- In most use-cases, you want to use Long Polling.
+
+---
+
+## Simple Notification System
+
+#### _SNS Introduction_
+
+- SNS is a highly available, durable, secure, fully managed pub/sub messaging service that enables you to decouple microservices, distributed systems, and serverless applications.
+- Example of Application Integration.
+- Subscribe and send notifications via text message, webhooks, lambdas, SQS and mobile notifications.
+- What is Pub/Sub?
+  - The publish-subscribe pattern is commonly implemented in messaging systems. The sender of messages (publishers) do not send their messages directly to receivers. They instead send their messages to an event bus. The event bus categorizes their messages into groups. The receivers of messages (subscribers) subscribe to these groups. Whenever new messages appear within their subscription, the messages are immediately delivered to them.
+    - Publishers have no knowledge of who their subscribers are.
+    - Subscribers do not pull for messages.
+    - Messages are instead automatically and immediately pushed to subscribers.
+    - Messages and events are interchangeable terms in pub/sub.
+
+![SNS](./images/sns.png)
+
+---
+
+#### _SNS Topics_
+
+- Topics allow you to group multiple subscriptions together.
+- A topic is able to deliver to multiple protocols at once eg. email, text message, https.
+- When topics deliver messages to subscribers, it will automatically format your message according to the subscriber's chosen protocol.
+- You can encrypt Topics via KMS.
+
+---
+
+#### _SNS Subscriptions_
+
+- To receive messages from a topic, you need to create a subscription.
+- A subscription can only subscribe to one protocol and one topic.
+- Protocols:
+  - HTTP, HTTPS - create webhooks into your web app
+  - Email - good for internal email notifications (only supports plain text)
+  - Email-JSON
+  - SQS - place SNS message into SQS queue
+  - Lambda - triggers a lambda function
+  - SMS - send a text message
+  - Platform application endpoints - mobile push
+
+---
+
+#### _Application as a Subscriber_
+
+- Send push notification messages directly to apps on mobile devices.
+- Can appear as message alerts, badge updates or sound alerts.
+
+---
+
+## Elasticache
+
+#### _Elasticache Introduction_
+
+- Managed caching service which either runs Redis or Memcached.
+- Deploy, run, and scale popular open source compatible in-memory data store.
+- Frequently identical queries are stored in the cache.
+- Elasticache is only accessible to resources operating with the same VPC to ensure low latency.
+
+---
+
+#### _What is In-Memory Data Store?_
+
+- **Caching** - the process of storing data in a cache. A cache is a temporary storage area. Caches are optimized for fast retrieval with the tradeoff of data not being durable.
+- **In-Memory Data Store** - when data is stored In-Memory (think of RAM). The tradeoff is high volatility (low durability, risk of data loss) but access to data is very fast.
+
+---
+
+#### _Caching Comparison_
+
+- **Memcached** is generally preferred for caching HTML fragments. Memcache is a simple key/value store. The tradeoff of it being simple is that it is very fast.
+- **Redis** can perform many different kinds of operations on your data. It's very good for leaderboards, keeps track of unread notification data. It is very fast, but arguably not as fast as Memcached.
+
+---
+
+## High Availability
+
+#### _HA Introduction_
+
+- Think about what could cause a service to become unavailable:
+  - AZ level eg. data-center flooded
+  - Region level eg. meteor strike
+  - App level eg. too much traffic, unresponsiveness due to distance in geographical locations
+  - Instance level eg. instance failure
+- Solutions we should implement to ensure High Availability:
+  - For multi-AZ, an Elastic Load Balancer can route traffic to operational AZs.
+  - We can route traffic to another Region via Route53.
+  - We can use ASG to increase the amount of instances to meet the demand of traffic.
+  - We can use ASG to ensure a minimum amount of instances are running and have ELB route traffic to healthy instances.
+  - We can use CloudFront to cache static content for faster delivery in nearby regions.
+
+---
+
+#### _Scale Up vs Scale Out_
+
+- When utilization increases and we are reaching capacity, we can:
+  - Scale Up (Vertical Scaling)
+    - Increase the size of instances
+    - Simpler to manage
+    - Lower availability (if a single instance fails, service becomes unavailable)
+  - Scale Out (Horizontal Scaling)
+    - Adding more of the same
+    - More complexity to manage
+    - Higher availability (if a single instance fails, it does not matter)
+- You generally want to **scale out** and **then up** to balance complexity and availability.
+
+![Scale Up Out](./images/scale_up_out.png)
+
+---
+
+## Elastic Beanstalk
+
+#### _EB Introduction_
+
+- Quickly deploy and manage web apps on AWS without worrying about infrastructure.
+- The Heroku of AWS. Choose a platform, upload your code and it runs.
+- Not recommended for "production" applications.
+- EB is powered by a CloudFormation template that can set up for you:
+  - ELB
+  - ASG
+  - RDS database
+  - EC2 preconfigured or customer
+  - Monitoring (CloudWatch, SNS)
+  - In-Place and Blue/Green deployment methodologies
+  - Security (rotates passwords)
+  - Can run Dockerized environments
+
+---
+
+## API Gateway
+
+#### _APIG Introduction_
+
+- Fully managed service to create, publish, maintain, monitor and secure APIs at any scale.
+- Create APIs that act as a front door for apps to access data, business logic, or functionality from back-end services.
+- API Gateway throttles API endpoints at 10,000 requests per second (can be increased via service request from AWS support).
+- You can require Authorization to your API via AWS Cognito or a custom Lambda.
+
+![API Gateway](./images/api_gateway.png)
+
+---
+
+#### _APIG Key Features_
+
+- API Gateway handles all the tasks involved in accepting and processing up to hundreds of thousands of concurrent API calls, including traffic management, authorization and monitoring.
+- Allows you to track and control any usage of the API. Throttle requests to help prevent attacks.
+- Expose HTTPS endpoints to define a RESTful API.
+- Highly scalable and cost-effective.
+- Send each API endpoint to a different target.
+- Maintain multiple versions of your API.
+
+---
+
+#### _APIG Configuration_
+
+- **Resources**
+  - When you create an API, you need to also create multiple resources.
+  - Resources are the URLS you define eg. `/projects`
+  - Resources can have child resources eg. `/projects/-id-/edit`
+- **Methods**
+  - You need to define Methods on Resources.
+  - You can define multiple Methods on a Resource.
+- **Stages**
+  - In order to use your API, you need to deploy it to Stages.
+  - Stages are versions of your API.
+- **Invoke URL**
+  - For each stage, AWS provides you a Invoke URL.
+  - This is where you'll make your API calls.
+  - It is possible to use a custom domain for your Invoke URL.
+- **Deploy API**
+  - Every time you make a change to your API, you need to deploy it via the **Deploy API** action.
+  - When you deploy, you choose the stage.
+  - When you create an API Method on a resource, you need to choose the Integration type. The most common Integration type is Lambda.
+  - You have to fine tune control over the Request and Response for the Method Execution.
+
+---
+
+#### _APIG Caching_
+
+- API Caching can be enabled to cache your endpoints' responses to API calls.
+- When enabled on a stage, API Gateway caches responses from your endpoint for a specified time-to-live (TTL) period.
+- API Gateway responds to requests by looking up the response from cache (instead of making a request to the endpoint).
+- Reduces the number of calls made to your endpoint and improves latency of the requests made to your API.
+
+---
+
+#### _APIG CORS_
+
+- Cross-Origin Resource Sharing (CORS) is a way that the server at the other end (not client code in the browser) can relax a same-origin policy.
+- Allows restricted resources (eg fonts) on a webpage to be requested from a different domain than the initial resource that it came from.
+- Should always be enabled if using JS/AJAX that uses multiple domains with an API gateway.
+- CORS is always enforced by the client.
+
+---
+
+#### _Same Origin Policy_
+
+- Same Origin Policy is a concept in the application security model where a web browser permits scripts contained in a first web page to access data in a second webpage.
+  - Same Origin Policies are used to help prevent Cross-Site Scripting (XSS) attacks.
+  - They only work if both web pages have the same origin.
+  - They are enforced at the web browser level.
+  - They ignore tools such as Postman or Curl.
+
+---
+
+## Kinesis
+
+#### _Kinesis Introduction_
+
+---
+
+- Fully-managed solution for collecting, processing and analyzing streaming data in the cloud.
+- Scalable, durable and **real-time**.
+- Streaming Data Examples:
+  - Stock prices
+  - Game data
+  - Social Network data
+  - Geospatial data
+  - Click Stream data
+- There are 4 types of Kinesis Streams
+  - Kinesis Data Streams
+  - Kinesis Firehose Delivery Streams
+  - Kinesis Data Analytics
+  - Kinesis Video Analytics
+- KPL (Kinesis Producer Library) is a Java library to write data to a stream.
+
+---
+
+#### _Kinesis Data Streams_
+
+![Kinesis Data Streams](./images/kinesis_data_streams.png)
+
+---
+
+#### _Kinesis Firehose Delivery Stream_
+
+![Kinesis FDS](./images/kinesis_fds.png)
+
+---
+
+#### _Kinesis Video Analytics_
+
+![Kinesis Video Analytics](./images/kinesis_vs.png)
+
+---
+
+#### _Kinesis Data Analytics_
+
+- You specify Firehose or Data Streams as an input and an output.
+- Data that pass through Data Analytics is run through custom SQL you provide and the results are then output.
+- This allows for real-time analytics of your data.
+
+![Kinesis Data Analytics](./images/kinesis_da.png)
+
+---
+
+## Storage Gateway
+
+#### _Storage Gateway Introduction_
+
+- Storage Gateway connects an on-premises software appliance with cloud-based storage.
+- Provides seamless and secure integration between an organization's on-premises IT environment and AWS's storage infrastructure.
+- Securely store data to the AWS Cloud in scalable and cost-effective manner.
+- Software appliance is available as a virtual machine (VM) image.
+- Supports both VMWare ESXi and Microsoft Hyper-V.
+- Once installed and activated, you can use the AWS Console to create your gateway.
+- There are 3 Types of Gateways:
+  - File (NFS) - store your files on S3
+  - Volume (iSCSI) - store copies of your hard disk drives in S3
+    - Stored Volumes
+    - Cached Volumes
+  - Tape Gateway (VTL - virtual tape library)
+
+#### _File Gateway_
+
+- Access your files through Network File System (NFS) or SMB mount point.
+- Ownership, permissions and timestamps are all stored within S3 metadata of the object associated with the file.
+- Once a file is transferred to S3, it can be managed as a native S3 object.
+- Bucket policies, versioning, lifecycle management, and cross-region replication apply directly to objects stored in your bucket.
+
+---
+
+#### _Volume Gateway_
+
+- VG presents your applications with disk volumes using the Internet Small Computer Systems Interface (iSCSI) block protocol.
+- Data that is written to volumes can be asynchronously backed up as point-in-time snapshots of the volumes and stored in the cloud as AWS EBS Snapshots.
+- Snapshots are incremental backups that capture only changed blocks in the volume.
+- All snapshot storage is also compressed to help minimize your storage charges.
+
+---
+
+#### _Stored Volumes_
+
+- Primary data is stored locally while asynchronously backing up that data to AWS.
+- Provide your on-premises applications with low-latency access to their entire datasets while still providing durable off-site backups.
+- Create storage volumes and mount them as iSCSI devices from your on-premises servers.
+- Any data written to stored volumes is stored on your on-premises storage hardware.
+- EBS snapshots are backed up to S3.
+- Stored Volumes can be between 1GB - 16TB in size.
+
+---
+
+#### _Cached Volumes_
+
+- Lets you use AWS S3 as your primary data storage, while retaining frequently accessed data locally in your storage gateway.
+- Minimizes the need to scale your on-premises storage infrastructure while still providing your applications with low latency data access.
+- Create storage volumes up to 32TB in size and attach them as iSCSI devices from your on-premises servers.
+- Your gateway stores data that you write to these volumes in S3 and retains recently read data in your on-premises storage gateway cache and upload buffer storage.
+- Cached volumes can be between 1GB - 32GB in size.
+
+#### _Tape Gateway_
+
+- A durable, cost-effective solution to archive your data in the AWS cloud.
+- The VTL interface provides leverage over existing tape-based backup application infrastructure.
+- Store data on virtual tape cartridges that you create on your tape gateway.
+- Each tape gateway is pre-configured with a media changer and tape drives, which are available to your existing client backup applications as iSCSI devices.
+- You add tape cartridges as you need to archive your data.
+- Supported by NetBackup, Backup Exec, and Veeam.

@@ -4,6 +4,12 @@
 
 - [FAQ](#faq)
 - [Exam Guide Overview](#exam-guide-overview)
+- [Architecture 101](#architecture-101)
+  - [High Availability vs Fault Tolerance](#high-availability-vs-fault-tolerance)
+  - [RPO vs RTO](#rpo-vs-rto)
+  - [Tiered Application Design](#tiered-application-design)
+  - [Encryption](#encryption)
+  - [Odds and Ends](#odds-and-ends)
 - [S3](#s3)
   - [Introduction to S3](#introduction-to-s3)
   - [S3 Object](#s3-object)
@@ -164,13 +170,13 @@
   - [Alarms](#cloudwatch-alarms)
   - [Dashboard](#cloudwatch-dashboard)
   - [Availability](#cloudwatch-availability)
-  - [Agent & Host Level Metrics](#agent-&-host-level-metrics)
+  - [Agent & Host Level Metrics](#agent-host-level-metrics)
 - [CloudTrail](#cloudtrail)
   - [Introduction](#cloudtrail-introduction)
   - [CloudTrail Event History](#cloudtrail-event-history)
   - [Trail Options](#trail-options)
   - [CloudTrail to CloudWatch](#cloudtrail-to-cloudwatch)
-  - [Management vs Data Events](management-vs-data-events)
+  - [Management vs Data Events](#management-vs-data-events)
 
 ---
 
@@ -249,6 +255,70 @@ Whitepapers
 
 - AWS Well-Achitected Framework.
 - Architecting for the Cloud: AWS Best Practices.
+
+---
+
+
+## Architecture 101
+
+#### _High Availability vs Fault Tolerance_
+
+- High Availability - Hardware, software and configuration allowing a system to recover quickly in the event of a failure
+- Fault Tolerance - System designed to operate through a failure with **no user impact**. More expensive and complex to achieve.
+- Example: Trucks with a spare tire vs airplane with backup engines
+
+---
+
+#### _RPO vs RTO_
+
+- Recovery Point Objective - How much a business can tolerate to lose, expressed in time. The maximum time between a failure and the last successful backup.
+- Recovery Time Objective - The maximum amount of time a system can be down. How long a solution takes to recover.
+
+---
+
+#### _Tiered Application Design_
+
+![Tiered Application Design](./images/tiered_application_design.png)
+
+---
+
+#### _Encryption_
+
+- Encryption is the process of taking plaintext and converting it into ciphertext, and converting ciphertext into plaintext. Plaintext and ciphertext can be text, images, or any other data.
+- Encryption generally uses an algorithm and one or more keys. It is commonly used to encrypt data at rest or in transit.
+- The process can be symmetrical (where the same key is used for encryption and decryption) or assymtrical (where different keys - called public and private keys - are used).
+
+![Encryption](./images/encryption.png)
+
+- Symmetric encryption:
+```sh
+echo "Cats are Amazing" > hiddenmessage.txt
+gpg -c hiddenmessage.txt
+cat hiddenmessage.txt.gpg # this will be unreadable
+# this clears the cached password
+echo RELOADAGENT | gpg-connect-agent
+gpg -o output.txt hiddenmessage.txt.gpg
+rm hiddenmessage.txt.gpg
+rm output.txt
+```
+- Assymetric encryption:
+```sh
+gpg --gen-key
+gpg --armor --output pubkey.txt --export 'Adrian' ## see public key
+gpg --armor --output privkey.asc --export-secret-keys 'Adrian' ## export secret key
+gpg --encrypt --recipient 'Adrian' hiddenmessage.txt
+gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
+```
+- PEM files contain private keys that are only generated once.
+
+---
+
+#### _Odds and Ends_
+
+- Cost effecient or cost effective - implementing a solution within AWS using products or product features that provide the required service for as little initial and ongoing cost as possible. Using your funds effectively and knowing if product X is better or worse than product Y for a given solution.
+- Secure - In a systems architecture context, implementing a given solution that secures data and operations as much as possible from an internal and external attack.
+- Application session state - data that represents what a customer is doing, what they have chosen, or what they have configured. Examples include items and quantities in a shopping cart, notes on an X-ray, and 3D position of a real-time heart scan. Session state can be stored on a server (stateful server) or externally to a server (stateless server).
+- Undifferentiated heavy lifting - a part of an application, system or platform that is not specific to your business. Allowing a vendor (AWS) to handle this part frees your staff to work on adding direct value to your customers.
 
 ---
 

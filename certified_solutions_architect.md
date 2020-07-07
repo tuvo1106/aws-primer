@@ -5,6 +5,9 @@
 - [FAQ](#faq)
 - [Exam Guide Overview](#exam-guide-overview)
 - [Architecture 101](#architecture-101)
+  - [Access Management](#access-management)
+  - [Shared Responsibility Model](#shared-responsibility-model)
+  - [Service Models](#service-models)
   - [High Availability vs Fault Tolerance](#high-availability-vs-fault-tolerance)
   - [RPO vs RTO](#rpo-vs-rto)
   - [Tiered Application Design](#tiered-application-design)
@@ -258,8 +261,28 @@ Whitepapers
 
 ---
 
-
 ## Architecture 101
+
+#### _Access Management_
+
+- Principal - A person or application that can make an authenticated or anonymous request to perform an action on a system
+- Authentication - The process of authenticating a principal against an identity. This could be via username and password or API keys
+- Identity - Objects that require authentication and are authorized to access resources
+- Authorization - The process of checking and allowing or denying access to a resource for an identity
+
+---
+
+#### _Shared Responsibility Model_
+
+![Shared Responsibility Model](./images/srn.png)
+
+---
+
+### _Service Models_
+
+![Service Models](./images/service_models.png)
+
+---
 
 #### _High Availability vs Fault Tolerance_
 
@@ -291,6 +314,7 @@ Whitepapers
 ![Encryption](./images/encryption.png)
 
 - Symmetric encryption:
+
 ```sh
 echo "Cats are Amazing" > hiddenmessage.txt
 gpg -c hiddenmessage.txt
@@ -301,7 +325,9 @@ gpg -o output.txt hiddenmessage.txt.gpg
 rm hiddenmessage.txt.gpg
 rm output.txt
 ```
+
 - Assymetric encryption:
+
 ```sh
 gpg --gen-key
 gpg --armor --output pubkey.txt --export 'Adrian' ## see public key
@@ -309,6 +335,7 @@ gpg --armor --output privkey.asc --export-secret-keys 'Adrian' ## export secret 
 gpg --encrypt --recipient 'Adrian' hiddenmessage.txt
 gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 ```
+
 - PEM files contain private keys that are only generated once.
 
 ---

@@ -13,6 +13,10 @@
   - [Tiered Application Design](#tiered-application-design)
   - [Encryption](#encryption)
   - [Odds and Ends](#odds-and-ends)
+  - [AWS Accounts](#aws-accounts)
+  - [AWS Physical and Networking Layer](#aws-physical-and-networking-layer)
+  - [AWS Well-Architected Framework](#aws-well-architected-framework)
+  - [Elasticity](#elasticity)
 - [S3](#s3)
   - [Introduction to S3](#introduction-to-s3)
   - [S3 Object](#s3-object)
@@ -309,7 +313,7 @@ Whitepapers
 
 - Encryption is the process of taking plaintext and converting it into ciphertext, and converting ciphertext into plaintext. Plaintext and ciphertext can be text, images, or any other data.
 - Encryption generally uses an algorithm and one or more keys. It is commonly used to encrypt data at rest or in transit.
-- The process can be symmetrical (where the same key is used for encryption and decryption) or assymtrical (where different keys - called public and private keys - are used).
+- The process can be symmetrical (where the same key is used for encryption and decryption) or asymmetrical (where different keys - called public and private keys - are used).
 
 ![Encryption](./images/encryption.png)
 
@@ -326,7 +330,7 @@ rm hiddenmessage.txt.gpg
 rm output.txt
 ```
 
-- Assymetric encryption:
+- Asymmetric encryption:
 
 ```sh
 gpg --gen-key
@@ -342,10 +346,77 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 
 #### _Odds and Ends_
 
-- Cost effecient or cost effective - implementing a solution within AWS using products or product features that provide the required service for as little initial and ongoing cost as possible. Using your funds effectively and knowing if product X is better or worse than product Y for a given solution.
+- Cost efficient or cost effective - implementing a solution within AWS using products or product features that provide the required service for as little initial and ongoing cost as possible. Using your funds effectively and knowing if product X is better or worse than product Y for a given solution.
 - Secure - In a systems architecture context, implementing a given solution that secures data and operations as much as possible from an internal and external attack.
 - Application session state - data that represents what a customer is doing, what they have chosen, or what they have configured. Examples include items and quantities in a shopping cart, notes on an X-ray, and 3D position of a real-time heart scan. Session state can be stored on a server (stateful server) or externally to a server (stateless server).
 - Undifferentiated heavy lifting - a part of an application, system or platform that is not specific to your business. Allowing a vendor (AWS) to handle this part frees your staff to work on adding direct value to your customers.
+
+---
+
+#### _AWS Accounts_
+
+- AWS accounts are isolated. They are created initially with a single root user. This user, via its username/password/APIKeys, is the only identity that can use (authenticate to) the account. If account credentials are leaked, the impact (blast radius) is limited to that account.
+- Authorization is controlled on a per-account basis. The root user starts with full control of the account and its resources. Additional identities can be created or external identities (AWS or otherwise) can be granted access. Unless defined otherwise, no identity except the account root user has access to resources.
+- Accounts can be linked and configured to allow consolidated billing where a master account is charged for all member account resource usage.
+- Every AWS account has its own isolated billing information. This is initially in the form of an attached credit card, but established account can be converted to use traditional, term-based invoicing. By default, you are only billed for resources in your account. Billing or security exploits are limited to a single account.
+
+---
+
+#### _AWS Physical and Networking Layer_
+
+- Regions contain multiple AZs, which are separated and isolated networks. A failure in one AZ generally won't impact another.
+- AZs in the same region are connected with redundant, high-speed, low-latency network connections.
+- Most AWS services run within AZs. Some series operate from one AZ, while other replicate between AZs. Some services allow you to choose the AZ to use, and some don't.
+
+---
+
+#### _AWS Well-Architected Framework_
+
+- Security
+  - The security pillar includes the ability to protect information, systems, and assets while delivering business value through risk assessments and mitigation strategies.
+    - Implement a strong identity foundation
+    - Enable traceability
+    - Apply security at all layers
+    - Automate security best practices
+    - Protect data in transit and at rest
+    - Prepare for security events
+- Reliability
+  - The reliability pillar includes the ability of a system to recover from infrastructure or service disruptions, dynamically acquire computing resources to meet demand, and mitigate disruptions, such as misconfigurations or transient network issues.
+    - Test recovery procedures
+    - Automatically recover from failure
+    - Scale horizontally to increase aggregate system availability
+    - Stop guessing capacity
+    - Manage change in automation
+- Performance Efficiency
+  - The performance efficiency pillar includes the ability to use computing resources efficiently to meet system requirements and to maintain that efficiency as demand changes and technologies evolve.
+    - Democratize advanced technologies
+    - Go global in minutes
+    - Use serverless architectures
+    - Experiment more often
+    - Mechanical sympathy
+- Operational Excellence
+  - The operational excellence pillar includes the ability to run and monitor systems to deliver business value and to continually improve supporting processes and procedures
+    - Perform operations as code
+    - Annotate documentation
+    - Make frequent, small, reversible changes
+    - Refine operations procedures frequently
+    - Anticipate failure
+    - Learn from operational failures
+- Cost Optimization
+  - The cost optimization pillar includes the ability to avoid or eliminate unneeded cost or suboptimal resources
+    - Adopt a consumption model
+    - Measure overall efficiency
+    - Stop spending money on data center operations
+    - Analyze and attribute expenditure
+    - Use managed services to reduce cost of ownership
+
+---
+
+#### _Elasticity_
+
+- Traditional legacy systems use vertical scaling. An attempt is made to forecast demand and purchase servers ideally before the demand passes current capacity. Purchase too early and capacity is waster. Purchase too late and performance is impacted.
+- WHen horizontal scaling is used (more, smaller servers), capacity can be maintained closer to demand. There is less waste because servers and there's less risk of performance impact as each increase is less expensive, so it generally requires less approval.
+- Elasticity, or elastic scaling, is where automation and horizontal scaling are used in conjunction to match capacity with demand. Demand is rarely so linear - it can increase or decrease, often in rapid and sudden way. An efficient platform should scale OUT and IN, matching demands on that system.
 
 ---
 

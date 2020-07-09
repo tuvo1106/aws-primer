@@ -4,9 +4,9 @@ This repository contains notes for AWS certifications.
 
 |                                Docs                                 |
 | :----------------------------------------------------------------- |
-|  [Certified Cloud Practitioner](./certified_cloud_practitioner.md)  |
-| [Certified Solutions Architect](./certified_solutions_architect.md) |
-|           [Certified Developer](./certified_developer.md)           |
+|  [Certified Cloud Practitioner](./aws/certified_cloud_practitioner.md)  |
+| [Certified Solutions Architect](./aws/certified_solutions_architect.md) |
+|           [Certified Developer](./aws/certified_developer.md)           |
 
 ## Author
 

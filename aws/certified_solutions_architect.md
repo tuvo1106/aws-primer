@@ -278,13 +278,13 @@ Whitepapers
 
 #### _Shared Responsibility Model_
 
-![Shared Responsibility Model](./images/srn.png)
+![Shared Responsibility Model](../images/srn.png)
 
 ---
 
 ### _Service Models_
 
-![Service Models](./images/service_models.png)
+![Service Models](../images/service_models.png)
 
 ---
 
@@ -305,7 +305,7 @@ Whitepapers
 
 #### _Tiered Application Design_
 
-![Tiered Application Design](./images/tiered_application_design.png)
+![Tiered Application Design](../images/tiered_application_design.png)
 
 ---
 
@@ -315,7 +315,7 @@ Whitepapers
 - Encryption generally uses an algorithm and one or more keys. It is commonly used to encrypt data at rest or in transit.
 - The process can be symmetrical (where the same key is used for encryption and decryption) or asymmetrical (where different keys - called public and private keys - are used).
 
-![Encryption](./images/encryption.png)
+![Encryption](../images/encryption.png)
 
 - Symmetric encryption:
 
@@ -424,35 +424,42 @@ gpg --output decrypted.txt --decrypt hiddenmessage.txt.gpg
 
 #### _Introduction to S3_
 
-- Object-based storage service.
+- S3 is a global object storage platform that can be used to store objects in the form of text files, phots, audio, movies, large binaries, or other object types.
+- When you upload an object to S3, it is replicated across the AZs in a region.
 - Serverless storage in the cloud.
 - Don't worry about file systems or disk space.
 
 **What is Object Storage (Object-based Storage)?**
 
-- data storage architecture that manages data as objects, _as opposed_ to other storage architectures:
-  - file systems - manages data as files and file hierarchy.
-  - block storage - manages data as blocks within sectors and tracks.
+- data storage architecture that manages data as objects, **as opposed** to other storage architectures:
 
-S3 provides you with unlimited storage. You do not need to think about the underlying infrastructure.
-The S3 console provides an interface for you to upload and access your data.
+  - file systems - manages data as files and file hierarchy
+  - block storage - manages data as blocks within sectors and tracks
+
+- S3 provides you with unlimited storage. You do not need to think about the underlying infrastructure.
+- The S3 console provides an interface for you to upload and access your data.
+
+---
 
 #### _S3 Object_
 
-Objects contain your data. They are like files.
-Objects may consist of:
+- Objects contain your data. They are like files.
+- Objects may consist of:
+  - Key - name of object.
+  - Value - the data itself made up of a sequence of bytes.
+  - Version ID - when versioning available, the version of object.
+  - Metadata - additional information attached to the object.
+- You can store data from _0 Bytes_ to _5 Terabytes_ in size.
 
-- Key - name of object.
-- Value - the data itself made up of a sequence of bytes.
-- Version ID - when versioning available, the version of object.
-- Metadata - additional information attached to the object.
-
-You can store data from _0 Bytes_ to _5 Terabytes_ in size.
+---
 
 #### _S3 Bucket_
 
-Buckets hold objects. Buckets can also have folders which in turn hold objects.
-S3 is a a universal namespace so bucket names must be unique (think like having a domain name).
+- Buckets hold objects. Buckets can also have folders which in turn hold objects.
+- S3 is a a universal namespace so bucket names must be unique (think like having a domain name).
+- Minimum of three and maximum of 63 characters - no uppercase or underscores
+- Must start with a lowercase letter or a number and can't be formatted as an IP address
+- Default 100 buckets for account and hard 1,000 bucket limit via support request
 
 ---
 
@@ -573,8 +580,7 @@ Trade Retrieval Time, Accessibility and Durability for Cheaper Storage.
 - MFA Delete can only be enabled under these conditions:
   - The _AWS CLI_ must be used to turn on MFA.
   - The bucket must have _versioning turned on_.
-
-Only the bucket owner logged in as **Root User** can DELETE objects from bucket.
+- Only the bucket owner logged in as **Root User** can DELETE objects from bucket.
 
 ---
 
@@ -654,7 +660,7 @@ Provision a _logically isolated section of the AWS cloud_ where you can launch A
 Think of a AWS VPC as your own _personal data center_.
 Gives you complete control over your virtual networking environment.
 
-![VPC](./images/vpc.png)
+![VPC](../images/vpc.png)
 
 Combining these components and services is what makes up your VPC:
 
@@ -970,7 +976,7 @@ You're allowed two Access keys per user.
 - **Cognito Identity Pools** - Provide temporary credentials for users to access AWS services.
 - **Cognito Sync** - Syncs user data and preferences across all devices
 
-![Cognito](./images/cognito.png)
+![Cognito](../images/cognito.png)
 
 ---
 
@@ -1001,7 +1007,7 @@ You're allowed two Access keys per user.
 - Identity Pools provide temporary AWS credentials to access services eg. S3, DynamoDB.
 - Identity Pools can be thought of as the actual mechanism authorizing access to the AWS resources.
 
-![Identity Pools](./images/identity_pools.png)
+![Identity Pools](../images/identity_pools.png)
 
 ---
 
@@ -1239,7 +1245,7 @@ There are _7 different types_ of Routing Policies:
 
 EC2 instances generally double in price and key attributes.
 
-![EC2](./images/ec2.png)
+![EC2](../images/ec2.png)
 
 ---
 
@@ -1360,7 +1366,7 @@ Combine metadata with userdata scripts to perform all sorts of advanced AWS stag
   - A block device mapping that specifies the volumes to attach to the instance when it's launched.
 - AMIs are _Region Specific!_
 
-![AMI](./images/ami.png)
+![AMI](../images/ami.png)
 
 ---
 
@@ -1622,7 +1628,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
   - Cold HDD - sc1 - lowest cost HDD for infrequently accessed workloads
   - EBS Magnetic - standard - previous generation HDD
 
-![EBS](./images/ebs.png)
+![EBS](../images/ebs.png)
 
 ---
 
@@ -1662,7 +1668,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
   - Copy the AMI to another region.
   - Launch a new EC2 instance from the copied AMI.
 
-![EBS Moving Volumes](./images/ebs_moving_volumes.png)
+![EBS Moving Volumes](../images/ebs_moving_volumes.png)
 
 ---
 
@@ -1675,7 +1681,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
   - Create a new AMI from the encrypted Snapshot.
   - Launch new EC2 instance in from the created AMI.
 
-![Ebs Encryption](./images/ebs_encryption.png)
+![Ebs Encryption](../images/ebs_encryption.png)
 
 ---
 
@@ -1827,7 +1833,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 #### _Multi-AZ vs Read Replicas_
 
-![Multi-AZ vs Read Replicas](./images/multi-az_vs_read-replicas.png)
+![Multi-AZ vs Read Replicas](../images/multi-az_vs_read-replicas.png)
 
 ---
 
@@ -1856,7 +1862,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - Aurora is allowed up to 15 replicas.
 - Aurora can span multiple regions via Aurora Global Database.
 
-![aurora_availability](./images/aurora_availability.png)
+![aurora_availability](../images/aurora_availability.png)
 
 ---
 
@@ -1870,7 +1876,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 #### _Aurora Replicas_
 
-![Aurora Replicas](./images/aurora_replicas.png)
+![Aurora Replicas](../images/aurora_replicas.png)
 
 ---
 
@@ -2025,7 +2031,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 #### _Table Structure_
 
-![DynamoDB Table Structure](images/dynamodb_table_structure.png)
+![DynamoDB Table Structure](../images/dynamodb_table_structure.png)
 
 ---
 
@@ -2046,28 +2052,33 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 #### _CloudFormation Introduction_
 
-- **Infrastructure as Code** - the process of managing and provisioning computer data centers through machine-readable definition files (eg. YAML, JSON) rather than physical hardware configuration or interactive configuration tools.
-- Can be uploaded to S3 or directly if under 0.05 MB.
-- **NestedStacks** helps you break up your CF template into smaller reusable templates that can be composed into larger templates.
+- **Infrastructure as Code** - the process of managing and provisioning computer data centers through machine-readable definition files (eg. YAML, JSON) rather than physical hardware configuration or interactive configuration tools
+- Used to automate the creation of resources via code.
+- Can be uploaded to S3 or directly if under 0.05 MB
+- **NestedStacks** helps you break up your CF template into smaller reusable templates that can be composed into larger templates
+- CF is effective if you frequently deploy the same infrastructure or you require guaranteed consistent configuration
 
 ---
 
-#### _Template Formats_
+#### _Templates and Stacks_
 
 - JSON, YAML (indent-based)
+- Contains logical resources and configurations
+- A template can create up to 200 resources
+- Stacks are created and modified based on templates, which can be changed and used to update a stack
+- Stacks take logical resources from a template and create, update, or delete the physical resources in AWS.
+- Stack names need to be unique
+- If a stack is deleted, then, by default, any resources it has created are also deleted
+- A stack can be updated by uploading a new version of a template
+- New logical resources cause new physical resources
+- Removed logical resources cause the stack to delete physical resources
+- Changed logical resources update with some disruption or replace physical resources
 
 ---
 
 #### _Template Anatomy_
 
-![Template Anatomy](./images/template_anatomy.png)
-
----
-
-#### _CloudFormation Introduction_
-
-- A templating language that defines AWS resources to be provisioned.
-- Used to automate the creation of resources via code.
+![Template Anatomy](../images/template_anatomy.png)
 
 ---
 
@@ -2145,7 +2156,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - How often CW will collect and make available data.
 - Detailed monitoring is a paid service.
 
-![CW Availability](./images/cw_availability.png)
+![CW Availability](../images/cw_availability.png)
 
 ---
 
@@ -2240,7 +2251,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - Lambda is commonly used to **glue different services together** so the use cases are endless.
 - Processing Thumbnails, Contact Email Form
 
-![Lambda Use Cases](./images/lambda_use_cases.png)
+![Lambda Use Cases](../images/lambda_use_cases.png)
 
 ---
 
@@ -2263,7 +2274,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 #### _Lambda Interface_
 
-![Lambda Interface](./images/lambda_interface.png)
+![Lambda Interface](../images/lambda_interface.png)
 
 ---
 
@@ -2385,7 +2396,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
     - Messages are instead automatically and immediately pushed to subscribers.
     - Messages and events are interchangeable terms in pub/sub.
 
-![SNS](./images/sns.png)
+![SNS](../images/sns.png)
 
 ---
 
@@ -2476,7 +2487,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
     - Higher availability (if a single instance fails, it does not matter)
 - You generally want to **scale out** and **then up** to balance complexity and availability.
 
-![Scale Up Out](./images/scale_up_out.png)
+![Scale Up Out](../images/scale_up_out.png)
 
 ---
 
@@ -2508,7 +2519,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - API Gateway throttles API endpoints at 10,000 requests per second (can be increased via service request from AWS support).
 - You can require Authorization to your API via AWS Cognito or a custom Lambda.
 
-![API Gateway](./images/api_gateway.png)
+![API Gateway](../images/api_gateway.png)
 
 ---
 
@@ -2600,19 +2611,19 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 #### _Kinesis Data Streams_
 
-![Kinesis Data Streams](./images/kinesis_data_streams.png)
+![Kinesis Data Streams](../images/kinesis_data_streams.png)
 
 ---
 
 #### _Kinesis Firehose Delivery Stream_
 
-![Kinesis FDS](./images/kinesis_fds.png)
+![Kinesis FDS](../images/kinesis_fds.png)
 
 ---
 
 #### _Kinesis Video Analytics_
 
-![Kinesis Video Analytics](./images/kinesis_vs.png)
+![Kinesis Video Analytics](../images/kinesis_vs.png)
 
 ---
 
@@ -2622,7 +2633,7 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - Data that pass through Data Analytics is run through custom SQL you provide and the results are then output.
 - This allows for real-time analytics of your data.
 
-![Kinesis Data Analytics](./images/kinesis_da.png)
+![Kinesis Data Analytics](../images/kinesis_da.png)
 
 ---
 

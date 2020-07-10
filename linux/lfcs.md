@@ -1,6 +1,8 @@
 # Linux Foundation Certified SysAdmin (LFCS)
 
-## Searching for files
+## Essential Commands
+
+### Searching for files
 
 **Basic Searching**
 
@@ -69,7 +71,7 @@ locate test.txt
 
 ---
 
-## Evaluate and Compare the Basic File System Features and Options
+### Evaluate and Compare the Basic File System Features and Options
 
 **What is a Filesystem?**
 
@@ -152,7 +154,7 @@ locate test.txt
 
 ---
 
-## Compare and Manipulate File Content and Use Input-Output Redirection
+### Compare and Manipulate File Content and Use Input-Output Redirection
 
 **Sort**
 
@@ -189,7 +191,7 @@ cut -d ";" -f1 delimited.txt
 
 ---
 
-## Analyze Text Using Basic Regular Expressions
+### Analyze Text Using Basic Regular Expressions
 
 ```sh
 # Match every line that starts with 'the'
@@ -207,6 +209,54 @@ grep '\<[tT]he\>' alice.txt
 
 # Find any two same lowercase letters (back-reference)
 grep '\([a-z]\)\1' alice.txt
+```
+
+---
+
+### Archive, Backup, Compreses, Unpack, and Decompress Files
+
+**Tar (tape archive)**
+
+```sh
+# No compression, c: create, v: verbose, f:file
+tar cvf databackup.tar /data
+
+# List tarball contents
+tar tvf databackup.tar
+```
+
+**Zip**
+
+```sh
+gzip databackup.tar
+
+# Tar and zip
+tar cfvz databackup.tar.gz /data
+
+# Extract
+tar xfvz databackup.tar.gz
+```
+
+---
+
+### Create and Manage Hard and Soft Links
+
+- hard links point to the direct inodes on disk where the file lives
+- name does not matter
+- changing content of hard link will change all refs
+- deleting hard link will still presist original until all references are gone
+
+```sh
+# Hard link
+ln <to> hardlink
+```
+
+- soft links point anywhere you can specify a file, e.g. different file systems
+- if you delete original sym link, the link is broken
+
+```sh
+# Soft link
+ln -s <to> softlink
 ```
 
 ---

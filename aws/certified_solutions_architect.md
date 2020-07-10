@@ -906,21 +906,45 @@ NAT Gateways is a managed service which launches redundant instances within the 
 
 - Identity Access Management
 - Manages access of AWS users and resources.
-- IAM is a universal system (applied to all regions at the same time). IAM is a free service.
+- IAM is a universal system (applied to all regions at the same time).
+  -IAM is a free service.
 - A root account is the account initially created when AWS is set up.
-- New IAM accounts have no permissions by default until granted.
+- New IAM accounts have no permissions by default until granted (implicit deny).
+- If a request is explicitly allowed, it's allowed unless denied by an explicit deny.
+- **DENY -> ALLOW --> DENY**
 - New users get assigned an Access key ID and Secret when first created when you give them programmatic access.
 - Access keys are only used for CLI and SDK (cannot access console).
 - Always set up MFA for Root Accounts.
+
+![Identity and Access Control](../images/iam_access_control.png)
 
 ---
 
 #### _IAM Core Components_
 
 - Users - End users who log into the console or interact with AWS resource programmatically
+  - Suitable for long-term access for a known identity
+  - Principals authenticate to IAM Users with a username and password or using access keys
+  - Has ARN, considered "real" identity
+  - Hard limit of **5,000** users per account
+  - 10 group memberships per IAM user
+  - 10 managed policy per user
+  - 1 MFA per user, 2 access keys per user
+  - No inline limit, but you cannot exceed 2048 characters for all inline policies
 - Groups - Group up your Users so they share permission levels of the group eg. Administrators, Develops, Auditors
+  - Groups allow easier administration over sets of IAM users. Inline and managed policies can be applied to group that flow on to members of that group.
+  - Groups can contain many users and users can be in many groups.
+  - Groups are **not** a true identity - they cannot be the principal in a policy, so they can't be referenced in resource policies.
+  - Groups have no credentials.
 - Roles - Associate permissions to a Role and then assign this to Users or Groups
-- Policies - JSON documents which grant permissions for a specific user, group or role to access services. Policies are attached to IAM Identities.
+  - Roles are assumed by another identity allowed in the trust policy (IAM user, AWS service, etc...). When a role is assumed, the Security Token Service (STS) generates a **time-limited** set of access keys (temporary security credentials). These accces keys have the permissions defined in the permissions policy.
+  - IAM roles have no long-term credentials.
+
+![IAM Roles](../images/iam_roles.png)
+
+- Policies - JSON documents which grant permissions for a specific user, group or role to access services.
+  - Policies are attached to IAM Identities. They have no effect until they are attached.
+  - A policy document is a list of statements.
 
 ---
 
@@ -928,7 +952,9 @@ NAT Gateways is a managed service which launches redundant instances within the 
 
 - Managed Policies - a policy which is managed by AWS, which you cannot edit. Managed policies are labeled with an orange box.
 - Customer Managed Policies - a policy created by the customer which is editable. Customer policies have no symbol beside them.
+  - Customer-managed policies are flexible but require administration.
 - Inline Policies - a policy which is directly attached to the user.
+  - Inline policies are low overhead but lack flexibility.
 
 ---
 
@@ -953,9 +979,11 @@ In IAM, you can set a Password Policy. To set the minimum requirements of a pass
 
 #### _Programmatic Access Keys_
 
-Access keys allow users to interact with AWS service programmatically via the AWS CLI or AWS SDK.
-
-You're allowed two Access keys per user.
+- Access keys allow users to interact with AWS service programmatically via the AWS CLI or AWS SDK.
+- Access keys do not allow you to authenticate via console.
+- Access keys consist of two parts: access key ID and secret access key.
+- The secret key is sensitive and only available once upon generation. It is stored only by the owner and not AWS.
+- You're allowed two Access keys per user.
 
 ---
 
@@ -1036,7 +1064,7 @@ Important AWS CLI flags to know:
 
 ---
 
-#### _SKD (Software Development Kit)_
+#### _SDK (Software Development Kit)_
 
 Control multiple AWS services using popular programming languages.
 

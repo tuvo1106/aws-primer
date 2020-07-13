@@ -949,3 +949,649 @@ cat index.hml
 apt-get update -y
 apt-get install vim -y
 ```
+
+## Dockerfile
+
+### Introduction
+
+- Dockerfiles are instructions. They contains all of the commands used to build an image.
+  - Docker images consist of read-only layers.
+  - Each represents a Dockerfile instruction.
+  - Layers are stacked.
+  - Each layer is a result of the changes from the previous layer.
+  - Images are built using the docker image build command.
+
+**Dockerfile Layers**
+
+```
+Dockerfile:
+FROM ubuntu:15.04
+COPY . /app
+RUN make /app
+CMD python /app/app.py
+```
+
+- FROM creates a layer from the ubuntu:15.04 Docker image.
+- COPY adds files from your Docker client’s current directory.
+- RUN builds your application with make.
+- CMD specifies what command to run within the container.
+
+**Best Practices**
+
+- Keep containers as ephemeral as possible.
+- Follow Principle 6 of the 12 Factor App.
+- Avoid including unnecessary files.
+- Use .dockerignore.
+- Use multi-stage builds.
+- Don’t install unnecessary packages.
+- Decouple applications.
+- Minimize the number of layers.
+- Sort multi-line arguments.
+- Leverage build cache.
+
+---
+
+### Working with Instructions
+
+- FROM: Initializes a new build stage and sets the Base Image
+- RUN: Will execute any commands in a new layer
+- CMD: Provides a default for an executing container. There can only be one CMD instruction in a Dockerfile
+- LABEL: Adds metadata to an image
+- EXPOSE: Informs Docker that the container listens on the specified network ports at runtime
+- ENV: Sets the environment variable <key> to the value <value>
+- ADD: Copies new files, directories or remote file URLs from <src> and adds them to the filesystem of the image at the path <dest>.
+- COPY: Copies new files or directories from <src> and adds them to the filesystem of the container at the path <dest>.
+- ENTRYPOINT: Allows for configuring a container that will run as an executable
+- VOLUME: Creates a mount point with the specified name and marks it as holding externally mounted volumes from native host or other containers
+- USER: Sets the user name (or UID) and optionally the user group (or GID) to use when running the image and for any RUN, CMD, and ENTRYPOINT instructions that follow it in the Dockerfile
+- WORKDIR: Sets the working directory for any RUN, CMD, ENTRYPOINT, COPY, and ADD instructions that follow it in the Dockerfile
+- ARG: Defines a variable that users can pass at build-time to the builder with the docker build command, using the --build-arg <varname>=<value> flag
+- ONBUILD: Adds a trigger instruction to the image that will be executed at a later time, when the image is used as the base for another build
+- HEALTHCHECK: Tells Docker how to test a container to check that it is still working
+- SHELL: Allows the default shell used for the shell form of commands to be overridden
+
+- To set up the environment:
+
+```sh
+sudo yum install git -y
+mkdir docker_images
+cd docker_images
+mkdir weather-app
+cd weather-app
+git clone https://github.com/linuxacademy/content-weather-app.git src
+```
+
+- Create the Dockerfile:
+
+```sh
+vi Dockerfile
+```
+
+- Dockerfile contents:
+
+```docker
+# Create an image for the weather-app
+
+FROM node
+LABEL org.label-schema.version=v1.1
+RUN mkdir -p /var/node
+ADD src/ /var/node/
+WORKDIR /var/node
+RUN npm install
+EXPOSE 3000
+CMD ./bin/www
+```
+
+- Build the weather-app image:
+
+```
+docker image build -t linuxacademy/weather-app:v1 .
+```
+
+- List the images:
+
+```
+docker image ls
+```
+
+- Create the weather-app container:
+
+```
+docker container run -d --name weather-app1 -p 8081:3000 linuxacademy/weather-app:v1
+```
+
+- List all running containers:
+
+```
+docker container ls
+```
+
+---
+
+### Environment Variables
+
+- To make new software easier to run, you can use ENV to update the PATH environment variable for the software that your container installs.
+- Setup your environment:
+
+```sh
+cd docker_images
+mkdir env
+cd env
+```
+
+- Use the --env flag to pass an environment variable when building an image:
+
+```
+--env [KEY]=[VALUE]
+```
+
+- Use the ENV instruction in the Dockerfile:
+
+```
+ENV [KEY]=[VALUE]
+ENV [KEY][value]
+```
+
+- Clone the weather-app:
+
+```sh
+git clone https://github.com/linuxacademy/content-weather-app.git src
+```
+
+- Create the Dockerfile
+
+```sh
+vi Dockerfile
+```
+
+- Dockerfile contents:
+
+```docker
+# Create an image for the weather-app
+
+FROM node
+LABEL org.label-schema.version=v1.1
+ENV NODE_ENV="development"
+ENV PORT 3000
+
+RUN mkdir -p /var/node
+ADD src/ /var/node/
+WORKDIR /var/node
+RUN npm install
+EXPOSE \$PORT
+CMD ./bin/www
+```
+
+- Create the weather-app container:
+
+```
+docker image build -t linuxacademy/weather-app:v2 .
+```
+
+- Inspect the container to see the environment variables:
+
+```
+docker image inspect linuxacademy/weather-app:v2
+```
+
+- Deploy the weather-dev application:
+
+```
+docker container run -d --name weather-dev -p 8082:3001 --env PORT=3001 linuxacademy/weather-app:v2
+```
+
+- Inspect the development container to see the environment variables:
+
+```
+docker container inspect weather-dev
+```
+
+- Deploy the weather-app to production:
+
+```
+docker container run -d --name weather-app2 -p 8083:3001 --env PORT=3001 --env NODE_ENV=production linuxacademy/weather-app:v2
+```
+
+- Inspect the production container to see the environment variables:
+
+```
+docker container inspect weather-app2
+```
+
+- Get the logs for weather-app2:
+
+```
+docker container logs weather-app2
+docker container run -d --name weather-prod -p 8084:3000 --env NODE_ENV=production linuxacademy/weather-app:v2
+```
+
+---
+
+### Build Arguments
+
+- Use the --build-arg flag when building an image:
+
+```
+--build-arg [NAME]=[VALUE]
+```
+
+- Use the ARG instruction in the Dockerfile:
+
+```
+ARG [NAME]=[DEFAULT_VALUE]
+```
+
+- Navigate to the args directory:
+
+```sh
+cd docker_images
+mkdir args
+cd args
+```
+
+- Clone the weather-app:
+
+```sh
+git clone https://github.com/linuxacademy/content-weather-app.git src
+```
+
+- Create the Dockerfile:
+
+```sh
+vi Dockerfile
+```
+
+```docker
+Dockerfile:
+
+# Create an image for the weather-app
+FROM node
+LABEL org.label-schema.version=v1.1
+ARG SRC_DIR=/var/node
+RUN mkdir -p $SRC_DIR
+ADD src/ $SRC_DIR
+WORKDIR $SRC_DIR
+RUN npm install
+EXPOSE 3000
+CMD ./bin/www
+```
+
+- Create the weather-app container:
+
+```
+docker image build -t linuxacademy/weather-app:v3 --build-arg SRC_DIR=/var/code .
+```
+
+- Inspect the image:
+
+```
+docker image inspect linuxacademy/weather-app:v3 | grep WorkingDir
+```
+
+- Create the weather-app container:
+
+```
+docker container run -d --name weather-app3 -p 8085:3000 linuxacademy/weather-app:v3
+```
+
+- Verify that the container is working by executing curl:
+
+```
+curl localhost:8085
+```
+
+### Working with Non-privileged Users
+
+- Rather than using root, we can use a non-privileged user to configure and run an application.
+- Setup your environment:
+
+```sh
+cd docker_images
+mkdir non-privileged-user
+cd non-privileged-user
+```
+
+- Create the Dockerfile:
+
+```
+vi Dockerfile
+```
+
+```docker
+Dockerfile contents:
+
+# Creates a CentOS image that uses cloud_user as a non-privileged user
+FROM centos:latest
+RUN useradd -ms /bin/bash cloud_user
+USER cloud_user
+```
+
+- Build the new image:
+
+```
+docker image build -t centos7/nonroot:v1 .
+```
+
+- Create a container using the new image:
+
+```
+docker container run -it --name test-build centos7/nonroot:v1 /bin/bash
+```
+
+- Connecting as a privileged user:
+
+```
+docker container start test-build
+docker container exec -u 0 -it test-build /bin/bash
+```
+
+- Set up the environment:
+
+```
+cd ~/docker_images
+mkdir node-non-privileged-user
+cd node-non-privileged-user
+```
+
+- Create the Dockerfile:
+
+```
+vi Dockerfile
+```
+
+```docker
+Dockerfile contents:
+
+# Create an image for the weather-app
+FROM node
+LABEL org.label-schema.version=v1.1
+RUN useradd -ms /bin/bash node_user
+USER node_user
+ADD src/ /home/node_user
+WORKDIR /home/node_user
+RUN npm install
+EXPOSE 3000
+CMD ./bin/www
+git clone https://github.com/linuxacademy/content-weather-app.git src
+```
+
+- Build the weather-app image using the non-privileged user node_user:
+
+```
+docker image build -t linuxacademy/weather-app-nonroot:v1 .
+```
+
+- Create a container using the linuxacademy/weather-app-nonroot:v1 image:
+
+```
+docker container run -d --name weather-app-nonroot -p 8086:3000 linuxacademy/weather-app-nonroot:v1
+```
+
+---
+
+### Order of Execution
+
+- Some instructions may have unintended consequences that can cause your build to fail.
+- Setup your environment:
+
+```
+cd docker_images
+mkdir centos-conf
+cd centos-conf
+```
+
+- Create the Dockerfile:
+
+```sh
+vi Dockerfile
+```
+
+```docker
+Dockerfile contents:
+
+# Creates a CentOS image that uses cloud_user as a non-privileged user
+FROM centos:latest
+RUN mkdir -p ~/new-dir1
+RUN useradd -ms /bin/bash cloud_user
+USER cloud_user
+RUN mkdir -p ~/new-dir2
+RUN mkdir -p /etc/myconf
+RUN echo "Some config data" >> /etc/myconf/my.conf
+```
+
+- Build the new image:
+
+```
+docker image build -t centos7/myconf:v1 .
+```
+
+### Using the Volume Instruction
+
+- Use the VOLUME instruction to automatically create a mount point in a Docker image. When a container is created using this image, a volume will be created and mounted to the specified directory.
+- Set up your environment:
+
+```
+cd docker_images
+mkdir volumes
+cd volumes
+```
+
+- Create the Dockerfile:
+
+```
+vi Dockerfile
+```
+
+- Build an Nginx image that uses a volume:
+
+```
+FROM nginx:latest
+VOLUME ["/usr/share/nginx/html/"]
+```
+
+- Build the new image:
+
+```
+docker image build -t linuxacademy/nginx:v1 .
+```
+
+- Create a new container using the linuxacademy/nginx:v1 image:
+
+```
+docker container run -d --name nginx-volume linuxacademy/nginx:v1
+```
+
+- Inspect nginx-volume:
+
+```
+docker container inspect nginx-volume
+```
+
+- List the volumes:
+
+```
+docker volume ls | grep [VOLUME_NAME]
+```
+
+- Inspect the volumes:
+
+```
+docker volume inspect [VOLUME_NAME]
+```
+
+---
+
+### Entrypoint vs. Command
+
+- Though ENTRYPOINT functions very similarly to CMD it's behaviors are very different.
+- ENTRYPOINT allows us to configure a container that will run as an executable.
+- We can override all elements specified using CMD.
+- Using the docker run --entrypoint flag will override the ENTRYPOINT instruction.
+- Setup your environment:
+
+```
+cd docker_images
+mkdir entrypoint
+cd entrypoint
+```
+
+- Create the Dockerfile:
+
+```sh
+vi Dockerfile
+```
+
+```docker
+Dockerfile contents:
+
+# Create an image for the weather-app
+FROM node
+LABEL org.label-schema.version=v1.1
+ENV NODE_ENV="production"
+ENV PORT 3001
+RUN mkdir -p /var/node
+ADD src/ /var/node/
+WORKDIR /var/node
+RUN npm install
+EXPOSE $PORT
+ENTRYPOINT ./bin/www
+```
+
+- Clone the image:
+
+```
+git clone https://github.com/linuxacademy/content-weather-app.git src
+```
+
+- Build the image:
+
+```
+docker image build -t linuxacademy/weather-app:v4 .
+```
+
+- Deploy the weather-app:
+
+```
+docker container run -d --name weather-app4 linuxacademy/weather-app:v4
+```
+
+- Inspect weather-app4:
+
+```
+docker container inspect weather-app4 | grep Cmd
+docker container inspect weather-app-nonroot
+docker container inspect weather-app4
+```
+
+- Create the weather-app container:
+
+```
+docker container run -d --name weather-app5 -p 8083:3001 linuxacademy/weather-app:v4 echo "Hello World"
+```
+
+- Inspect weather-app5:
+
+```
+docker container inspect weather-app5
+```
+
+- Create the volumes for Prometheus:
+
+```
+docker volume create prometheus
+docker volume create prometheus_data
+
+sudo chown -R nfsnobody:nfsnobody /var/lib/docker/volumes/prometheus/
+sudo chown -R nfsnobody:nfsnobody /var/lib/docker/volumes/prometheus_data/
+```
+
+- Create the Prometheus container:
+
+```
+docker run --name prometheus -d -p 8084:9090 \
+  -v prometheus:/etc/prometheus \
+  -v prometheus_data:/prometheus/data \
+  prom/prometheus \
+  --config.file=/etc/prometheus/prometheus.yml \
+  --storage.tsdb.path=/prometheus/data
+```
+
+- Inspect Prometheus:
+
+```
+docker container inspect prometheus
+```
+
+---
+
+### Using .dockerignore
+
+- Setup your environment:
+
+```sh
+cd docker_images
+mkdir dockerignore
+cd dockerignore
+git clone https://github.com/linuxacademy/content-weather-app.git src
+cd src
+git checkout dockerignore
+cd ../
+```
+
+- Create the .dockerignore file:
+
+```sh
+vi .dockerignore
+```
+
+- Add the following to .dockerignore:
+
+```
+# Ignore these files
+*/*.md
+*/.git
+src/docs/
+*/tests/
+```
+
+- Create the Dockerfile:
+
+```sh
+vi Dockerfile
+```
+
+```docker
+Dockerfile contents:
+
+# Create an image for the weather-app
+FROM node
+LABEL org.label-schema.version=v1.1
+ENV NODE_ENV="production"
+ENV PORT 3000
+RUN mkdir -p /var/node
+ADD src/ /var/node/
+WORKDIR /var/node
+RUN npm install
+EXPOSE $PORT
+ENTRYPOINT ["./bin/www"]
+```
+
+- Build the image:
+
+```
+docker image build -t linuxacademy/weather-app:v5 .
+```
+
+- Create the weather-app container:
+
+```
+docker container run -d --name weather-app-ignore linuxacademy/weather-app:v5
+```
+
+- List the contents of /var/node:
+
+```
+docker container exec weather-app-ignore ls -la /var/node
+```
+
+---

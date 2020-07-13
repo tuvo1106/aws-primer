@@ -63,6 +63,7 @@
   - [IAM Password Policy](#iam-password-policy)
   - [Programmatic Access Keys](#programmatic-access-keys)
   - [IMA MFA](#ima-mfa)
+  - [AWS Organizations](#aws-organizations)
 - [Cognito](#cognito)
   - [Web Identity Federation and IpD](#web-identity-federation-and-ipd)
   - [User Pools](#user-pools)
@@ -993,6 +994,17 @@ In IAM, you can set a Password Policy. To set the minimum requirements of a pass
 - The user has to turn on the MFA themselves, Admin cannot directly enforce users to have MFA.
 - The Admin account could create a policy requiring MFA to access certain resources.
 
+#### _AWS Organizations_
+
+- AWS Organizations is a service for managing multiple accounts within a single business. Rather than managing many accounts, with many isolated sets of logins and individual bills, organizations allow consolidation.
+- All accounts within an AWS Org can consolidate bills into a single account - one bill covering all business usage. Orgs can share bulk discounts and even manage accounts and permissions and limit account usage using **service control policies** (tree like structure).
+- Only one master account and it **cannot** be restricted.
+- By default, a root account can have 2 sub accounts.
+- **Role switching** is a method of accessing one account from another using only one set of credentials. It is used both within AWS Orgs and between two unconnected accounts.
+  - 1. A role in Account B trusts Account A
+  - 2. An identity in Account A can assume the role in Account B
+  - 3. ...and, using that role, it can operate inside Account B
+
 ---
 
 ## Cognito
@@ -1236,17 +1248,25 @@ There are _7 different types_ of Routing Policies:
 
 ## EC2
 
-- Cloud computing service.
+- Regional cloud computing service.
 - Choose your OS, Storage, Memory, Network Throughput.
 - Launch and SSH into your server within minutes.
 - EC2 is a highly configurable server.
 - EC2 is resizable compute capacity.
 - Anything and everything on AWS uses EC2 instances underneath.
+- Billed per second with a minimum of 60 seconds while state is running.
+- As an Infrastructure as a Service (IaaS) product, it's responsible for providing long-running compute as a service.
 
 ---
 
 #### _Instance Types_
 
+- EC2 instances are grouped into families, which are designed for a specific broad type workload. The type determines a certain set of features and sizes decide the level of workload they can cope with.
+- Special cases:
+  - "a" - AMD CPUs
+  - "A" - ARM-based
+  - "n" - higher speed networking
+  - "d" - NVMe storage
 - **General Purpose**
   - A1, T3, T3a, T2, M5, M5a, M4.
   - Balance of compute, memory and networking resources.
@@ -1639,11 +1659,13 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 - Snapshots are incremental, only changes made since the last snapshot are moved to S3.
 - Initial Snapshot of an EC2 instance will take longer to create than subsequent Snapshots.
 - You can take Snapshots while the instance is running.
+- Data is replicated across AZs in the region and (optionally) internationally.
 
 ---
 
 #### _EBS Introduction_
 
+- EBS supports a maximum per-instance throughput of 1,750 MiB/s and 80,000 IOPS. If you need more... instance volumes.
 - **What is IOPS?** - Input/Output per second. It is the speed at which non-contiguous reads and writes can be performed on a storage medium. High I/O = lots of small fast reads and writes.
 - **What is Throughput?** - The data transfer rate to and from the storage medium in megabytes per second.
 - **What is Bandwidth?** - - The measurement of the total possible speed of data movement along the network.

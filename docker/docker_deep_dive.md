@@ -1595,3 +1595,290 @@ docker container exec weather-app-ignore ls -la /var/node
 ```
 
 ---
+
+## Building and Distributing Images
+
+### Building Images
+
+- To build one:
+
+```docker
+docker image build -t <NAME>:<TAG> .
+```
+
+- Useful flags:
+  - `-f, --file string`: This is the name of the Dockerfile (Default is PATH/Dockerfile).
+  - `--force-rm`: Always remove intermediate containers.
+  - `--label list`: Set metadata for an image.
+  - `--rm`: Remove intermediate containers after a successful build (default is true).
+  - `--ulimit ulimit`: This sets ulimit options (default is []).
+
+```
+cd docker_images/weather-app
+cp Dockerfile Dockerfile.test
+docker image build -t linuxacademy/weather-app:path-example1 -f Dockerfile.test .
+docker image build -t linuxacademy/weather-app:path-example2 --label com.linuxacademy.version=v1.8 -f Dockerfile.test .
+```
+
+- Building image by piping the Dockerfile through STDIN:
+
+```
+docker image build -t <NAME>:<TAG> -<<EOF
+Build instructions
+EOF
+```
+
+- Example:
+
+```
+docker image build -t linuxacademy/nginx:stind --rm -<<EOF
+FROM nginx:latest
+VOLUME ["/usr/share/nginx/html/"]
+EOF
+```
+
+- Building an image using a URL:
+
+```
+docker image build -t <NAME>:<TAG> <GIT_URL>#<REF>
+docker image build -t <NAME>:<TAG> <GIT_URL>#:<DIRECTORY>
+docker image build -t <NAME>:<TAG> <GIT_URL>#<REF>:<DIRECTORY>
+```
+
+- Example:
+
+```
+docker image build -t linuxacademy/weather-app:github https://github.com/linuxacademy/content-weather-app.git#remote-build
+```
+
+- Building an image from a zip file:
+
+```
+docker image build -t <NAME>:<TAG> - < <FILE>.tar.gz
+```
+
+- Example:
+
+```
+cd docker_images
+mkdir tar_image
+cd tar_image
+git clone https://github.com/linuxacademy/content-weather-app.git
+cd content-weather-app
+git checkout remote-build
+tar -zcvf weather-app.tar.gz Dockerfile src
+docker image build -t linuxacademy/weather-app:from-tar - < weather-app.tar.gz
+```
+
+---
+
+### Using Multi-Stage Builds
+
+- By default, the stages are not named
+  - Stages are numbered with integers
+  - Starting with 0 for the first FROM instruction
+  - Name the stage by adding as to the FROM instruction
+  - Reference the stage name in the COPY instruction
+  - Set up your environment:
+
+```
+cd docker_images
+mkdir multi-stage-builds
+cd multi-stage-builds
+git clone https://github.com/linuxacademy/content-weather-app.git src
+```
+
+- Create the Dockerfile:
+
+```
+vi Dockerfile
+```
+
+- Dockerfile contents:
+
+```
+# Create an image for the weather-app using multi-stage build
+
+FROM node AS build
+RUN mkdir -p /var/node/
+ADD src/ /var/node/
+WORKDIR /var/node
+RUN npm install
+
+FROM node:alpine
+ARG VERSION=V1.1
+LABEL org.label-schema.version=\$VERSION
+ENV NODE_ENV="production"
+COPY --from=build /var/node /var/node
+WORKDIR /var/node
+EXPOSE 3000
+ENTRYPOINT ["./bin/www"]
+```
+
+- Build the image:
+
+```
+docker image build -t linuxacademy/weather-app:multi-stage-build --rm --build-arg VERSION=1.5 .
+```
+
+- List images to see the size difference:
+
+```
+docker image ls
+```
+
+- Create the weather-app container:
+
+```
+docker container run -d --name multi-stage-build -p 8087:3000 linuxacademy/weather-app:multi-stage-build
+```
+
+---
+
+### Tagging
+
+- Add a name and an optional tag with -t or --tag, in the name:tag format:
+
+```
+docker image build -t <name>:<tag>
+docker image build --tag <name>:<tag>
+```
+
+- List your images:
+
+```
+docker image ls
+```
+
+- Use our Git commit hash as the image tag:
+
+```
+git log -1 --pretty=%H
+```
+
+- Use the Docker tag to a create a new tagged image:
+
+```
+docker tag <SOURCE_IMAGE><:TAG> <TARGET_IMAGE>:<TAG>
+```
+
+- Get the commit hash:
+
+```
+cd docker_images/weather-app/src
+git log -1 --pretty=%H
+cd ../
+```
+
+- Build the image using the Git hash as the tag:
+
+```
+docker image build -t linuxacademy/weather-app:<GIT_HASH> .
+```
+
+- Tag the weather-app as the latest using the image tagged with the commit hash:
+
+```
+docker image tag linuxacademy/weather-app:<GIT_HASH> linuxacademy/weather-app:latest
+```
+
+---
+
+### Distributing Images on Docker Hub
+
+- Create a Docker Hub account:
+  `https://hub.docker.com/`
+
+- Docker Push:
+
+```
+docker image push <USERNAME>/<IMAGE_NAME>:<TAG>
+```
+
+- Creating an image for Docker Hub:
+
+```
+docker image tag <IMAGE_NAME>:<TAG> <linuxacademy>/<IMAGE_NAME>:<TAG>
+```
+
+- Set up your environment:
+
+```
+cd docker_images
+mkdir dockerhub
+cd dockerhub
+```
+
+- Create the Dockerfile:
+
+```
+vi Dockerfile
+```
+
+- Dockerfile contents:
+
+```
+# Create an image for the weather-app using multi-stage build
+FROM node AS build
+RUN mkdir -p /var/node/
+ADD src/ /var/node/
+WORKDIR /var/node
+RUN npm install
+
+FROM node:alpine
+ARG VERSION=V1.1
+LABEL org.label-schema.version=$VERSION
+ENV NODE_ENV="production"
+COPY --from=build /var/node /var/node
+WORKDIR /var/node
+EXPOSE 3000
+ENTRYPOINT ["./bin/www"]
+```
+
+- Git the weather-app code:
+
+```
+git clone https://github.com/linuxacademy/content-weather-app.git src
+```
+
+- Use the Git commit hash as the image tag:
+
+```
+cd src
+git log -1 --pretty=%H
+cd ../
+```
+
+- Build the image:
+
+```
+docker image build -t <USERNAME>/weather-app:<HASH> --build-arg VERSION=1.5 .
+```
+
+- Tag the image before pushing it to Docker Hub:
+
+```
+docker image tag linuxacademy/weather-app:<HASH> <USERNAME>/weather-app:<HASH>
+```
+
+- Push the image to Docker Hub:
+
+```
+docker login
+docker image push <USERNAME>/weather-app:<HASH>
+```
+
+- Tag the latest image:
+
+```
+docker image tag <USERNAME>/weather-app:<HASH> <USERNAME>/weather-app:latest
+```
+
+- Push the latest image to Docker Hub:
+
+```
+docker login <USERNAME>
+docker image push <USERNAME>/weather-app:latest
+```
+
+---

@@ -260,3 +260,29 @@ ln -s <to> softlink
 ```
 
 ---
+
+## Operation of Running Systems
+
+### Boot, reboot, and shut down a system safely
+
+```sh
+# Correct way to reboot Linux machine
+sudo shutdown -r now
+sudo reboot # same command
+
+# See active users
+w
+```
+
+### Boot or change system into different operating modes
+
+- System V Runlevels
+
+```
+# See what runlevel
+runlevel
+# Runlevel 0
+sudo shutdown -h
+# Runlevel 6
+sudo reboot
+```

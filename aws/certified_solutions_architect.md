@@ -127,6 +127,7 @@
   - [Storage Volumes](#storage-volumes)
   - [Medium SSD](#medium-ssd)
   - [Magnetic Tapes](#magnetic-tapes)
+  - [EBS Snapshots](#ebs-snapshots)
   - [Moving Volumes](#moving-volumes)
   - [Encrypted Root Volumes](#encrypted-root-volumes)
   - [EBS vs Instance Store Volumes](#ebs-vs-instance-store-volumes)
@@ -868,10 +869,12 @@ NACLs act as a virtual firewall at the subnet level.
 
 #### _Security Groups_
 
-- You can specify the source to be an IP range or a specific IP
-- You can specify the source to be another security group
+- Security groups are software firewalls that can be attached to network interfaces and (by association) products in AWS.
+- SGs have a hidden implicit/default deny rule but cannot explicitly deny traffic.
+- You can specify the source to be an IP range or a specific IP.
+- You can specify the source to be another security group.
 - An instance can belong to multiple security groups, and rules are permissive.
-- Security groups are _stateful_ (if traffic is allowed inbound, it is also allowed outbound)
+- Security groups are **stateful** (if traffic is allowed inbound, it is also allowed outbound).
 
 ---
 
@@ -1340,8 +1343,9 @@ You can provide an EC2 with Userdata which is a _script_ that will be automatica
 `curl http://169.254.169.254/latest/meta-data`
 
 - `/public-ipv4` - gets current public IPV4 address
-- `/ami-id` - gets the AMI ID used to launch this instance
-- `/instance-type` - gets the instance type
+- `/ami-id` - gets AMI ID used to launch this instance
+- `/instance-id` - gets instance ID
+- `/instance-type` - gets instance type
 
 Combine metadata with userdata scripts to perform all sorts of advanced AWS staging automation.
 
@@ -1703,6 +1707,14 @@ The X-Forwarded-For (XFF) header is a command method for identifying the origina
 
 - A large reel of magnetic tape. A tape drive is used to write data to the tape. Medium and large-sized data centers deploy both tape and disk formats. They normally come in the form of cassettes. Magnetic is very cheap to produce and can store considerable amount of data.
 - Durable for decades.
+
+---
+
+#### _EBS Snapshots_
+
+- EBS snapshots are a point-in-time backup of an EBS volume stored in S3. The initial snapshot is a full copy of the volume. Future snapshots only store the data changed since the last snapshot.
+- Snapshots can be used to create new volumes and are a great way to **move** or **copy** instances between AZs. When creating a snapshot of the root/boot volume of an instance or busy volume, it's recommended the instance is powered off, or disks are "flushed".
+- Snapshots can be copied between regions, shared and automated using Data Lifecycle Manager (DLM).
 
 ---
 

@@ -104,6 +104,7 @@
   - [Creating an AMI](#creating-an-ami)
   - [Choosing an AMI](#choosing-an-ami)
   - [Copying an AMI](#copying-an-ami)
+  - [Bootstrapping](#bootstrapping)
 - [Auto Scaling Groups](#auto-scaling-groups)
   - [Capacity Settings](#capacity-settings)
   - [Health Check Replacements](#health-check-replacements)
@@ -1407,6 +1408,20 @@ Combine metadata with userdata scripts to perform all sorts of advanced AWS stag
 
 ---
 
+#### _EC2 Networking_
+
+- Elastic IPs are static. When allocated, they replace the normal public IP, which is deallocated.
+
+---
+
+#### _EC2 Instance Roles_
+
+- EC2 instance roles are IAM roles that can be "assumed" by EC2 using an intermediary called an instance profile.
+- An instance profile is either created automatically when using the console UI or manually when using the CLI. It's a container for the role that is associated with an EC2 instance.
+- The instance profile allows application on the EC2 instance to access the credentials from the role using the instance metadata.
+
+---
+
 ## Amazon Machine Image
 
 - A template to configure new instances.
@@ -1416,7 +1431,7 @@ Combine metadata with userdata scripts to perform all sorts of advanced AWS stag
   - A template for the root volume (EBS Snapshot or Instance Store template) eg. an OS, an app server and applications.
   - Launch permissions that control which AWS accounts can use the AMI to launch instances.
   - A block device mapping that specifies the volumes to attach to the instance when it's launched.
-- AMIs are _Region Specific!_
+- AMIs are **Region Specific!**
 
 ![AMI](../images/ami.png)
 
@@ -1425,7 +1440,7 @@ Combine metadata with userdata scripts to perform all sorts of advanced AWS stag
 #### _AMI Use Case_
 
 - AMIs help you keep incremental changes to your OS, application code and system packages.
-- Using **Systems Manager Automation** you can routinely patch your AMIS with security updates.
+- Using **Systems Manager Automation** you can routinely patch your AMIs with security updates.
 - AMIs are used with **LaunchConfigurations**.
 
 ---
@@ -1468,9 +1483,18 @@ You can create an AMI from an existing AMI that's either running or stopped.
     - Instance store (ephemeral storage)
     - EBS Backed Volumes
 
+---
+
 #### _Copying an AMI_
 
-AMIs are region specific. If you want to use an AMI from another region. You need to **Copy the AMI** and then select destination region.
+AMIs are region specific. If you want to use an AMI from another region. You need to **copy the AMI** and then select destination region.
+
+---
+
+#### _Bootstrapping_
+
+- Bootstrapping is a process where instructions executed on an instance during its launch process. Bootstrapping is used to configure the instance, perform software installation, and add application configuration.
+- In EC2, user data can be used to run shell scripts (Bash or Powershell) or run cloud-init directives.
 
 ---
 
